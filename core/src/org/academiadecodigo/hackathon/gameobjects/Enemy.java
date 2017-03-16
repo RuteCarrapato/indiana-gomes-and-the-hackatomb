@@ -13,6 +13,6 @@ public class Enemy extends GameObject {
         super(screen, x, y);
         this.world = screen.getWorld();
         this.screen = screen;
-        this.b2dbody = new Body();
+//        this.b2dbody = new Body();
     }
 }
