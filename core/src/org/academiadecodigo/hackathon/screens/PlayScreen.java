@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.WorldCreator;
+import org.academiadecodigo.hackathon.gameobjects.Enemy;
 import org.academiadecodigo.hackathon.gameobjects.Player;
 import org.academiadecodigo.hackathon.utils.Constants;
 
@@ -53,7 +54,7 @@ public class PlayScreen extends AbstractGameScreen {
         gamePort = new FitViewport(Constants.VIEW_WIDTH / Constants.PPM, Constants.VIEW_HEIGHT / Constants.PPM, gameCam);
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("level1.tmx");
+        map = mapLoader.load(Constants.LEVEL1_TMX);
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
 
         gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight()/ 2, 0);
@@ -82,6 +83,7 @@ public class PlayScreen extends AbstractGameScreen {
         gameCam.update();
         renderer.setView(gameCam);
 
+
     }
 
     private void handleInput(float dt) {
@@ -103,20 +105,29 @@ public class PlayScreen extends AbstractGameScreen {
 
     @Override
     public void render(float delta) {
+        //separate our update logic from render
         update(delta);
 
+        //Clear the game screen with Black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        //render our game map
         renderer.render();
+
+        //renderer our Box2DDebugLines
         debugRenderer.render(world, gameCam.combined);
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        game.batch.end();
 
-//        game.batch.setProjectionMatrix(hud.stage.getCamera().;
+
+        for (Enemy enemy : creator.getEnemies())
+            enemy.draw(game.batch);
+
+        game.batch.end();
+        
     }
 
     @Override

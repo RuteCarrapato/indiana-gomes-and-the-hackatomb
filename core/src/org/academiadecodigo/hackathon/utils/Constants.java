@@ -22,4 +22,5 @@ public class Constants {
     public static final int TREASURE_INDEX = 0;
     public static final int ENEMY_INDEX = 0;
 
+    public static final String LEVEL1_TMX = "level1.tmx";
 }
