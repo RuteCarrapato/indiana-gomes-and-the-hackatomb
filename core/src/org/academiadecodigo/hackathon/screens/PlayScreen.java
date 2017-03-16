@@ -100,7 +100,8 @@ public class PlayScreen extends AbstractGameScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-        
+        debugRenderer.render(world, gameCam.combined);
+
     }
 
     @Override
