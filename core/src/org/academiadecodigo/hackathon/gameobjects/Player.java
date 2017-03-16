@@ -66,8 +66,8 @@ public class Player extends GameObject {
             this.b2dbody.applyLinearImpulse(new Vector2(-0.1f, 0), this.b2dbody.getWorldCenter(), true);
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            this.b2dbody.applyLinearImpulse(new Vector2(0, 4f), this.b2dbody.getWorldCenter(), true);
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            this.b2dbody.applyLinearImpulse(new Vector2(0, 2f), this.b2dbody.getWorldCenter(), true);
         }
     }
 

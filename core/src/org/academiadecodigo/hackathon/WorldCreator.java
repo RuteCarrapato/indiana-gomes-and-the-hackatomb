@@ -29,7 +29,7 @@ public class WorldCreator {
         Body body;
 
         // create ground bodies/fixtures
-        for(MapObject object : map.getLayers().get(Constants.GROUND_INDEX).getObjects().getByType(PolygonMapObject.class)) {
+        for(MapObject object : map.getLayers().get(Constants.GROUND_INDEX).getObjects().getByType(RectangleMapObject.class)) {
 
             Rectangle rect = ((RectangleMapObject)object).getRectangle();
 
@@ -53,8 +53,8 @@ public class WorldCreator {
 
             body = world.createBody(bdef);
 
-            shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
-            fdef.shape = shape;
+//            shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
+//            fdef.shape = shape;
             body.createFixture(fdef);
         }
 
