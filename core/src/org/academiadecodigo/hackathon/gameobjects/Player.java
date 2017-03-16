@@ -28,7 +28,7 @@ public class Player  extends GameObject {
         System.out.println(world);
 
         BodyDef bdef = new BodyDef();
-        bdef.position.set(1 / Constants.PPM , 1 / Constants.PPM);
+        bdef.position.set(52 / Constants.PPM , 52 / Constants.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2dbody = world.createBody(bdef);
 
@@ -40,7 +40,7 @@ public class Player  extends GameObject {
         b2dbody.createFixture(fdef);
     }
 
-    public void handleInput(float dt) {
+    /*public void handleInput(float dt) {
 
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             this.b2dbody.applyLinearImpulse(new Vector2(0.1f, 0), this.b2dbody.getWorldCenter(), true);
@@ -49,7 +49,7 @@ public class Player  extends GameObject {
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             this.b2dbody.applyLinearImpulse(new Vector2(-0.1f, 0), this.b2dbody.getWorldCenter(), true);
         }
-    }
+    }*/
 
     public void update() {
 

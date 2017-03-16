@@ -49,11 +49,11 @@ public class PlayScreen extends AbstractGameScreen {
         this.game = game;
 
         gameCam = new OrthographicCamera();
-        gamePort = new FitViewport(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT, gameCam);
+        gamePort = new FitViewport(Constants.VIEW_WIDTH / Constants.PPM, Constants.VIEW_HEIGHT / Constants.PPM, gameCam);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("level1.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map);
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
 
         gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight()/ 2, 0);
 
@@ -67,18 +67,23 @@ public class PlayScreen extends AbstractGameScreen {
     public void update(float dt){
         handleInput(dt);
 
+        world.step(1/60f, 6, 2);
+
+        gameCam.position.x = player.b2dbody.getPosition().x;
         gameCam.update();
         renderer.setView(gameCam);
+        debugRenderer.render(world, gameCam.combined);
     }
 
     private void handleInput(float dt) {
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            gameCam.position.x += 100 * dt;
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            gameCam.position.x -= 100 * dt;
+        // Player Movement
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            player.b2dbody.applyLinearImpulse(new Vector2(0.1f, 0), player.b2dbody.getWorldCenter(), true);
         }
 
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            player.b2dbody.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2dbody.getWorldCenter(), true);
+        }
     }
 
     @Override
@@ -120,7 +125,10 @@ public class PlayScreen extends AbstractGameScreen {
 
     @Override
     public void dispose() {
-
+        map.dispose();
+        renderer.dispose();
+        world.dispose();
+        debugRenderer.dispose();
     }
 
     public World getWorld() {
