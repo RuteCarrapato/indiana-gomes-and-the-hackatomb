@@ -66,5 +66,7 @@ public class WorldCreator {
         }*/
     }
 
-
+    public Array<Enemy> getEnemies() {
+        return enemies;
+    }
 }
