@@ -89,11 +89,14 @@ public class PlayScreen extends AbstractGameScreen {
 
     @Override
     public void render(float delta) {
+        //separate our update logic from render
         update(delta);
 
+        //Clear the game screen with Black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        //render our game map
         renderer.render();
 
     }
