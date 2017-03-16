@@ -1,6 +1,9 @@
 package org.academiadecodigo.hackathon.screens;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import org.academiadecodigo.hackathon.Indiana;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -20,11 +23,37 @@ public class PlayScreen extends AbstractGameScreen {
     private OrthographicCamera gameCam;
     private Viewport gamePort;
 
+    private TmxMapLoader mapLoader;
+    private TiledMap map;
+    private OrthogonalTiledMapRenderer renderer;
+
+
     public PlayScreen(Indiana game) {
         this.game = game;
-        texture = new Texture("badlogic.jpg");
+
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT, gameCam);
+
+        mapLoader = new TmxMapLoader();
+        map = mapLoader.load("level1.tmx");
+        renderer = new OrthogonalTiledMapRenderer(map);
+
+        gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight()/ 2, 0);
+
+    }
+
+    public void update(float dt){
+        handleInput(dt);
+
+        gameCam.update();
+        renderer.setView(gameCam);
+    }
+
+    private void handleInput(float dt) {
+        if(Gdx.input.isTouched()){
+            gameCam.position.x += 100 * dt;
+        }
+
     }
 
     @Override
@@ -35,12 +64,13 @@ public class PlayScreen extends AbstractGameScreen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        update(delta);
+
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.batch.setProjectionMatrix(gameCam.combined);
-        game.batch.begin();
-        game.batch.draw(texture, 50, 50);
-        game.batch.end();
+
+        renderer.render();
+
     }
 
     @Override
