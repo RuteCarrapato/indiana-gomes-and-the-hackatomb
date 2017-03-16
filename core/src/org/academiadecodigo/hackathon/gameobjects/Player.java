@@ -85,6 +85,7 @@ public class Player extends GameObject {
         FALLING,
         JUMPING,
         STANDING,
-        RUNNING
+        RUNNING,
+        DEAD
     }
 }

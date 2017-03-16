@@ -78,7 +78,10 @@ public class PlayScreen extends AbstractGameScreen {
         player.update(dt);
 
         world.step(1/60f, 6, 2);
-        gameCam.position.x = player.b2dbody.getPosition().x;
+
+        if (player.currentState != Player.State.DEAD) {
+            gameCam.position.x = player.b2dbody.getPosition().x;
+        }
 
         //Update the gameCam
         gameCam.update();
