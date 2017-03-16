@@ -101,7 +101,7 @@ public class PlayScreen extends AbstractGameScreen {
 
         renderer.render();
         debugRenderer.render(world, gameCam.combined);
-        
+
     }
 
     @Override
