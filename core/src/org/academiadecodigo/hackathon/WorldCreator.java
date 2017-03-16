@@ -47,7 +47,7 @@ public class WorldCreator {
 
             Rectangle rect = ((RectangleMapObject)object).getRectangle();
 
-            bdef.type = BodyDef.BodyType.KinematicBody;//TODO: Check if this body type is correct
+            bdef.type = BodyDef.BodyType.StaticBody;
             bdef.position.set((rect.getX() + rect.getWidth() / 2) / Constants.PPM, (rect.getY() + rect.getHeight() / 2) / Constants.PPM);
 
             body = world.createBody(bdef);
@@ -62,7 +62,7 @@ public class WorldCreator {
 
             Rectangle rect = ((RectangleMapObject)object).getRectangle();
 
-            enemies.add((new Enemy(screen,rect.getX() / Constants.PPM, rect.getY() / Constants.PPM)));
+            enemies.add((new Enemy(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM)));
         }
     }
 
