@@ -47,6 +47,7 @@ public class PlayScreen extends AbstractGameScreen {
 
     public PlayScreen(Indiana game) {
         this.game = game;
+        atlas = new TextureAtlas("sprites.pack");
 
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(Constants.VIEW_WIDTH / Constants.PPM, Constants.VIEW_HEIGHT / Constants.PPM, gameCam);
@@ -66,6 +67,10 @@ public class PlayScreen extends AbstractGameScreen {
         player = new Player(this);
 
 
+    }
+
+    public TextureAtlas getAtlas() {
+        return atlas;
     }
 
     public void update(float dt){
@@ -106,6 +111,12 @@ public class PlayScreen extends AbstractGameScreen {
         renderer.render();
         debugRenderer.render(world, gameCam.combined);
 
+        game.batch.setProjectionMatrix(gameCam.combined);
+        game.batch.begin();
+        player.draw(game.batch);
+        game.batch.end();
+
+//        game.batch.setProjectionMatrix(hud.stage.getCamera().;
     }
 
     @Override

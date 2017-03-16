@@ -1,9 +1,6 @@
 package org.academiadecodigo.hackathon.gameobjects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
@@ -13,19 +10,17 @@ import org.academiadecodigo.hackathon.utils.Constants;
  */
 public class Player extends GameObject {
 
-    private Texture playerTexture;
-
     public Player(PlayScreen screen) {
-
         super(screen);
-        playerTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
+        System.out.println(super.getTexture());
+        this.atlasRegion = screen.getAtlas().findRegion("player");
+        this.textureRegion = new TextureRegion(atlasRegion, 0, 0, 16, 16);
+        setBounds(0, 0, 16 / Constants.PPM, 16 / Constants.PPM);
+        setRegion(textureRegion);
         definePlayer();
-        setTexture(playerTexture);
     }
 
     public void definePlayer() {
-
-        System.out.println(world);
 
         BodyDef bdef = new BodyDef();
 
@@ -53,7 +48,7 @@ public class Player extends GameObject {
         }
     }*/
 
-    public void update() {
+    public void update(float dt) {
 
     }
 }
