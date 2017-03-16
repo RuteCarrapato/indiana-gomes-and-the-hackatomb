@@ -72,7 +72,7 @@ public class PlayScreen extends AbstractGameScreen {
         gameCam.position.x = player.b2dbody.getPosition().x;
         gameCam.update();
         renderer.setView(gameCam);
-        debugRenderer.render(world, gameCam.combined);
+
     }
 
     private void handleInput(float dt) {
@@ -100,7 +100,7 @@ public class PlayScreen extends AbstractGameScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-
+        
     }
 
     @Override
