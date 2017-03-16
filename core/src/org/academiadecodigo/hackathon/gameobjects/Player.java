@@ -32,6 +32,8 @@ public class Player extends GameObject {
         currentState = State.STANDING;
         previousState = State.STANDING;
         animTimer = 0;
+        runningRight = true;
+
         definePlayer();
     }
 
