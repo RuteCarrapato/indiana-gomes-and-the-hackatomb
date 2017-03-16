@@ -74,6 +74,8 @@ public class PlayScreen extends AbstractGameScreen {
     public void update(float dt){
         handleInput(dt);
 
+        player.update(dt);
+
         world.step(1/60f, 6, 2);
         gameCam.position.x = player.b2dbody.getPosition().x;
 
