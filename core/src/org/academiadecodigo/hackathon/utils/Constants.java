@@ -11,8 +11,6 @@ public class Constants {
     public static final int VIEW_HEIGHT = 208;
     public static final float PPM = 100;
 
-
-
     public static final int GRAVITY = -10;
     public static final int PROJECTILE_SPEED = 0; //TODO: DEFINE SPEED
 

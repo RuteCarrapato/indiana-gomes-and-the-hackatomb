@@ -2,6 +2,7 @@ package org.academiadecodigo.hackathon;
 
 
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
@@ -28,7 +29,7 @@ public class WorldCreator {
         Body body;
 
         // create ground bodies/fixtures
-        for(MapObject object : map.getLayers().get(Constants.GROUND_INDEX).getObjects().getByType(RectangleMapObject.class)) {
+        for(MapObject object : map.getLayers().get(Constants.GROUND_INDEX).getObjects().getByType(PolygonMapObject.class)) {
 
             Rectangle rect = ((RectangleMapObject)object).getRectangle();
 
