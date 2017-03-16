@@ -14,10 +14,11 @@ import org.academiadecodigo.hackathon.screens.PlayScreen;
 public class GameObject extends Sprite {
 
     public World world;
-    private PlayScreen screen;
+    public PlayScreen screen;
     public Body b2dbody;
     public Vector2 velocity;
     public TextureRegion textureRegion;
+    public TextureAtlas.AtlasRegion atlasRegion;
 
     public GameObject(PlayScreen screen) {
 

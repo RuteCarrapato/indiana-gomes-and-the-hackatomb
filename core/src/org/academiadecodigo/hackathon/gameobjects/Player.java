@@ -10,10 +10,11 @@ import org.academiadecodigo.hackathon.utils.Constants;
  */
 public class Player extends GameObject {
 
-
     public Player(PlayScreen screen) {
         super(screen);
-        textureRegion = new TextureRegion(getTexture(), 16, 0, 16, 16);
+        System.out.println(super.getTexture());
+        this.atlasRegion = screen.getAtlas().findRegion("player");
+        this.textureRegion = new TextureRegion(atlasRegion, 0, 0, 16, 16);
         setBounds(0, 0, 16 / Constants.PPM, 16 / Constants.PPM);
         setRegion(textureRegion);
         definePlayer();
@@ -47,7 +48,7 @@ public class Player extends GameObject {
         }
     }*/
 
-    public void update() {
+    public void update(float dt) {
 
     }
 }
