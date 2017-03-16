@@ -8,7 +8,7 @@ public class Constants {
     Screen Size and Box2D Scale (Pixels Per Meter)
      */
     public static final int VIEW_WIDTH = 480;
-    public static final int VIEW_HEIGHT = 480;
+    public static final int VIEW_HEIGHT = 208;
     public static final int PPM = 100;
 
 
