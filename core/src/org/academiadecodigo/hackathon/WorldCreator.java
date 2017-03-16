@@ -2,6 +2,7 @@ package org.academiadecodigo.hackathon;
 
 
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
@@ -28,7 +29,7 @@ public class WorldCreator {
         Body body;
 
         // create ground bodies/fixtures
-        for(MapObject object : map.getLayers().get(Constants.GROUND_INDEX).getObjects().getByType(RectangleMapObject.class)) {
+        for(MapObject object : map.getLayers().get(Constants.GROUND_INDEX).getObjects().getByType(PolygonMapObject.class)) {
 
             Rectangle rect = ((RectangleMapObject)object).getRectangle();
 
@@ -43,7 +44,7 @@ public class WorldCreator {
         }
 
         // create ladder bodies/fixtures
-       /* for(MapObject object : map.getLayers().get(Constants.LADDER_INDEX).getObjects().getByType(RectangleMapObject.class)) {
+       for(MapObject object : map.getLayers().get(Constants.LADDER_INDEX).getObjects().getByType(RectangleMapObject.class)) {
 
             Rectangle rect = ((RectangleMapObject)object).getRectangle();
 
@@ -52,18 +53,18 @@ public class WorldCreator {
 
             body = world.createBody(bdef);
 
-            shape.setAsBox(rect.getWidth() / 2, rect.getHeight() / 2 / Constants.PPM);
+            shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
             fdef.shape = shape;
             body.createFixture(fdef);
-        }*/
+        }
 
         //create all enemies
-        /*for(MapObject object : map.getLayers().get(Constants.ENEMY_INDEX).getObjects().getByType(RectangleMapObject.class)){
+        for(MapObject object : map.getLayers().get(Constants.ENEMY_INDEX).getObjects().getByType(RectangleMapObject.class)){
 
             Rectangle rect = ((RectangleMapObject)object).getRectangle();
 
             enemies.add((new Enemy(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM)));
-        }*/
+        }
     }
 
 
