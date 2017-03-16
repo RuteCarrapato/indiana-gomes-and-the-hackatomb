@@ -2,6 +2,7 @@ package org.academiadecodigo.hackathon.screens;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -65,8 +66,11 @@ public class PlayScreen extends AbstractGameScreen {
     }
 
     private void handleInput(float dt) {
-        if(Gdx.input.isTouched()){
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
             gameCam.position.x += 100 * dt;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            gameCam.position.x -= 100 * dt;
         }
 
     }

@@ -18,7 +18,7 @@ public class Constants {
 
 
     public static final int LADDER_INDEX = 0;
-    public static final int GROUND_INDEX = 0;
+    public static final int GROUND_INDEX = 2;
     public static final int TREASURE_INDEX = 0;
     public static final int ENEMY_INDEX = 0;
 
