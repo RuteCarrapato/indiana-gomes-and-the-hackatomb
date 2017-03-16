@@ -1,24 +1,31 @@
 package org.academiadecodigo.hackathon.gameobjects;
 
 
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import org.academiadecodigo.hackathon.Indiana;
+import org.academiadecodigo.hackathon.screens.PlayScreen;
 
 /**
  * Created by codecadet on 16/03/17.
  */
-public class GameObject {
+public class GameObject extends Sprite {
 
     public World world;
+    private PlayScreen screen;
     public Body b2dbody;
+    public Vector2 velocity;
 
-    public GameObject(World world) {
+    public GameObject(PlayScreen screen) {
 
-//        this.world = world;
-//        defineGameObj();
+        this.screen = screen;
+        this.world = screen.getWorld();
+    }
+
+    public GameObject(PlayScreen screen, float x, float y) {
+
+        this.screen = screen;
+        world = screen.getWorld();
     }
 
     public void defineGameObj() {
