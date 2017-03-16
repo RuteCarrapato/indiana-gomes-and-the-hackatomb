@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academiadecodigo.hackathon.Indiana;
+import org.academiadecodigo.hackathon.utils.Constants;
 
 public class PlayScreen extends AbstractGameScreen {
 
@@ -23,7 +24,7 @@ public class PlayScreen extends AbstractGameScreen {
         this.game = game;
         texture = new Texture("badlogic.jpg");
         gameCam = new OrthographicCamera();
-        gamePort = new FitViewport(800, 480, gameCam);
+        gamePort = new FitViewport(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT, gameCam);
     }
 
     @Override

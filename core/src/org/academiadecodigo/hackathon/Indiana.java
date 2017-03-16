@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 
 public class Indiana extends Game {
+
 	public SpriteBatch batch;
 
 	@Override
