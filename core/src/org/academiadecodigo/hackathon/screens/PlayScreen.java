@@ -60,12 +60,18 @@ public class PlayScreen extends AbstractGameScreen {
         // Creates the player TODO: MADE BY JOAQUIM CHECKA RUBEN
         this.world = new World(new Vector2(0, Constants.GRAVITY), true);
         debugRenderer = new Box2DDebugRenderer();
+
+
         creator = new WorldCreator(this);
         player = new Player(this);
+
+
     }
 
     public void update(float dt){
         handleInput(dt);
+
+        world.step(1/60f, 2, 0);
 
         gameCam.update();
         renderer.setView(gameCam);
