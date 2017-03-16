@@ -1,5 +1,8 @@
 package org.academiadecodigo.hackathon.gameobjects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -31,6 +34,17 @@ public class Player  extends GameObject {
 
         fdef.shape = shape;
         b2dbody.createFixture(fdef);
+    }
+
+    public void handleInput(float dt) {
+
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            this.b2dbody.applyLinearImpulse(new Vector2(0.1f, 0), this.b2dbody.getWorldCenter(), true);
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            this.b2dbody.applyLinearImpulse(new Vector2(-0.1f, 0), this.b2dbody.getWorldCenter(), true);
+        }
     }
 
 }
