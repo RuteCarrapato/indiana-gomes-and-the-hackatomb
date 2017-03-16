@@ -11,7 +11,7 @@ import org.academiadecodigo.hackathon.utils.Constants;
 /**
  * Created by codecadet on 16/03/17.
  */
-public class Player  extends GameObject {
+public class Player extends GameObject {
 
     private Texture playerTexture;
 
@@ -28,7 +28,9 @@ public class Player  extends GameObject {
         System.out.println(world);
 
         BodyDef bdef = new BodyDef();
+
         bdef.position.set(52 / Constants.PPM , 52 / Constants.PPM);
+
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2dbody = world.createBody(bdef);
 
