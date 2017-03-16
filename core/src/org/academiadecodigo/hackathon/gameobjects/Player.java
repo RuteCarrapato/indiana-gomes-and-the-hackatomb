@@ -17,10 +17,10 @@ public class Player extends GameObject {
 
     public State currentState;
     public State previousState;
-    private Animation animRun;
-    private Animation animJump;
-    private float animTimer;
-    private boolean runningRight;
+    public Animation animRun;
+    public Animation animJump;
+    public float animTimer;
+    public boolean runningRight;
 
     public Player(PlayScreen screen) {
 
@@ -37,6 +37,8 @@ public class Player extends GameObject {
         previousState = State.STANDING;
         animTimer = 0;
         runningRight = true;
+
+
 
         definePlayer();
     }
