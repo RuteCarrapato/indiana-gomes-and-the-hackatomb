@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import org.academiadecodigo.hackathon.gameobjects.Enemy;
+import org.academiadecodigo.hackathon.gameobjects.Ladder;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
 
@@ -45,7 +46,9 @@ public class WorldCreator {
         // create ladder bodies/fixtures
        for(MapObject object : map.getLayers().get(Constants.LADDER_INDEX).getObjects().getByType(RectangleMapObject.class)) {
 
-            Rectangle rect = ((RectangleMapObject)object).getRectangle();
+           Rectangle rect = ((RectangleMapObject)object).getRectangle();
+
+            /*
 
             bdef.type = BodyDef.BodyType.StaticBody;
             bdef.position.set((rect.getX() + rect.getWidth() / 2) / Constants.PPM, (rect.getY() + rect.getHeight() / 2) / Constants.PPM);
@@ -55,6 +58,10 @@ public class WorldCreator {
             shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
             fdef.shape = shape;
             body.createFixture(fdef);
+
+           */
+
+           new Ladder(screen, rect);
         }
 
         //create all enemies
