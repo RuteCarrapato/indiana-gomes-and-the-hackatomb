@@ -9,7 +9,7 @@ public class Constants {
      */
     public static final int VIEW_WIDTH = 480;
     public static final int VIEW_HEIGHT = 208;
-    public static final int PPM = 100;
+    public static final float PPM = 100;
 
 
 
