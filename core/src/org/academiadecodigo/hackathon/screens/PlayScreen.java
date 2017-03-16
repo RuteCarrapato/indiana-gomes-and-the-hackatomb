@@ -115,8 +115,7 @@ public class PlayScreen extends AbstractGameScreen {
         player.draw(game.batch);
         game.batch.end();
 
-//        game.batch.setProjectionMatrix(hud.stage.getCamera().;
-
+//        game.batch.setProjectionMatrix(hud.stage.getCamera();
     }
 
     @Override
