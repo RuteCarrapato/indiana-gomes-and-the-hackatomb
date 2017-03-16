@@ -1,14 +1,10 @@
 package org.academiadecodigo.hackathon.screens;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import org.academiadecodigo.hackathon.Indiana;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.utils.Constants;
