@@ -2,7 +2,6 @@ package org.academiadecodigo.hackathon.screens;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,12 +10,12 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.WorldCreator;
+import org.academiadecodigo.hackathon.colisiondetector.WorldContactListener;
 import org.academiadecodigo.hackathon.gameobjects.Player;
 import org.academiadecodigo.hackathon.utils.Constants;
 
@@ -62,7 +61,6 @@ public class PlayScreen extends AbstractGameScreen {
         this.world = new World(new Vector2(0, Constants.GRAVITY), true);
         debugRenderer = new Box2DDebugRenderer();
 
-
         creator = new WorldCreator(this);
         player = new Player(this);
 
@@ -81,20 +79,18 @@ public class PlayScreen extends AbstractGameScreen {
         world.step(1/60f, 6, 2);
         gameCam.position.x = player.b2dbody.getPosition().x;
 
+        //Update the gameCam
         gameCam.update();
+
+        //renderer draws what the camera views
         renderer.setView(gameCam);
 
     }
 
     private void handleInput(float dt) {
         // Player Movement
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            player.b2dbody.applyLinearImpulse(new Vector2(0.1f, 0), player.b2dbody.getWorldCenter(), true);
-        }
+        player.handleInput(dt);
 
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            player.b2dbody.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2dbody.getWorldCenter(), true);
-        }
     }
 
     @Override
@@ -113,12 +109,15 @@ public class PlayScreen extends AbstractGameScreen {
         renderer.render();
         debugRenderer.render(world, gameCam.combined);
 
+        world.setContactListener(new WorldContactListener());
+        EdgeShape body = new EdgeShape();
+
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
         player.draw(game.batch);
         game.batch.end();
 
-//        game.batch.setProjectionMatrix(hud.stage.getCamera().;
+//        game.batch.setProjectionMatrix(hud.stage.getCamera();
     }
 
     @Override

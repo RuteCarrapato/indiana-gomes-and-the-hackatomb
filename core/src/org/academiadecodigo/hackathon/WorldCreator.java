@@ -2,6 +2,7 @@ package org.academiadecodigo.hackathon;
 
 
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
@@ -55,8 +56,8 @@ public class WorldCreator {
 
             body = world.createBody(bdef);
 
-            shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
-            fdef.shape = shape;
+//            shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
+//            fdef.shape = shape;
             body.createFixture(fdef);
 
            */

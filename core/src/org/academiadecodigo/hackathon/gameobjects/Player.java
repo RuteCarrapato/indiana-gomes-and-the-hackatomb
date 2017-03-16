@@ -1,7 +1,11 @@
 package org.academiadecodigo.hackathon.gameobjects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g3d.model.Animation;
+
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
@@ -35,7 +39,7 @@ public class Player extends GameObject {
         definePlayer();
     }
 
-    public void definePlayer() {
+    private void definePlayer() {
 
         BodyDef bdef = new BodyDef();
 
@@ -52,16 +56,20 @@ public class Player extends GameObject {
         b2dbody.createFixture(fdef);
     }
 
-    /*public void handleInput(float dt) {
+    public void handleInput(float dt) {
 
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && b2dbody.getLinearVelocity().x <= 2) {
             this.b2dbody.applyLinearImpulse(new Vector2(0.1f, 0), this.b2dbody.getWorldCenter(), true);
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && b2dbody.getLinearVelocity().x >= -2) {
             this.b2dbody.applyLinearImpulse(new Vector2(-0.1f, 0), this.b2dbody.getWorldCenter(), true);
         }
-    }*/
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            this.b2dbody.applyLinearImpulse(new Vector2(0, 2f), this.b2dbody.getWorldCenter(), true);
+        }
+    }
 
     public void update(float dt) {
 
