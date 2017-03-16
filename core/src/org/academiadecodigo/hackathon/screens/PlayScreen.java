@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -56,6 +57,11 @@ public class PlayScreen extends AbstractGameScreen {
 
         gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight()/ 2, 0);
 
+        // Creates the player TODO: MADE BY JOAQUIM CHECKA RUBEN
+        this.world = new World(new Vector2(0, Constants.GRAVITY), true);
+        debugRenderer = new Box2DDebugRenderer();
+        creator = new WorldCreator(this);
+        player = new Player(this);
     }
 
     public void update(float dt){
