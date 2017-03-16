@@ -4,17 +4,43 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academiadecodigo.hackathon.Indiana;
+import org.academiadecodigo.hackathon.WorldCreator;
+import org.academiadecodigo.hackathon.gameobjects.Player;
 import org.academiadecodigo.hackathon.utils.Constants;
 
 public class PlayScreen extends AbstractGameScreen {
 
+    //Reference to our game, used to set Screens
     private Indiana game;
-    private Texture texture;
+    private TextureAtlas atlas;
+
+    //Basic PlayScreen variables
     private OrthographicCamera gameCam;
     private Viewport gamePort;
+
+    //TileMap variables
+    private TmxMapLoader mapLoader;
+    private TiledMap map;
+    private OrthogonalTiledMapRenderer renderer;
+
+    //BOX2D variables
+    private World world;
+    private Box2DDebugRenderer debugRenderer;
+    private WorldCreator creator;
+
+    //Sprites
+    private Player player;
+
+    private Texture texture;
 
     public PlayScreen(Indiana game) {
         this.game = game;
@@ -63,50 +89,18 @@ public class PlayScreen extends AbstractGameScreen {
     public void dispose() {
 
     }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public TiledMap getMap() {
+        return map;
+    }
 }
 
 
 
-//    // BOX2D
-//    private World world;
-//    private Box2DDebugRenderer b2dr;
-//
-//    // TILED MAP    TODO: Está aqui preparado para ti BONI
-////    private TmxMapLoader mapLoader;
-////    private TiledMap map;
-////    private OrthogonalTiledMapRenderer renderer;
-//
-//    public PlayScreen(Indiana game) {
-//
-//        //this.game = game;
-//        // BOX2D
-//        world = new World(new Vector2(0, 0), true);
-//        b2dr = new Box2DDebugRenderer();
-//
-//        // TILED MAP        TODO: Está aqui preparado para ti BONI
-////        mapLoader = new TmxMapLoader();
-////        map = mapLoader.load("map.tmx");
-////        renderer = new OrthogonalTiledMapRenderer(map);
-//
-//        BodyDef bdef = new BodyDef();
-//        PolygonShape shape = new PolygonShape();
-//        FixtureDef fdef = new FixtureDef();
-//        Body body;
-//
-//        // CREATE THE MAP OBJECTS ON LAYER 2
-//        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
-//
-//            Rectangle rect = ((RectangleMapObject)object).getRectangle();
-//
-//            bdef.type = BodyDef.BodyType.StaticBody;
-//            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Indiana.PPM, (rect.getY() + rect.getHeight() / 2) / Indiana.PPM);
-//
-//            body = world.createBody(bdef);
-//
-//            shape.setAsBox(rect.getWidth() / 2, rect.getHeight() / 2);
-//            fdef.shape = shape;
-//            body.createFixture(fdef);
-//        }
-//    }
+
 
 
