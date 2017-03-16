@@ -11,16 +11,14 @@ public class Constants {
     public static final int VIEW_HEIGHT = 208;
     public static final float PPM = 100;
 
-
-
     public static final int GRAVITY = -10;
     public static final int PROJECTILE_SPEED = 0; //TODO: DEFINE SPEED
 
 
-    public static final int LADDER_INDEX = 0;
+    public static final int LADDER_INDEX = 3;
     public static final int GROUND_INDEX = 2;
-    public static final int TREASURE_INDEX = 0;
-    public static final int ENEMY_INDEX = 0;
+    public static final int TREASURE_INDEX = 4;
+    public static final int ENEMY_INDEX = 5;
 
     public static final String LEVEL1_TMX = "level1.tmx";
 }

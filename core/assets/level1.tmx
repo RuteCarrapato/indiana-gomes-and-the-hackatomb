@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="64">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="104">
  <tileset firstgid="1" name="sa_bg1" tilewidth="16" tileheight="16" tilecount="1" columns="1">
   <image source="sa_bg1.png" width="16" height="16"/>
  </tileset>
@@ -29,14 +29,48 @@
   </data>
  </layer>
  <objectgroup name="ground">
-  <object id="34" x="0" y="0">
-   <polyline points="0,0 0,208 1328,208 1328,0 1296,0 1296,144 1232,144 1232,160 1216,160 1216,176 1088,176 1088,160 992,160 992,176 880,176 880,160 864,160 864,144 848,144 848,128 816,128 816,192 608,192 608,176 592,176 592,160 576,160 576,144 560,144 560,160 384,160 384,144 320,144 320,160 304,160 304,176 288,176 288,192 176,192 176,176 96,176 96,192 16,192 16,160 48,160 48,112 96,112 96,96 48,96 48,80 16,80 16,48 48,48 48,16 144,16 144,32 256,32 256,16 336,16 336,80 288,80 288,96 464,96 464,80 384,80 384,16 560,16 560,64 512,64 512,80 560,80 560,96 576,96 576,112 592,112 592,128 672,128 672,112 608,112 608,16 784,16 784,32 800,32 800,80 720,80 720,96 816,96 816,80 896,80 896,64 848,64 848,16 976,16 976,48 944,48 944,64 976,64 976,112 928,112 928,128 1104,128 1104,64 1152,64 1152,48 1104,48 1104,16 1296,16 1296,0 0,0"/>
-  </object>
   <object id="36" x="144" y="112" width="112" height="16"/>
   <object id="37" x="1264" y="96" width="32" height="16"/>
   <object id="45" x="1104" y="112" width="80" height="16"/>
+  <object id="64" x="0" y="0" width="48" height="48"/>
+  <object id="65" x="0" y="80" width="48" height="80"/>
+  <object id="66" x="0" y="48" width="16" height="32"/>
+  <object id="67" x="0" y="160" width="16" height="48"/>
+  <object id="68" x="16" y="192" width="1312" height="16"/>
+  <object id="69" x="96" y="176" width="80" height="16"/>
+  <object id="70" x="48" y="96" width="48" height="16"/>
+  <object id="72" x="288" y="176" width="320" height="16"/>
+  <object id="73" x="304" y="160" width="288" height="16"/>
+  <object id="74" x="320" y="144" width="64" height="16"/>
+  <object id="75" x="560" y="144" width="16" height="16"/>
+  <object id="76" x="288" y="80" width="176" height="16"/>
+  <object id="77" x="336" y="16" width="48" height="64"/>
+  <object id="78" x="48" y="0" width="672" height="16"/>
+  <object id="79" x="144" y="16" width="112" height="16"/>
+  <object id="80" x="560" y="16" width="48" height="80"/>
+  <object id="81" x="512" y="64" width="48" height="16"/>
+  <object id="82" x="576" y="96" width="32" height="16"/>
+  <object id="83" x="592" y="112" width="80" height="16"/>
+  <object id="86" x="720" y="0" width="608" height="16"/>
+  <object id="87" x="1296" y="16" width="32" height="128"/>
+  <object id="88" x="1232" y="144" width="96" height="48"/>
+  <object id="89" x="1216" y="160" width="16" height="16"/>
+  <object id="90" x="816" y="176" width="416" height="16"/>
+  <object id="91" x="992" y="160" width="96" height="16"/>
+  <object id="92" x="816" y="160" width="64" height="16"/>
+  <object id="93" x="816" y="144" width="48" height="16"/>
+  <object id="94" x="816" y="128" width="32" height="16"/>
+  <object id="95" x="976" y="16" width="128" height="112"/>
+  <object id="96" x="1104" y="48" width="48" height="16"/>
+  <object id="97" x="944" y="48" width="32" height="16"/>
+  <object id="98" x="928" y="112" width="48" height="16"/>
+  <object id="99" x="784" y="16" width="64" height="16"/>
+  <object id="100" x="800" y="32" width="48" height="48"/>
+  <object id="101" x="720" y="80" width="96" height="16"/>
+  <object id="102" x="848" y="64" width="48" height="16"/>
+  <object id="103" x="624.622" y="51.716"/>
  </objectgroup>
- <objectgroup name="ladder">
+ <objectgroup name="ladder" visible="0">
   <object id="38" x="256" y="112" width="16" height="80"/>
   <object id="39" x="464" y="80" width="16" height="80"/>
   <object id="40" x="704" y="80" width="16" height="112"/>
@@ -46,10 +80,10 @@
   <object id="46" x="1184" y="112" width="16" height="64"/>
   <object id="47" x="1152" y="48" width="16" height="64"/>
  </objectgroup>
- <objectgroup name="treasure">
+ <objectgroup name="treasure" visible="0">
   <object id="48" x="1280" y="80" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="enemies">
+ <objectgroup name="enemies" visible="0">
   <object id="49" x="848" y="48" width="16" height="16"/>
   <object id="50" x="960" y="160" width="16" height="16"/>
   <object id="51" x="1104" y="160" width="16" height="16"/>
