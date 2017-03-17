@@ -51,7 +51,7 @@ public class PlayScreen extends AbstractGameScreen {
 
     public PlayScreen(Indiana game) {
         this.game = game;
-        atlas = new TextureAtlas("player_movements.pack");
+        atlas = new TextureAtlas("sprites.pack");
 
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(Constants.VIEW_WIDTH / Constants.PPM, Constants.VIEW_HEIGHT / Constants.PPM, gameCam);

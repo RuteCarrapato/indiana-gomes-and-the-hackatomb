@@ -104,8 +104,6 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
     public void handleInput(float dt) {
 
         if(keyUp(Input.Keys.ANY_KEY) && climbingLadder) {
-            System.out.println("ANY KEY WAS UP!!!" + count++);
-//            this.b2dbody.setLinearVelocity(0, 0);
             this.currentState = State.LADDER_STOP;
             this.b2dbody.getLinearVelocity().y = 0;
         }

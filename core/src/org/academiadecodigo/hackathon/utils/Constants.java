@@ -18,7 +18,6 @@ public class Constants {
     public static final int LADDER_INDEX = 3;
     public static final int GROUND_INDEX = 2;
     public static final int TREASURE_INDEX = 4;
-    public static final int ENEMY_INDEX = 5;
 
     public static final String LEVEL1_TMX = "level1.tmx";
 
@@ -29,6 +28,9 @@ public class Constants {
     public static final float PROJECTILE_WIDTH = 16; // Pixels
 
     public static final int HUMAN_SIZE = 16;
+
+    public static final int ENEMY_INDEX = 5;
+    public static final String ENEMY_REGION = "zenemy";
 
     public static final String PLAYER_REGION = "player";
     public static final float PLAYER_X_SPEED = 2;
