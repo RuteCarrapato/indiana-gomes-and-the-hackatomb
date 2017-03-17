@@ -9,6 +9,7 @@ public class WorldContactListener implements ContactListener {
     @Override
     public void beginContact(Contact contact) {
 
+
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
         Fixture player;
