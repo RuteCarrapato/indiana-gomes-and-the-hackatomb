@@ -37,7 +37,7 @@ public class WorldContactListener implements ContactListener {
             player.hittingLadder();
         }
 
-        if (fixA.getUserData() == "enemy" || fixB.getUserData() == "enemy" && fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player) {
+        if (fixA.getUserData() instanceof Enemy || fixB.getUserData() instanceof Enemy && fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player) {
             Gdx.app.log("ENEMY", "collision");
 
             player.die();
@@ -66,18 +66,18 @@ public class WorldContactListener implements ContactListener {
             projectile.setToDestroy();
         }
 
-        if(fixA.getUserData() instanceof Projectile || fixB.getUserData() instanceof Projectile && fixA.getUserData()  instanceof Enemy || fixB.getUserData() instanceof Enemy) {
+        if(fixA.getUserData() instanceof Projectile || fixB.getUserData() instanceof Projectile && fixA.getUserData() instanceof Enemy || fixB.getUserData() instanceof Enemy) {
 
             Projectile projectile = null;
             Enemy enemy = null;
 
             if(fixA.getUserData() instanceof Projectile) {
-                projectile = (Projectile)fixA.getUserData();
-                enemy = (Enemy)fixB.getUserData();
+                projectile = (Projectile)(fixA.getUserData());
+                enemy = (Enemy)(fixB.getUserData());
 
             } else {
-                projectile = (Projectile)fixB.getUserData();
-                enemy = (Enemy)fixA.getUserData();
+                projectile = (Projectile)(fixB.getUserData());
+                enemy = (Enemy)(fixA.getUserData());
 
             }
 

@@ -98,12 +98,20 @@ public class PlayScreen extends AbstractGameScreen {
         //renderer draws what the camera views
         renderer.setView(gameCam);
 
+        //Enemies movem
+        for (Enemy enemy : creator.getEnemies()) {
+            enemy.move();
+        }
+
 
     }
 
     private void handleInput(float dt) {
         // Player Movement
         player.handleInput(dt);
+
+
+
 
     }
 
@@ -127,7 +135,6 @@ public class PlayScreen extends AbstractGameScreen {
 
         //renderer our Box2DDebugLines
         debugRenderer.render(world, gameCam.combined);
-
 
         world.setContactListener(new WorldContactListener(this));
 
