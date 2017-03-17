@@ -7,6 +7,8 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import org.academiadecodigo.hackathon.gameobjects.InputProcessor;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
@@ -14,7 +16,6 @@ import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
 
-import static org.academiadecodigo.hackathon.Indiana.manager;
 
 /**
  * Created by codecadet on 16/03/17.
@@ -28,6 +29,7 @@ public class Player extends GameObject {
     public Animation<TextureRegion> animLadder;
     public Animation animJump;
     public TextureRegion animStand;
+    public TextureRegion animLadderStop;
 
     public float animTimer;
     public boolean runningRight;
@@ -37,6 +39,7 @@ public class Player extends GameObject {
     private Array<Projectile> projectiles;
 
     private Sound sound;
+    public InputProcessor inputProcessor;
 
     public Player(PlayScreen screen) {
         super(screen);
@@ -48,13 +51,14 @@ public class Player extends GameObject {
 
         setRegion(textureRegion);
 
-        animStand = screen.getAtlas().findRegion("player");
-
         // State and Animations
         currentState = State.STANDING;
         previousState = State.STANDING;
         animTimer = 0;
         runningRight = true;
+
+        animStand = screen.getAtlas().findRegion("player");
+        animLadderStop = screen.getAtlas().findRegion("playerladder1");
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
@@ -71,6 +75,8 @@ public class Player extends GameObject {
 
         animLadder = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
+
+        this.inputProcessor = new InputProcessor(this);
 
         definePlayer();
 
@@ -94,8 +100,19 @@ public class Player extends GameObject {
         b2dbody.createFixture(fdef).setUserData(Constants.PLAYER_REGION);
     }
 
+    /**
+     * Handles player input
+     * @param dt
+     */
+    int count = 0;
     public void handleInput(float dt) {
 
+        if(inputProcessor.keyUp(Input.Keys.ANY_KEY) && climbingLadder) {
+            System.out.println("ANY KEY WAS UP!!!" + count++);
+//            this.b2dbody.setLinearVelocity(0, 0);
+            this.currentState = State.LADDER_STOP;
+            this.b2dbody.getLinearVelocity().y = 0;
+        }
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && b2dbody.getLinearVelocity().x <= Constants.PLAYER_X_SPEED) {
             this.b2dbody.applyLinearImpulse(new Vector2(0.1f, 0), this.b2dbody.getWorldCenter(), true);
@@ -110,8 +127,11 @@ public class Player extends GameObject {
             this.b2dbody.applyLinearImpulse(new Vector2(0, 2f), this.b2dbody.getWorldCenter(), true);
         }
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+            fire();
+        }
+
         if (Gdx.input.isKeyPressed(Input.Keys.UP) && climbingLadder) {
-            System.out.println("GOING UP AND CLIMBING LADDER");
            b2dbody.setLinearVelocity(0, 1);
         }
     }
@@ -164,6 +184,8 @@ public class Player extends GameObject {
             case LADDER:
                 region = animLadder.getKeyFrame(animTimer, true);
                 break;
+            case LADDER_STOP:
+                region = animLadderStop;
             default:
                 region = animStand;
         }
@@ -203,17 +225,6 @@ public class Player extends GameObject {
         return State.STANDING;
     }
 
-    public enum State {
-        FALLING,
-        JUMPING,
-        STANDING,
-        RUNNING,
-        DEAD,
-        LADDER
-    }
-
-
-
     public void resetGravity() {
         b2dbody.setGravityScale(1);
     }
@@ -234,6 +245,16 @@ public class Player extends GameObject {
 
         sound = Indiana.manager.get("audio/sounds/GUN.mp3", Sound.class);
         sound.play();
+    }
+
+    public enum State {
+        FALLING,
+        JUMPING,
+        STANDING,
+        RUNNING,
+        DEAD,
+        LADDER,
+        LADDER_STOP
     }
 }
 
