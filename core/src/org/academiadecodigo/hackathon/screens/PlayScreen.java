@@ -5,8 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -72,6 +70,7 @@ public class PlayScreen extends AbstractGameScreen {
 
         creator = new WorldCreator(this);
         player = new Player(this);
+//        enemy = new Enemy(this, );
         music = Indiana.manager.get("audio/music/rick.mp3", Music.class);
         music.setLooping(true);
         music.play();
@@ -103,6 +102,7 @@ public class PlayScreen extends AbstractGameScreen {
         //Enemies movem
         for (Enemy enemy : creator.getEnemies()) {
             enemy.move();
+            enemy.update(dt);
         }
 
 
@@ -149,9 +149,9 @@ public class PlayScreen extends AbstractGameScreen {
         game.batch.begin();
         player.draw(game.batch);
 
-//        for (Enemy enemy : creator.getEnemies()) {
-//            enemy.draw(game.batch);
-//        }
+        for (Enemy enemy : creator.getEnemies()) {
+            enemy.draw(game.batch);
+        }
 
         game.batch.end();
 

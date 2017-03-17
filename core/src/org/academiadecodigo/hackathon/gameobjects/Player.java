@@ -3,16 +3,13 @@ package org.academiadecodigo.hackathon.gameobjects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
-import org.academiadecodigo.hackathon.gameobjects.InputProcessor;
-
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.utils.Array;
 import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
@@ -223,10 +220,6 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
         }
 
         return State.STANDING;
-    }
-
-    public void resetGravity() {
-        b2dbody.setGravityScale(1);
     }
 
     public void die() {
