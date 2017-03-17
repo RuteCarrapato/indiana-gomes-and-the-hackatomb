@@ -2,7 +2,6 @@ package org.academiadecodigo.hackathon.gameobjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -15,7 +14,6 @@ import com.badlogic.gdx.utils.Array;
 import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
-
 
 /**
  * Created by codecadet on 16/03/17.
@@ -35,6 +33,8 @@ public class Player extends GameObject {
     public boolean runningRight;
     public boolean climbingLadder;
     public boolean playerIsDead;
+
+    public boolean onTheFloor = true;
 
     private Array<Projectile> projectiles;
 
@@ -97,7 +97,7 @@ public class Player extends GameObject {
         shape.setRadius(6 / Constants.PPM);
 
         fdef.shape = shape;
-        b2dbody.createFixture(fdef).setUserData(Constants.PLAYER_REGION);
+        b2dbody.createFixture(fdef).setUserData(this);
     }
 
     /**
@@ -123,7 +123,8 @@ public class Player extends GameObject {
             this.b2dbody.applyLinearImpulse(new Vector2(-0.1f, 0), this.b2dbody.getWorldCenter(), true);
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && onTheFloor) {
             this.b2dbody.applyLinearImpulse(new Vector2(0, 2f), this.b2dbody.getWorldCenter(), true);
         }
 
@@ -186,6 +187,7 @@ public class Player extends GameObject {
                 break;
             case LADDER_STOP:
                 region = animLadderStop;
+                break;
             default:
                 region = animStand;
         }
@@ -245,6 +247,11 @@ public class Player extends GameObject {
 
         sound = Indiana.manager.get("audio/sounds/GUN.mp3", Sound.class);
         sound.play();
+    }
+
+    public void setOnTheFloor(boolean onTheFloor) {
+
+        this.onTheFloor = onTheFloor;
     }
 
     public enum State {

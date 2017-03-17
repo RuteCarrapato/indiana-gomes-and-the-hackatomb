@@ -2,6 +2,7 @@ package org.academiadecodigo.hackathon.colisiondetector;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
+import org.academiadecodigo.hackathon.gameobjects.Ladder;
 import org.academiadecodigo.hackathon.gameobjects.Player;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 
@@ -22,11 +23,27 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
-        if (fixA.getUserData() == "player" || fixB.getUserData() == "player" && fixA.getUserData() == "ladder" || fixB.getUserData() == "ladder") {
+
+        System.out.println(fixA.getUserData());
+        System.out.println(fixB.getUserData());
+
+
+        if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
             Gdx.app.log("LADDER", "collision");
 
             player.hittingLadder();
+        }
 
+        if (fixA.getUserData() == "enemy" || fixB.getUserData() == "enemy" && fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player) {
+            Gdx.app.log("ENEMY", "collision");
+
+            player.die();
+        }
+
+
+        if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() == "ground" || fixB.getUserData() == "ground") {
+
+            player.setOnTheFloor(true);
         }
 
     }
@@ -37,11 +54,21 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
-        if (fixA.getUserData() == "player" || fixB.getUserData() == "player" && fixA.getUserData() == "ladder" || fixB.getUserData() == "ladder") {
+
+        if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
             Gdx.app.log("LADDER", "collision");
 
             player.hittingLadder();
         }
+
+
+        if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() == "ground" || fixB.getUserData() == "ground") {
+
+            System.out.println("is not on floor");
+
+            player.setOnTheFloor(false);
+        }
+
     }
 
     @Override
