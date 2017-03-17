@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.utils.Constants;
 
@@ -14,6 +16,7 @@ public class MenuScreen extends AbstractGameScreen {
 
     final Indiana game;
     OrthographicCamera camera;
+    private Texture splashScreen;
 
     public MenuScreen(final Indiana game) {
 
@@ -41,8 +44,8 @@ public class MenuScreen extends AbstractGameScreen {
 
         game.batch.begin();
 
-        game.font.draw(game.batch, "Welcome to Indiana Gomes", 100, 150);
-        game.font.draw(game.batch, "Press any tecla para empezar", 100, 100);
+        splashScreen = new Texture("IndianaGomes.png");
+        game.batch.draw(splashScreen,0,0,Constants.VIEW_WIDTH,Constants.VIEW_HEIGHT);
 
         game.batch.end();
 

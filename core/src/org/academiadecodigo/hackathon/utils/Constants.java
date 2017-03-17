@@ -26,4 +26,5 @@ public class Constants {
     public static final float PLAYER_X_SPEED = 2;
 
     public static final int HUMAN_SIZE = 16;
+    public static final String PLAYER_REGION = "player";
 }

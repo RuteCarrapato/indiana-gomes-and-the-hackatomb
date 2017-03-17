@@ -27,14 +27,18 @@ public class Player extends GameObject {
     public float animTimer;
     public boolean runningRight;
     public boolean climbingLadder;
+    public boolean playerIsDead;
+
+    private Array<Projectile> projectiles;
 
     public Player(PlayScreen screen) {
         super(screen);
 
         // Atlas Region in sprites.png and sprites.pack
-        this.atlasRegion = screen.getAtlas().findRegion("player");
+        this.atlasRegion = screen.getAtlas().findRegion(Constants.PLAYER_REGION);
         this.textureRegion = new TextureRegion(atlasRegion, 0, 0, Constants.HUMAN_SIZE, Constants.HUMAN_SIZE);
         setBounds(0, 0, Constants.HUMAN_SIZE / Constants.PPM, Constants.HUMAN_SIZE / Constants.PPM);
+
         setRegion(textureRegion);
 
         animStand = screen.getAtlas().findRegion("player");
@@ -62,6 +66,8 @@ public class Player extends GameObject {
         frames.clear();
 
         definePlayer();
+
+        projectiles = new Array<Projectile>();
     }
 
     private void definePlayer() {
@@ -78,7 +84,7 @@ public class Player extends GameObject {
         shape.setRadius(6 / Constants.PPM);
 
         fdef.shape = shape;
-        b2dbody.createFixture(fdef);
+        b2dbody.createFixture(fdef).setUserData(Constants.PLAYER_REGION_STRING);
     }
 
     public void handleInput(float dt) {
@@ -106,11 +112,18 @@ public class Player extends GameObject {
 
         setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y - getHeight() / 2);
         setRegion(getFrame(dt));
+
+        for (Projectile projectile : projectiles) {
+            projectile.update(dt);
+            if (projectile.isDestroyed()) {
+                projectiles.removeValue(projectile, true);
+            }
+        }
     }
 
     public TextureRegion getFrame(float dt) {
 
-        currentState = getState();
+        currentState = getState(dt);
 
         TextureRegion region = null;
 
@@ -154,7 +167,7 @@ public class Player extends GameObject {
         return region;
     }
 
-    public State getState() {
+    public State getState(float dt) {
 
         if(climbingLadder) {
             return State.LADDER;
@@ -198,5 +211,20 @@ public class Player extends GameObject {
 
         }
 
+    }
+
+    public void die() {
+        if (!isDead()) {
+            //TODO: Boni: Implement sound effect of dead/game over
+            playerIsDead = true;
+        }
+    }
+
+    public boolean isDead() {
+        return playerIsDead;
+    }
+
+    public void fire(){
+        projectiles.add(new Projectile(screen, b2dbody.getPosition().x, b2dbody.getPosition().y, runningRight));
     }
 }
