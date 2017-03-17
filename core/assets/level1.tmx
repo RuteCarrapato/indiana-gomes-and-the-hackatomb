@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="136">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="83" height="13" tilewidth="16" tileheight="16" nextobjectid="136">
  <tileset firstgid="1" name="sa_bg1" tilewidth="16" tileheight="16" tilecount="1" columns="1">
-  <image source="sa_bg1.png" width="16" height="16"/>
+  <image source="maptiles/sa_bg1.png" width="16" height="16"/>
  </tileset>
  <tileset firstgid="2" name="sa_rocks1" tilewidth="16" tileheight="16" tilecount="1" columns="1">
-  <image source="sa_rocks1.png" width="16" height="16"/>
+  <image source="maptiles/sa_rocks1.png" width="16" height="16"/>
  </tileset>
  <tileset firstgid="3" name="sa_brick2" tilewidth="16" tileheight="16" tilecount="1" columns="1">
-  <image source="sa_brick2.png" width="16" height="16"/>
+  <image source="maptiles/sa_brick2.png" width="16" height="16"/>
  </tileset>
  <tileset firstgid="4" name="ladder" tilewidth="16" tileheight="16" tilecount="1" columns="1">
-  <image source="ladder.png" width="16" height="16"/>
+  <image source="maptiles/ladder.png" width="16" height="16"/>
  </tileset>
  <tileset firstgid="5" name="enemy" tilewidth="16" tileheight="16" tilecount="1" columns="1">
-  <image source="enemy.png" width="16" height="16"/>
+  <image source="sprites/enemy.png" width="16" height="16"/>
  </tileset>
  <tileset firstgid="6" name="treasure" tilewidth="16" tileheight="16" tilecount="1" columns="1">
-  <image source="treasure.png" width="16" height="16"/>
+  <image source="sprites/treasure.png" width="16" height="16"/>
  </tileset>
- <layer name="background" width="240" height="13">
+ <layer name="background" width="83" height="13">
   <data encoding="base64" compression="zlib">
-   eJztzrEJAAAIBLF3/6WtHMBKhBykv0pSAADAG9P1BwAAAAAAAAAAwEYDIpMMLw==
+   eJztzrEJAAAIBLF3/6WtHEEEyUH6qyQFsGi6/gAAAH5qihUENg==
   </data>
  </layer>
- <layer name="graphics" width="240" height="13">
+ <layer name="graphics" width="83" height="13">
   <data encoding="base64" compression="zlib">
-   eJztme0KgzAMRf1i7//IQ1AIpXe5sWk75B7Ij8liK+Q0tm7LsmyKlBBiNEz9RWv2aU1n5DG52R7KXzGLHv1jtL/RXPkr3kKPuou6sF6R5e8K/rNf4fm7mzgCYwsxmhH+Ip9OrCsRf8t7Iv+8+Xn9V/6Kf4bpWwzIw70SyAnG3wPcM+JPpr8fYs5C9ILtWy1ul/xyolxLynGZfujB+HuPi8az64j8FbNgel6t30X2hyVeTq1vs7loPPR+4O1/0XPa3/JXzKL1/LmHv09yz+voOTJ6NvLXnrsJMZpsf5lvMTbHvh8zc2D8fXIGFRk367uTEK201h1T19Fgxyuvo/vU1gtm72tzDidP/ooZoLpja5up6xaHvfMre86UPYfMdUeIHsyu+TeFEKP5AptgBIs=
+   eJztVkEOwzAIS5to/3/yVKmTEIqDzch2KRKHVcN2DA09W2vnk+WJQq1hMHfVMbVZHxS8qvi1l2rtTi+rQ8U+7qw6zwH+0++MvOwmh8hdHR4bne0Kq1vR5DGRF5G+aC5VL6N+MoE86ZNE+hgvB8BUZqLSyxfAWPXzG599rPT5vnpeZk6iYLz88CI+21Plzp3NgXKfzHSsYjbPbC3iQ+9NNFPonPZ31R7f4WWm9nqOzlExy8hLvzMrvWQwbY19hxkNjJeZ/aHwVn5PZTiUZPn8c4Qz6x1zV9qaEdSttLM8LEfWz2j32B1RreHJ/+UbfqkEiw==
   </data>
  </layer>
  <objectgroup name="ground" visible="0">

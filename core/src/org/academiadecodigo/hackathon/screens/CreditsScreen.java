@@ -39,7 +39,7 @@ public class CreditsScreen extends AbstractGameScreen {
 
         game.batch.begin();
 
-        splashScreen = new Texture("credits.png");
+        splashScreen = new Texture("splashscreens/credits.png");
         game.batch.draw(splashScreen,0,0,Constants.CONFIG_WIDTH,Constants.CONFIG_HEIGHT);
 
         game.batch.end();

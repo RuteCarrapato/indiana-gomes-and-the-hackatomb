@@ -42,7 +42,7 @@ public class WinScreen extends AbstractGameScreen {
 
         game.batch.begin();
 
-        splashScreen = new Texture("WinScreen.png");
+        splashScreen = new Texture("splashscreens/WinScreen.png");
         game.batch.draw(splashScreen,0,0,Constants.CONFIG_WIDTH,Constants.CONFIG_HEIGHT);
 
         game.batch.end();

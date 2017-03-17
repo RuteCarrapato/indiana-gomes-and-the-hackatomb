@@ -43,7 +43,7 @@ public class MenuScreen extends AbstractGameScreen {
 
         game.batch.begin();
 
-        splashScreen = new Texture("IndianaGomes.png");
+        splashScreen = new Texture("splashscreens/IndianaGomes.png");
         game.batch.draw(splashScreen,0,0,Constants.CONFIG_WIDTH,Constants.CONFIG_HEIGHT);
 
         game.batch.end();

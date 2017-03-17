@@ -45,7 +45,7 @@ public class GameOverScreen extends AbstractGameScreen {
 
         game.batch.begin();
 
-        splashScreen = new Texture("GameOver.png");
+        splashScreen = new Texture("splashscreens/GameOver.png");
         game.batch.draw(splashScreen,0,0,Constants.CONFIG_WIDTH,Constants.CONFIG_HEIGHT);
 
         game.batch.end();

@@ -9,42 +9,29 @@ import org.academiadecodigo.hackathon.utils.Constants;
 
 public class WorldContactListener implements ContactListener {
 
-    public World world;
-    public Player player;
+    private Player player;
     private Hud hud;
 
     public WorldContactListener(PlayScreen screen) {
-        this.world = screen.getWorld();
         this.player = screen.getPlayer();
         this.hud = screen.getHud();
-
     }
 
     @Override
     public void beginContact(Contact contact) {
 
-
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
         if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
-            Gdx.app.log("LADDER", "collision");
-
             player.hittingLadder();
         }
 
         if (((fixA.getUserData() instanceof Enemy) && (fixB.getUserData() instanceof Player)) || ((fixA.getUserData() instanceof Player) && (fixB.getUserData() instanceof Enemy))) {
-            Gdx.app.log("ENEMY", "collision");
-
             player.die();
         }
 
-        if (fixA.getUserData() instanceof Enemy || fixB.getUserData() instanceof Player) {
-
-        }
-
         if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() == "ground" || fixB.getUserData() == "ground") {
-
             player.setOnTheFloor(true);
         }
 
@@ -82,16 +69,13 @@ public class WorldContactListener implements ContactListener {
             }
             enemy.setToDestroy();
 
-
         }
 
         // Collision Player with Treasure
         if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof Treasure) || (fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Treasure)) {
             player.win();
         }
-
     }
-
 
     @Override
     public void endContact(Contact contact) {
@@ -99,25 +83,12 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
-
         if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof Ladder) || (fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Ladder)) {
-            Gdx.app.log("LADDER", "collision");
-
             player.hittingLadder();
         }
 
-
         if ((fixA.getUserData() instanceof Player && fixB.getUserData() == "ground") || (fixB.getUserData() instanceof Player && fixA.getUserData() == "ground")) {
-
-            System.out.println("is not on floor");
-
             player.setOnTheFloor(false);
-        }
-
-        if((fixA.getUserData() instanceof Projectile && fixB.getUserData() instanceof Enemy) || (fixA.getUserData() instanceof Enemy && fixB.getUserData() instanceof Projectile)){
-            if(fixA.getUserData() instanceof Enemy){
-
-            }
         }
 
     }

@@ -41,7 +41,7 @@ public class InstructionsScreen extends AbstractGameScreen {
 
         game.batch.begin();
 
-        splashScreen = new Texture("instructions.png");
+        splashScreen = new Texture("splashscreens/instructions.png");
         game.batch.draw(splashScreen,0,0,Constants.CONFIG_WIDTH,Constants.CONFIG_HEIGHT);
 
         game.batch.end();
