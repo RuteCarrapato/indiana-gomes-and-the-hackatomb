@@ -72,15 +72,18 @@ public class WorldCreator {
 
         //create all enemies
         enemies = new Array<Enemy>();
-        for (MapObject object : map.getLayers().get(Constants.ENEMY_INDEX).getObjects().getByType(RectangleMapObject.class)) {
+        int count = 0;
+        for(MapObject object: map.getLayers().get(Constants.ENEMY_INDEX).getObjects().getByType(RectangleMapObject.class)) {
 
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             System.out.println("enemies created");
 
-            enemies.add((new Enemy(screen, rect)));
-
-
+            enemies.add((new Enemy(screen, rect, count)));
+            count++;
         }
+
+
+
     }
 
     public Array<Enemy> getEnemies() {
