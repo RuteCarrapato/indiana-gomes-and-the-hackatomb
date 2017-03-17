@@ -1,8 +1,11 @@
 package org.academiadecodigo.hackathon.gameobjects;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.sun.tools.internal.jxc.ap.Const;
@@ -17,11 +20,11 @@ public class Projectile extends GameObject {
     boolean destroyed;
     boolean setToDestroy;
 
+
     public Projectile(PlayScreen screen, float x, float y, boolean fireRight) {
-        super(screen);
+        super(screen, new Texture(fireRight ? Constants.PROJECTILE_RIGHT : Constants.PROJECTILE_LEFT));//"bullet_left.png"));
         this.fireRight = fireRight;
-        setTexture(new Texture(fireRight ? Constants.PROJECTILE_RIGHT : Constants.PROJECTILE_LEFT));
-        setBounds(x, y, Constants.PROJECTILE_WIDTH / Constants.PPM, Constants.PROJECTILE_HEIGHT / Constants.PPM);
+        setBounds(x, y + (float)0.3*Constants.HUMAN_SIZE/Constants.PPM, Constants.PROJECTILE_WIDTH / Constants.PPM, Constants.PROJECTILE_HEIGHT / Constants.PPM);
         defineProjectile();
     }
 
@@ -30,14 +33,15 @@ public class Projectile extends GameObject {
         bdef.position.set(
                 fireRight ? getX() + (Constants.PROJECTILE_WIDTH) / Constants.PPM
                           : getX() - (Constants.PROJECTILE_WIDTH) / Constants.PPM, getY());
+
         bdef.type = BodyDef.BodyType.KinematicBody;//DynamicBody;
         if (!world.isLocked()) {
             b2dbody = world.createBody(bdef);
         }
 
         FixtureDef fdef = new FixtureDef();
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(getTexture().getWidth()/Constants.PPM, getTexture().getWidth()/Constants.PPM, new Vector2(0, 0), 0);
+        CircleShape shape = new CircleShape();
+        shape.setRadius(Constants.PROJECTILE_RADIUS / Constants.PPM);
         fdef.shape = shape;
         fdef.restitution = 1;
         fdef.friction = 0;
@@ -45,7 +49,7 @@ public class Projectile extends GameObject {
 
 
         b2dbody.createFixture(fdef).setUserData(this);
-        b2dbody.setLinearVelocity(new Vector2(fireRight ? 2 : -2, 0));
+        b2dbody.setLinearVelocity(new Vector2(fireRight ? Constants.PROJECTILE_SPEED : -Constants.PROJECTILE_SPEED, 0));
     }
 
     public void update(float dt) {
@@ -55,7 +59,6 @@ public class Projectile extends GameObject {
             destroyed = true;
         }
 
-        // Ignore gravity?
         if (b2dbody.getLinearVelocity().y > 2f) {
             b2dbody.setLinearVelocity(b2dbody.getLinearVelocity().x, 2f);
         }
@@ -71,5 +74,10 @@ public class Projectile extends GameObject {
 
     public boolean isDestroyed() {
         return destroyed;
+    }
+
+    @Override
+    public void draw(Batch batch){
+        super.draw(batch);
     }
 }
