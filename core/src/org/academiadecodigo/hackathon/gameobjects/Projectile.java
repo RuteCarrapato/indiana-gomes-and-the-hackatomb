@@ -34,7 +34,7 @@ public class Projectile extends GameObject {
                 fireRight ? getX() + (Constants.PROJECTILE_WIDTH) / Constants.PPM
                           : getX() - (Constants.PROJECTILE_WIDTH) / Constants.PPM, getY());
 
-        bdef.type = BodyDef.BodyType.KinematicBody;//DynamicBody;
+        bdef.type = BodyDef.BodyType.DynamicBody;//DynamicBody;
         if (!world.isLocked()) {
             b2dbody = world.createBody(bdef);
         }
@@ -49,13 +49,13 @@ public class Projectile extends GameObject {
 
 
         b2dbody.createFixture(fdef).setUserData(this);
-        b2dbody.setLinearVelocity(new Vector2(fireRight ? Constants.PROJECTILE_SPEED : -Constants.PROJECTILE_SPEED, 0));
     }
 
     public void update(float dt) {
 
         setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y - getHeight() / 2);
 
+        b2dbody.setLinearVelocity(new Vector2(fireRight ? Constants.PROJECTILE_SPEED : -Constants.PROJECTILE_SPEED, 0.15f)); //magic number nullify gravity
         if (setToDestroy && !destroyed) {
             world.destroyBody(b2dbody);
             System.out.println("Projectile destroyed");
