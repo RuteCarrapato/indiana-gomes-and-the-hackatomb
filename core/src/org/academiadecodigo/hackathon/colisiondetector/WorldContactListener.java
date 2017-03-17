@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import org.academiadecodigo.hackathon.gameobjects.Ladder;
 import org.academiadecodigo.hackathon.gameobjects.Player;
+import org.academiadecodigo.hackathon.gameobjects.Projectile;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 
 public class WorldContactListener implements ContactListener {
@@ -14,6 +15,7 @@ public class WorldContactListener implements ContactListener {
     public WorldContactListener(PlayScreen screen) {
         this.world = screen.getWorld();
         this.player = screen.getPlayer();
+
     }
 
     @Override
@@ -44,6 +46,23 @@ public class WorldContactListener implements ContactListener {
         if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() == "ground" || fixB.getUserData() == "ground") {
 
             player.setOnTheFloor(true);
+        }
+
+        if(fixA.getUserData() instanceof Projectile || fixB.getUserData() instanceof Projectile && fixA.getUserData() == "ground" || fixB.getUserData()== "ground") {
+
+            Fixture projectileFixture;
+            Projectile projectile = null;
+
+            if(fixA.getUserData() instanceof Projectile) {
+                projectileFixture = fixA;
+                projectile = (Projectile)projectileFixture.getUserData();
+
+            } else {
+                projectileFixture = fixB;
+                projectile = (Projectile)projectileFixture.getUserData();
+            }
+
+            projectile.setToDestroy();
         }
 
     }
