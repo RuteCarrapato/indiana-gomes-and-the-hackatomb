@@ -123,7 +123,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
 
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && onTheFloor) {
-            this.b2dbody.applyLinearImpulse(new Vector2(0, 2f), this.b2dbody.getWorldCenter(), true);
+            this.b2dbody.applyLinearImpulse(new Vector2(0, Constants.PLAYER_JUMP_FORCE), this.b2dbody.getWorldCenter(), true);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {

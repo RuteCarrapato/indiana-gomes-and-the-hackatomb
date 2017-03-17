@@ -31,6 +31,7 @@ public class Constants {
     public static final String PLAYER_REGION = "player";
     public static final float PLAYER_X_SPEED = 2;
     public static final float PLAYER_RUN_FORCE = 0.075f;
+    public static final float PLAYER_JUMP_FORCE = 2.8f;
 
     public static final float PROJECTILE_RADIUS = 2;
     public static final String PROJECTILE_RIGHT = "bullet_right.png";
