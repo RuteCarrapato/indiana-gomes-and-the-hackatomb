@@ -30,7 +30,7 @@ public class Ladder extends GameObject{
         fdef.shape = shape;
         fdef.isSensor = true;
 
-        b2dbody.createFixture(fdef).setUserData(Constants.LADDER_SPRITE_NAME);
+        b2dbody.createFixture(fdef).setUserData(this);
 
     }
 }
