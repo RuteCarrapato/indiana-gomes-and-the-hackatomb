@@ -13,7 +13,7 @@ public class WorldContactListener implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-        Gdx.app.log("Begin contact","");
+        Gdx.app.log("Begin contact", "");
     }
 
     @Override
