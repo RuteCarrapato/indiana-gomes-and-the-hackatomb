@@ -26,4 +26,11 @@ public class Constants {
     public static final float PLAYER_X_SPEED = 2;
 
     public static final String PLAYER_REGION_STRING = "player";
+
+    public static final String PROJECTILE_RIGHT = "bullet_right.png";
+    public static final String PROJECTILE_LEFT = "bullet_left.png";
+
+    public static final float PROJECTILE_HEIGHT = 16; // Pixels
+    public static final float PROJECTILE_WIDTH = 16; // Pixels
+
 }
