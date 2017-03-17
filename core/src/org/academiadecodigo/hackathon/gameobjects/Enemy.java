@@ -10,15 +10,9 @@ import com.badlogic.gdx.utils.Array;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
 
-/**
- * Created by codecadet on 16/03/17.
- */
 public class Enemy extends GameObject {
-    public boolean died;
 
     public boolean enemyIsDead;
-    public float initialPosition;
-
     private int index;
 
     private Animation<TextureRegion> animWalk;
@@ -176,4 +170,5 @@ public class Enemy extends GameObject {
         STANDING,
         DEAD
     }
+
 }

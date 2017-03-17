@@ -100,6 +100,7 @@ public class PlayScreen extends AbstractGameScreen {
 
         //Enemies movem
         for (Enemy enemy : creator.getEnemies()) {
+
             enemy.move();
             enemy.update(dt);
         }
@@ -135,17 +136,14 @@ public class PlayScreen extends AbstractGameScreen {
 
         world.setContactListener(new WorldContactListener(this));
 
-        /*
-        Texture texture = new Texture("bullet_left.png");
-        Sprite sprite = new Sprite(texture);
-        sprite.setBounds(0, 1, 0.32f, 0.32f);
-        */
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
         player.draw(game.batch);
 
         for (Enemy enemy : creator.getEnemies()) {
-            enemy.draw(game.batch);
+            if(!enemy.isDead()) {
+                enemy.draw(game.batch);
+            }
         }
 
         game.batch.end();

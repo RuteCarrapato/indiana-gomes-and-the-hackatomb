@@ -13,7 +13,6 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.utils.Array;
 import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.screens.GameOverScreen;
-import org.academiadecodigo.hackathon.screens.MenuScreen;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 import org.academiadecodigo.hackathon.screens.WinScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
