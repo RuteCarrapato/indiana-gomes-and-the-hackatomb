@@ -2,6 +2,7 @@ package org.academiadecodigo.hackathon.screens;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -10,7 +11,6 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -43,6 +43,9 @@ public class PlayScreen extends AbstractGameScreen {
     //Sprites
     private Player player;
 
+    //Music
+    private Music music;
+
     public PlayScreen(Indiana game) {
         this.game = game;
         atlas = new TextureAtlas("sprites.pack");
@@ -54,7 +57,7 @@ public class PlayScreen extends AbstractGameScreen {
         map = mapLoader.load(Constants.LEVEL1_TMX);
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
 
-        gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight()/ 2, 0);
+        gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
         // Creates the player TODO: MADE BY JOAQUIM CHECKA RUBEN
         this.world = new World(new Vector2(0, Constants.GRAVITY), true);
@@ -62,7 +65,9 @@ public class PlayScreen extends AbstractGameScreen {
 
         creator = new WorldCreator(this);
         player = new Player(this);
-
+        music = Indiana.manager.get("audio/music/rick.mp3", Music.class);
+        music.setLooping(true);
+        music.play();
 
     }
 
@@ -70,12 +75,12 @@ public class PlayScreen extends AbstractGameScreen {
         return atlas;
     }
 
-    public void update(float dt){
+    public void update(float dt) {
         handleInput(dt);
 
         player.update(dt);
 
-        world.step(1/60f, 6, 2);
+        world.step(1 / 60f, 6, 2);
 
         if (player.currentState != Player.State.DEAD) {
             gameCam.position.x = player.b2dbody.getPosition().x;
@@ -117,8 +122,8 @@ public class PlayScreen extends AbstractGameScreen {
         //renderer our Box2DDebugLines
         debugRenderer.render(world, gameCam.combined);
 
-        world.setContactListener(new WorldContactListener());
-        EdgeShape body = new EdgeShape();
+
+        world.setContactListener(new WorldContactListener(this));
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
@@ -129,7 +134,7 @@ public class PlayScreen extends AbstractGameScreen {
 //            enemy.draw(game.batch);
 
         game.batch.end();
-        
+
     }
 
     @Override
@@ -167,7 +172,12 @@ public class PlayScreen extends AbstractGameScreen {
     public TiledMap getMap() {
         return map;
     }
+
+    public Player getPlayer() {
+        return player;
+    }
 }
+
 
 
 

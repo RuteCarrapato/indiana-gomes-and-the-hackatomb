@@ -1,15 +1,19 @@
 package org.academiadecodigo.hackathon;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.academiadecodigo.hackathon.managers.AssetManager;
 import org.academiadecodigo.hackathon.screens.MenuScreen;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 
 public class Indiana extends Game {
 
 	public SpriteBatch batch;
-    public BitmapFont font;
+	public BitmapFont font;
+	public static com.badlogic.gdx.assets.AssetManager manager;
+
 
 
 	@Override
@@ -18,13 +22,17 @@ public class Indiana extends Game {
 
 		font = new BitmapFont();
 
+		manager = new com.badlogic.gdx.assets.AssetManager();
+		manager.load("audio/music/rick.mp3", Music.class);
+        manager.load("audio/sounds/GUN.mp3", Music.class);
+		manager.finishLoading();
+
 		setScreen(new MenuScreen(this));
 	}
 
 	@Override
 	public void render () {
     		super.render();
-
 	}
 
 	@Override
