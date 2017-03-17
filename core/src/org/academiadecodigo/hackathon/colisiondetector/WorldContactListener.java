@@ -9,6 +9,7 @@ public class WorldContactListener implements ContactListener {
     public void beginContact(Contact contact) {
         Gdx.app.log("Begin contact", "");
 
+
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
         Fixture player;
