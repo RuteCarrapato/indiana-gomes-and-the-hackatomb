@@ -2,6 +2,7 @@ package org.academiadecodigo.hackathon;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.academiadecodigo.hackathon.managers.AssetManager;
@@ -24,7 +25,7 @@ public class Indiana extends Game {
 
 		manager = new com.badlogic.gdx.assets.AssetManager();
 		manager.load("audio/music/rick.mp3", Music.class);
-        manager.load("audio/sounds/GUN.mp3", Music.class);
+        manager.load("audio/sounds/GUN.mp3", Sound.class);
 		manager.finishLoading();
 
 		setScreen(new MenuScreen(this));

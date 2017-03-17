@@ -28,9 +28,9 @@ public class Projectile extends GameObject {
     private void defineProjectile() {
         BodyDef bdef = new BodyDef();
         bdef.position.set(
-                fireRight ? getX() + (Constants.PROJECTILE_WIDTH * 2) / Constants.PPM
-                          : getX() - (Constants.PROJECTILE_WIDTH * 2) / Constants.PPM, getY());
-        bdef.type = BodyDef.BodyType.DynamicBody;
+                fireRight ? getX() + (Constants.PROJECTILE_WIDTH) / Constants.PPM
+                          : getX() - (Constants.PROJECTILE_WIDTH) / Constants.PPM, getY());
+        bdef.type = BodyDef.BodyType.KinematicBody;//DynamicBody;
         if (!world.isLocked()) {
             b2dbody = world.createBody(bdef);
         }
@@ -41,8 +41,11 @@ public class Projectile extends GameObject {
         fdef.shape = shape;
         fdef.restitution = 1;
         fdef.friction = 0;
+        fdef.density = 0f;
+
+
         b2dbody.createFixture(fdef).setUserData(this);
-        b2dbody.setLinearVelocity(new Vector2(fireRight ? 2 : -2, 2.5f));
+        b2dbody.setLinearVelocity(new Vector2(fireRight ? 2 : -2, 0));
     }
 
     public void update(float dt) {
