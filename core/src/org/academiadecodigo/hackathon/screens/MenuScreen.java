@@ -43,15 +43,20 @@ public class MenuScreen extends AbstractGameScreen {
 
         game.batch.begin();
 
-        splashScreen = new Texture("IndianaGomes.png");
+        splashScreen = new Texture("splashscreens/IndianaGomes.png");
         game.batch.draw(splashScreen,0,0,Constants.CONFIG_WIDTH,Constants.CONFIG_HEIGHT);
 
         game.batch.end();
 
         //Waiting for input of any key or touch
-        if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
+        if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
             game.setScreen(new PlayScreen(game));
+        } else if (Gdx.input.isKeyPressed((Input.Keys.I))){
+            game.setScreen(new InstructionsScreen(game));
+        } else if (Gdx.input.isKeyPressed((Input.Keys.C))) {
+            game.setScreen(new CreditsScreen(game));
         }
+
 
     }
 

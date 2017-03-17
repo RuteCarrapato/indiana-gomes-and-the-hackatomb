@@ -22,6 +22,7 @@ public class WorldCreator {
 
         World world = screen.getWorld();
         TiledMap map = screen.getMap();
+
         //create body and fixture variables
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -54,19 +55,6 @@ public class WorldCreator {
 
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            /*
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Constants.PPM, (rect.getY() + rect.getHeight() / 2) / Constants.PPM);
-
-            body = world.createBody(bdef);
-
-//            shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
-//            fdef.shape = shape;
-            body.createFixture(fdef);
-
-           */
-
             new Ladder(screen, rect);
         }
 
@@ -80,8 +68,6 @@ public class WorldCreator {
             enemies.add((new Enemy(screen, rect, count)));
             count++;
         }
-
-
 
     }
 

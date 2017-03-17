@@ -31,11 +31,13 @@ public class Constants {
     public static final String PLAYER_REGION = "player";
     public static final float PLAYER_X_SPEED = 2;
     public static final float PLAYER_RUN_FORCE = 0.075f;
+    public static final float PLAYER_JUMP_FORCE = 2.8f;
 
     public static final float PROJECTILE_RADIUS = 2;
-    public static final String PROJECTILE_RIGHT = "bullet_right.png";
-    public static final String PROJECTILE_LEFT = "bullet_left.png";
+    public static final String PROJECTILE_RIGHT = "sprites/bullet_right.png";
+    public static final String PROJECTILE_LEFT = "sprites/bullet_left.png";
     public static final float PROJECTILE_HEIGHT = 16; // Pixels
     public static final float PROJECTILE_WIDTH = 16; // Pixels
     public static final float PROJECTILE_SPEED = 2;
+    public static final int ENEMY_POINTS = 100;
 }

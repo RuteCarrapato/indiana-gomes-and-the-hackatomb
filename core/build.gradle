@@ -17,9 +17,6 @@ task connectDB{
         compile
     }
 
-    dependencies {
-        compile com.oracle:ojdbc6:11.2.0.4.0'
-    }
 
     doLast{
 

@@ -11,13 +11,13 @@ import org.academiadecodigo.hackathon.utils.Constants;
 /**
  * Created by codecadet on 3/17/17.
  */
-public class WinScreen extends AbstractGameScreen {
+public class InstructionsScreen extends AbstractGameScreen {
 
     private final Indiana game;
     private OrthographicCamera camera;
     private Texture splashScreen;
 
-    public WinScreen(Indiana game) {
+    public InstructionsScreen(final Indiana game) {
 
         this.game = game;
 
@@ -33,7 +33,6 @@ public class WinScreen extends AbstractGameScreen {
 
     @Override
     public void render(float delta) {
-
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -42,14 +41,16 @@ public class WinScreen extends AbstractGameScreen {
 
         game.batch.begin();
 
-        splashScreen = new Texture("splashscreens/WinScreen.png");
+        splashScreen = new Texture("splashscreens/instructions.png");
         game.batch.draw(splashScreen,0,0,Constants.CONFIG_WIDTH,Constants.CONFIG_HEIGHT);
 
         game.batch.end();
 
+        //Waiting for input of any key or touch
         if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
             game.setScreen(new PlayScreen(game));
         }
+
     }
 
     @Override

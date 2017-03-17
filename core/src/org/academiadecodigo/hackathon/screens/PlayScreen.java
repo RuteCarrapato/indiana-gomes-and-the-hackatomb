@@ -51,7 +51,7 @@ public class PlayScreen extends AbstractGameScreen {
 
     public PlayScreen(Indiana game) {
         this.game = game;
-        atlas = new TextureAtlas("sprites.pack");
+        atlas = new TextureAtlas("sprites/sprites.pack");
 
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(Constants.VIEW_WIDTH / Constants.PPM, Constants.VIEW_HEIGHT / Constants.PPM, gameCam);
@@ -64,7 +64,7 @@ public class PlayScreen extends AbstractGameScreen {
 
         // Creates the player TODO: MADE BY JOAQUIM CHECKA RUBEN
         this.world = new World(new Vector2(0, Constants.GRAVITY), true);
-        debugRenderer = new Box2DDebugRenderer();
+//        debugRenderer = new Box2DDebugRenderer();
 
         hud = new Hud(game.batch);
 
@@ -101,6 +101,7 @@ public class PlayScreen extends AbstractGameScreen {
 
         //Enemies movem
         for (Enemy enemy : creator.getEnemies()) {
+
             enemy.move();
             enemy.update(dt);
         }
@@ -132,21 +133,18 @@ public class PlayScreen extends AbstractGameScreen {
         renderer.render();
 
         //renderer our Box2DDebugLines
-        debugRenderer.render(world, gameCam.combined);
+//        debugRenderer.render(world, gameCam.combined);
 
         world.setContactListener(new WorldContactListener(this));
 
-        /*
-        Texture texture = new Texture("bullet_left.png");
-        Sprite sprite = new Sprite(texture);
-        sprite.setBounds(0, 1, 0.32f, 0.32f);
-        */
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
         player.draw(game.batch);
 
         for (Enemy enemy : creator.getEnemies()) {
-            enemy.draw(game.batch);
+            if(!enemy.isDead()) {
+                enemy.draw(game.batch);
+            }
         }
 
         game.batch.end();
