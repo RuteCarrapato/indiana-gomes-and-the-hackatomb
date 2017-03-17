@@ -43,7 +43,7 @@ public class Player extends GameObject {
 
         BodyDef bdef = new BodyDef();
 
-        bdef.position.set(52 / Constants.PPM , 52 / Constants.PPM);
+        bdef.position.set(52 / Constants.PPM, 52 / Constants.PPM);
 
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2dbody = world.createBody(bdef);
@@ -58,15 +58,15 @@ public class Player extends GameObject {
 
     public void handleInput(float dt) {
 
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && b2dbody.getLinearVelocity().x <= 2) {
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && b2dbody.getLinearVelocity().x <= 2) {
             this.b2dbody.applyLinearImpulse(new Vector2(0.1f, 0), this.b2dbody.getWorldCenter(), true);
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && b2dbody.getLinearVelocity().x >= -2) {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && b2dbody.getLinearVelocity().x >= -2) {
             this.b2dbody.applyLinearImpulse(new Vector2(-0.1f, 0), this.b2dbody.getWorldCenter(), true);
         }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             this.b2dbody.applyLinearImpulse(new Vector2(0, 2f), this.b2dbody.getWorldCenter(), true);
         }
     }
@@ -81,5 +81,21 @@ public class Player extends GameObject {
         JUMPING,
         STANDING,
         RUNNING
+    }
+
+    public void climbStairs() {
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+
+            this.b2dbody.applyLinearImpulse(new Vector2(0, 10.1f), this.b2dbody.getWorldCenter(), true);
+
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+
+            this.b2dbody.applyLinearImpulse(new Vector2(0, 9.9f), this.b2dbody.getWorldCenter(), true);
+
+        }
+
     }
 }
