@@ -21,6 +21,7 @@ public class Player extends GameObject {
     private Animation animJump;
     private float animTimer;
     private boolean runningRight;
+    private int jumpCount = 1;
 
     public Player(PlayScreen screen) {
 
@@ -58,17 +59,23 @@ public class Player extends GameObject {
 
     public void handleInput(float dt) {
 
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && b2dbody.getLinearVelocity().x <= 2) {
+
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && b2dbody.getLinearVelocity().x <= Constants.PLAYER_X_SPEED) {
             this.b2dbody.applyLinearImpulse(new Vector2(0.1f, 0), this.b2dbody.getWorldCenter(), true);
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && b2dbody.getLinearVelocity().x >= -2) {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && b2dbody.getLinearVelocity().x >= -Constants.PLAYER_X_SPEED) {
+
             this.b2dbody.applyLinearImpulse(new Vector2(-0.1f, 0), this.b2dbody.getWorldCenter(), true);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             this.b2dbody.applyLinearImpulse(new Vector2(0, 2f), this.b2dbody.getWorldCenter(), true);
+            //TODO REFRESH JUMPS WHEN HIT THE GROUND
         }
+
+
+
     }
 
     public void update(float dt) {
@@ -80,7 +87,8 @@ public class Player extends GameObject {
         FALLING,
         JUMPING,
         STANDING,
-        RUNNING
+        RUNNING,
+        DEAD
     }
 
     public void climbStairs() {

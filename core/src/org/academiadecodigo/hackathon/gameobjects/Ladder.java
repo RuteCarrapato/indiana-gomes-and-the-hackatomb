@@ -31,7 +31,7 @@ public class Ladder extends GameObject {
         shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
         fdef.shape = shape;
         fdef.isSensor = true;
-        b2dbody.createFixture(fdef).setUserData("ladder");
+        b2dbody.createFixture(fdef).setUserData(Constants.LADDER_SPRITE_NAME);
 
     }
 }
