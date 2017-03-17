@@ -1,7 +1,6 @@
 package org.academiadecodigo.hackathon.gameobjects;
 
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
@@ -10,7 +9,7 @@ import org.academiadecodigo.hackathon.utils.Constants;
  * Created by codecadet on 16/03/17.
  */
 public class Enemy extends GameObject {
-    public boolean died;
+    public boolean enemyIsDead;
     private float initialPosition;
     private int index;
 
@@ -49,8 +48,8 @@ public class Enemy extends GameObject {
     private int signal = 1;
 
     public void move() {
-        System.out.println("Position: " + b2dbody.getPosition().x);
-        System.out.println("Velocidade: " + b2dbody.getLinearVelocity());
+//        System.out.println("Position: " + b2dbody.getPosition().x);
+//        System.out.println("Velocidade: " + b2dbody.getLinearVelocity());
 
         counter++;
 
@@ -66,7 +65,7 @@ public class Enemy extends GameObject {
 
 
     public void die() {
-        died = true;
-
+        System.out.println("Enemy enemyIsDead");
+        enemyIsDead = true;
     }
 }

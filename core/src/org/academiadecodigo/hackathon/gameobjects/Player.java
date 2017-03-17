@@ -144,6 +144,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
         for (Projectile projectile : projectiles) {
             projectile.update(dt);
             if (projectile.isDestroyed()) {
+                System.out.println();
                 projectiles.removeValue(projectile, true);
             }
         }
@@ -252,14 +253,8 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
     public void draw(Batch batch){
         super.draw(batch);
 
-
-//        Texture texture = new Texture("bullet_left.png");
-//        Sprite sprite = new Sprite(texture);
-//        sprite.setBounds(0, 1, 0.32f, 0.32f);
         for (Projectile projectile : projectiles) {
-            System.out.println("im here");
             projectile.draw(batch);
-//            sprite.draw(batch);
         }
     }
 

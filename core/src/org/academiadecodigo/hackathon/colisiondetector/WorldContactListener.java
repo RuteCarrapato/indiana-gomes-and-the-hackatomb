@@ -66,23 +66,22 @@ public class WorldContactListener implements ContactListener {
             projectile.setToDestroy();
         }
 
-        if(fixA.getUserData() instanceof Projectile || fixB.getUserData() instanceof Projectile && fixA.getUserData() instanceof Enemy || fixB.getUserData() instanceof Enemy) {
+        if (((fixA.getUserData() instanceof Projectile) && (fixB.getUserData() instanceof Enemy)) || ((fixA.getUserData() instanceof Enemy) && (fixB.getUserData() instanceof Projectile))) {
 
             Projectile projectile = null;
             Enemy enemy = null;
 
-//            if(fixA.getUserData() instanceof Projectile) {
-//                projectile = (Projectile)(fixA.getUserData());
-//                enemy = (Enemy)(fixB.getUserData());
-//
-//            } else {
-//                projectile = (Projectile)(fixB.getUserData());
-//                enemy = (Enemy)(fixA.getUserData());
-//
-//            }
+            if (fixA.getUserData() instanceof Projectile) {
+                projectile = (Projectile)(fixA.getUserData());
+                enemy = (Enemy)(fixB.getUserData());
 
-//            projectile.setToDestroy();
-//            enemy.die();
+            } else {
+                projectile = (Projectile)(fixB.getUserData());
+                enemy = (Enemy)(fixA.getUserData());
+            }
+
+            projectile.setToDestroy();
+            enemy.die();
         }
 
     }
