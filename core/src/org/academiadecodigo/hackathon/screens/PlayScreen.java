@@ -53,7 +53,7 @@ public class PlayScreen extends AbstractGameScreen {
 
     public PlayScreen(Indiana game) {
         this.game = game;
-        atlas = new TextureAtlas("player_movements.pack");
+        atlas = new TextureAtlas("sprites.pack");
 
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(Constants.VIEW_WIDTH / Constants.PPM, Constants.VIEW_HEIGHT / Constants.PPM, gameCam);
@@ -158,7 +158,19 @@ public class PlayScreen extends AbstractGameScreen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
+        if(gameOver()) {
+            game.setScreen(new GameOverScreen(game));
+            dispose();
+        }
+    }
 
+    public boolean gameOver() {
+
+        if(player.currentState == Player.State.DEAD && player.getAnimTimer() > 3) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override

@@ -84,6 +84,7 @@ public class WorldContactListener implements ContactListener {
             enemy.die();
         }
 
+
     }
 
     @Override
