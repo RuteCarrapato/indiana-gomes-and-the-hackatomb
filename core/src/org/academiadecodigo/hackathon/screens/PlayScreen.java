@@ -4,15 +4,19 @@ package org.academiadecodigo.hackathon.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+<<<<<<< HEAD
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.World;
+=======
+import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
+>>>>>>> 9b8519042a56df19660e520ad3716238f39289aa
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academiadecodigo.hackathon.Indiana;
@@ -43,8 +47,6 @@ public class PlayScreen extends AbstractGameScreen {
 
     //Sprites
     private Player player;
-
-    private Texture texture;
 
     public PlayScreen(Indiana game) {
         this.game = game;
@@ -79,7 +81,10 @@ public class PlayScreen extends AbstractGameScreen {
         player.update(dt);
 
         world.step(1/60f, 6, 2);
-        gameCam.position.x = player.b2dbody.getPosition().x;
+
+        if (player.currentState != Player.State.DEAD) {
+            gameCam.position.x = player.b2dbody.getPosition().x;
+        }
 
         //Update the gameCam
         gameCam.update();

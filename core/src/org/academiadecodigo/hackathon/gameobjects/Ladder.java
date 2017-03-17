@@ -11,10 +11,10 @@ public class Ladder extends GameObject{
 
     public Ladder(PlayScreen screen, Rectangle rectangle) {
         super(screen);
-        defineladder(rectangle);
+        defineLadder(rectangle);
     }
 
-    public void defineladder(Rectangle rect) {
+    public void defineLadder(Rectangle rect) {
 
         BodyDef bdef = new BodyDef();
 
@@ -29,6 +29,8 @@ public class Ladder extends GameObject{
         shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
         fdef.shape = shape;
         fdef.isSensor = true;
-        b2dbody.createFixture(fdef).setUserData("ladder");
+
+        b2dbody.createFixture(fdef).setUserData(Constants.LADDER_SPRITE_NAME);
+
     }
 }

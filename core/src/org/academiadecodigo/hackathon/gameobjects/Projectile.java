@@ -1,6 +1,7 @@
 package org.academiadecodigo.hackathon.gameobjects;
 
 import com.badlogic.gdx.physics.box2d.World;
+import org.academiadecodigo.hackathon.gameobjects.GameObject;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 
 /**

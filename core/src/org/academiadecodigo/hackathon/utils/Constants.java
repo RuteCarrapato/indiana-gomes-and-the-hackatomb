@@ -21,4 +21,7 @@ public class Constants {
     public static final int ENEMY_INDEX = 5;
 
     public static final String LEVEL1_TMX = "level1.tmx";
+    public static final String LADDER_SPRITE_NAME = "ladder";
+
+    public static final float PLAYER_X_SPEED = 2;
 }

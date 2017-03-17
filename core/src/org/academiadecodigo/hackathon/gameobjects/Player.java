@@ -17,11 +17,10 @@ public class Player extends GameObject {
 
     public State currentState;
     public State previousState;
-    private Animation animRun;
-    private Animation animJump;
-    private float animTimer;
-    private boolean runningRight;
-    private int jumpCount = 1;
+    public Animation animRun;
+    public Animation animJump;
+    public float animTimer;
+    public boolean runningRight;
 
     public Player(PlayScreen screen) {
 
@@ -37,6 +36,10 @@ public class Player extends GameObject {
         currentState = State.STANDING;
         previousState = State.STANDING;
         animTimer = 0;
+        runningRight = true;
+
+
+
         definePlayer();
     }
 
@@ -44,7 +47,7 @@ public class Player extends GameObject {
 
         BodyDef bdef = new BodyDef();
 
-        bdef.position.set(52 / Constants.PPM , 52 / Constants.PPM);
+        bdef.position.set(52 / Constants.PPM, 52 / Constants.PPM);
 
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2dbody = world.createBody(bdef);
@@ -54,20 +57,22 @@ public class Player extends GameObject {
         shape.setRadius(6 / Constants.PPM);
 
         fdef.shape = shape;
-        b2dbody.createFixture(fdef).setUserData("player");
+        b2dbody.createFixture(fdef).setUserData("player"); //TODO Change to constant
     }
 
     public void handleInput(float dt) {
 
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && b2dbody.getLinearVelocity().x <= 1) {
+
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && b2dbody.getLinearVelocity().x <= Constants.PLAYER_X_SPEED) {
             this.b2dbody.applyLinearImpulse(new Vector2(0.1f, 0), this.b2dbody.getWorldCenter(), true);
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && b2dbody.getLinearVelocity().x >= -1) {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && b2dbody.getLinearVelocity().x >= -Constants.PLAYER_X_SPEED) {
+
             this.b2dbody.applyLinearImpulse(new Vector2(-0.1f, 0), this.b2dbody.getWorldCenter(), true);
         }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             this.b2dbody.applyLinearImpulse(new Vector2(0, 2f), this.b2dbody.getWorldCenter(), true);
             //TODO REFRESH JUMPS WHEN HIT THE GROUND
         }
@@ -78,13 +83,31 @@ public class Player extends GameObject {
 
     public void update(float dt) {
 
-        setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y / 2);
+        setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y - getHeight() / 2);
     }
 
     public enum State {
         FALLING,
         JUMPING,
         STANDING,
-        RUNNING
+        RUNNING,
+        CLIMBING,
+        DEAD
+    }
+
+    public void climbStairs() {
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+
+            this.b2dbody.applyLinearImpulse(new Vector2(0, 10.1f), this.b2dbody.getWorldCenter(), true);
+
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+
+            this.b2dbody.applyLinearImpulse(new Vector2(0, 9.9f), this.b2dbody.getWorldCenter(), true);
+
+        }
+
     }
 }
