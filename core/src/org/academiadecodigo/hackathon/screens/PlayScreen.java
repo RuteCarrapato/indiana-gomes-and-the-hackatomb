@@ -16,7 +16,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.WorldCreator;
 import org.academiadecodigo.hackathon.colisiondetector.WorldContactListener;
-import org.academiadecodigo.hackathon.gameobjects.items.Item;
 import org.academiadecodigo.hackathon.gameobjects.Player;
 import org.academiadecodigo.hackathon.utils.Constants;
 
@@ -42,9 +41,6 @@ public class PlayScreen extends AbstractGameScreen {
 
     //Sprites
     private Player player;
-
-    private Array<Item> items;
-
 
     public PlayScreen(Indiana game) {
         this.game = game;
