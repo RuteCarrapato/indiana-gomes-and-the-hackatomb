@@ -11,7 +11,6 @@ import org.academiadecodigo.hackathon.utils.Constants;
  */
 public class Enemy extends GameObject {
     public boolean died;
-    private float initialPosition;
     private int index;
 
     public Enemy(PlayScreen screen, Rectangle rectangle, int index) {
@@ -41,17 +40,12 @@ public class Enemy extends GameObject {
 
         b2dbody.createFixture(fdef).setUserData(this);
 
-        this.initialPosition = b2dbody.getPosition().x;
-
     }
 
     private int counter = 0;
     private int signal = 1;
 
     public void move() {
-        System.out.println("Position: " + b2dbody.getPosition().x);
-        System.out.println("Velocidade: " + b2dbody.getLinearVelocity());
-
         counter++;
 
         if(counter % 60 == 0){

@@ -32,13 +32,17 @@ public class GameOverScreen extends AbstractGameScreen {
         this.stage = new Stage(viewport, game.batch);
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.RED);
+        Label.LabelStyle font2 = new Label.LabelStyle(new BitmapFont(), Color.RED);
 
         Table table = new Table();
         table.center();
         table.setFillParent(true);
 
         Label gameOverLabel = new Label("GAME OVER", font);
+        Label enterKey = new Label("Press Enter to Play Again", font2);
+
         table.add(gameOverLabel).expandX();
+        table.add(enterKey).expandX();
 
         stage.addActor(table);
     }
@@ -55,6 +59,11 @@ public class GameOverScreen extends AbstractGameScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.draw();
+
+        if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+
+            game.setScreen(new MenuScreen(game));
+        }
 
     }
 
@@ -80,6 +89,7 @@ public class GameOverScreen extends AbstractGameScreen {
 
     @Override
     public void dispose() {
+        stage.dispose();
 
     }
 }

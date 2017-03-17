@@ -2,10 +2,7 @@ package org.academiadecodigo.hackathon.colisiondetector;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
-import org.academiadecodigo.hackathon.gameobjects.Enemy;
-import org.academiadecodigo.hackathon.gameobjects.Ladder;
-import org.academiadecodigo.hackathon.gameobjects.Player;
-import org.academiadecodigo.hackathon.gameobjects.Projectile;
+import org.academiadecodigo.hackathon.gameobjects.*;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 
 public class WorldContactListener implements ContactListener {
@@ -27,8 +24,8 @@ public class WorldContactListener implements ContactListener {
         Fixture fixB = contact.getFixtureB();
 
 
-        System.out.println(fixA.getUserData());
-        System.out.println(fixB.getUserData());
+//        System.out.println(fixA.getUserData());
+//        System.out.println(fixB.getUserData());
 
 
         if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
@@ -37,36 +34,39 @@ public class WorldContactListener implements ContactListener {
             player.hittingLadder();
         }
 
-        if (fixA.getUserData() instanceof Enemy || fixB.getUserData() instanceof Enemy && fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player) {
+        if (((fixA.getUserData() instanceof Enemy) && (fixB.getUserData() instanceof Player)) || ((fixA.getUserData() instanceof Player) && (fixB.getUserData() instanceof Enemy))) {
             Gdx.app.log("ENEMY", "collision");
 
             player.die();
         }
 
+        if(fixA.getUserData() instanceof Enemy || fixB.getUserData() instanceof Player){
+
+        }
 
         if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() == "ground" || fixB.getUserData() == "ground") {
 
             player.setOnTheFloor(true);
         }
 
-        if(fixA.getUserData() instanceof Projectile || fixB.getUserData() instanceof Projectile && fixA.getUserData() == "ground" || fixB.getUserData()== "ground") {
+        if (fixA.getUserData() instanceof Projectile || fixB.getUserData() instanceof Projectile && fixA.getUserData() == "ground" || fixB.getUserData() == "ground") {
 
             Fixture projectileFixture;
             Projectile projectile = null;
 
-            if(fixA.getUserData() instanceof Projectile) {
+            if (fixA.getUserData() instanceof Projectile) {
                 projectileFixture = fixA;
-                projectile = (Projectile)projectileFixture.getUserData();
+                projectile = (Projectile) projectileFixture.getUserData();
 
             } else {
                 projectileFixture = fixB;
-                projectile = (Projectile)projectileFixture.getUserData();
+                projectile = (Projectile) projectileFixture.getUserData();
             }
 
             projectile.setToDestroy();
         }
 
-        if(fixA.getUserData() instanceof Projectile || fixB.getUserData() instanceof Projectile && fixA.getUserData() instanceof Enemy || fixB.getUserData() instanceof Enemy) {
+        if (fixA.getUserData() instanceof Projectile || fixB.getUserData() instanceof Projectile && fixA.getUserData() instanceof Enemy || fixB.getUserData() instanceof Enemy) {
 
             Projectile projectile = null;
             Enemy enemy = null;
@@ -85,7 +85,14 @@ public class WorldContactListener implements ContactListener {
 //            enemy.die();
         }
 
+        // Collision Player with Treasure
+        if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Treasure || fixB.getUserData() instanceof Treasure) {
+            player.win();
+        }
+
+
     }
+
 
     @Override
     public void endContact(Contact contact) {

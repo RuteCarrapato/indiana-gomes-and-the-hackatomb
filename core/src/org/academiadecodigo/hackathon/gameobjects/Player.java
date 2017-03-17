@@ -12,6 +12,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import org.academiadecodigo.hackathon.Indiana;
+import org.academiadecodigo.hackathon.screens.GameOverScreen;
+import org.academiadecodigo.hackathon.screens.MenuScreen;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
 
@@ -32,7 +34,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
     public float animTimer;
     public boolean runningRight;
     public boolean climbingLadder;
-    public boolean playerIsDead;
+    public boolean playerIsDead = false;
     public boolean onTheFloor = true;
 
     private Array<Projectile> projectiles;
@@ -129,7 +131,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP) && climbingLadder) {
-           b2dbody.setLinearVelocity(0, 1);
+           this.b2dbody.setLinearVelocity(0, 1);
         }
     }
 
@@ -149,7 +151,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
     public void hittingLadder() {
 
         if(climbingLadder) {
-            climbingLadder = false;
+            this.climbingLadder = false;
         } else {
             this.climbingLadder = true;
         }
@@ -224,12 +226,10 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
         return State.STANDING;
     }
 
-    public void resetGravity() {
-        b2dbody.setGravityScale(1);
-    }
-
     public void die() {
         if (!isDead()) {
+            System.out.println("MORRI");
+            screen.getGame().setScreen(new GameOverScreen(screen.getGame()));
             //TODO: Boni: Implement sound effect of dead/game over
             playerIsDead = true;
         }
@@ -249,6 +249,11 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
     public void setOnTheFloor(boolean onTheFloor) {
 
         this.onTheFloor = onTheFloor;
+    }
+
+
+    public void win() {
+        screen.getGame().setScreen(new MenuScreen(screen.getGame()));
     }
 
 
@@ -303,6 +308,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
     public boolean scrolled(int amount) {
         return false;
     }
+
 
     public enum State {
         FALLING,
