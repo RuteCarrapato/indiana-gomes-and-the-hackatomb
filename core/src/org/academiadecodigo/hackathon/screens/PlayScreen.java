@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.WorldCreator;
 import org.academiadecodigo.hackathon.colisiondetector.WorldContactListener;
+import org.academiadecodigo.hackathon.gameobjects.Enemy;
 import org.academiadecodigo.hackathon.gameobjects.Player;
 import org.academiadecodigo.hackathon.utils.Constants;
 
@@ -92,12 +93,20 @@ public class PlayScreen extends AbstractGameScreen {
         //renderer draws what the camera views
         renderer.setView(gameCam);
 
+        //Enemies movem
+        for (Enemy enemy : creator.getEnemies()) {
+            enemy.move();
+        }
+
 
     }
 
     private void handleInput(float dt) {
         // Player Movement
         player.handleInput(dt);
+
+
+
 
     }
 
@@ -122,13 +131,11 @@ public class PlayScreen extends AbstractGameScreen {
         //renderer our Box2DDebugLines
         debugRenderer.render(world, gameCam.combined);
 
-
         world.setContactListener(new WorldContactListener(this));
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
         player.draw(game.batch);
-
 
 //        for (Enemy enemy : creator.getEnemies())
 //            enemy.draw(game.batch);
