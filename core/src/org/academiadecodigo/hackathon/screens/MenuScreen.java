@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.utils.Constants;
 

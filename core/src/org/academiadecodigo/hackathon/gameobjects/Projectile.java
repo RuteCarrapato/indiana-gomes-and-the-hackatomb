@@ -55,7 +55,6 @@ public class Projectile extends GameObject {
         b2dbody.setLinearVelocity(new Vector2(fireRight ? Constants.PROJECTILE_SPEED : -Constants.PROJECTILE_SPEED, 0.15f)); //magic number nullify gravity
         if (setToDestroy && !destroyed) {
             world.destroyBody(b2dbody);
-            System.out.println("Projectile destroyed");
             destroyed = true;
         }
 
