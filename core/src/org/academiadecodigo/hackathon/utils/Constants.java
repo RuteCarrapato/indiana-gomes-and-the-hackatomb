@@ -37,5 +37,5 @@ public class Constants {
     public static final String PROJECTILE_LEFT = "bullet_left.png";
     public static final float PROJECTILE_HEIGHT = 16; // Pixels
     public static final float PROJECTILE_WIDTH = 16; // Pixels
-    public static final float PROJECTILE_SPEED = 1;
+    public static final float PROJECTILE_SPEED = 2;
 }

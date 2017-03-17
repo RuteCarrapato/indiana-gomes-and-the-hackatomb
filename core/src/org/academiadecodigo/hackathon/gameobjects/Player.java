@@ -322,7 +322,6 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
         return false;
     }
 
-
     public enum State {
         FALLING,
         JUMPING,
