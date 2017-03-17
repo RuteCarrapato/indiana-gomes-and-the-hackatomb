@@ -1,6 +1,7 @@
 package org.academiadecodigo.hackathon.gameobjects;
 
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -27,10 +28,16 @@ public class GameObject extends Sprite {
     }
 
     public GameObject(PlayScreen screen, float x, float y) {
-
         this.screen = screen;
         world = screen.getWorld();
         setPosition(x, y);
+    }
+
+    public GameObject(PlayScreen screen, Texture texture) {
+        super(texture);
+        this.screen = screen;
+        world = screen.getWorld();
+
     }
 
     public void defineGameObj() {

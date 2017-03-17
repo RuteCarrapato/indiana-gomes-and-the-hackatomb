@@ -34,4 +34,5 @@ public class Constants {
     public static final int HUMAN_SIZE = 16;
 
     public static final String PLAYER_REGION = "player";
+    public static final float PROJECTILE_RADIUS = 2;
 }

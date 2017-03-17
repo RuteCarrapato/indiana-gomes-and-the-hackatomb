@@ -3,7 +3,10 @@ package org.academiadecodigo.hackathon.gameobjects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import org.academiadecodigo.hackathon.gameobjects.InputProcessor;
@@ -245,6 +248,20 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
 
         sound = Indiana.manager.get("audio/sounds/GUN.mp3", Sound.class);
         sound.play();
+    }
+
+    public void draw(Batch batch){
+        super.draw(batch);
+
+
+//        Texture texture = new Texture("bullet_left.png");
+//        Sprite sprite = new Sprite(texture);
+//        sprite.setBounds(0, 1, 0.32f, 0.32f);
+        for (Projectile projectile : projectiles) {
+            System.out.println("im here");
+            projectile.draw(batch);
+//            sprite.draw(batch);
+        }
     }
 
     public void setOnTheFloor(boolean onTheFloor) {
