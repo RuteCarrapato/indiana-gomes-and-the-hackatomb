@@ -151,7 +151,19 @@ public class PlayScreen extends AbstractGameScreen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
+        if(gameOver()) {
+            game.setScreen(new GameOverScreen(game));
+            dispose();
+        }
+    }
 
+    public boolean gameOver() {
+
+        if(player.currentState == Player.State.DEAD && player.getAnimTimer() > 3) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override

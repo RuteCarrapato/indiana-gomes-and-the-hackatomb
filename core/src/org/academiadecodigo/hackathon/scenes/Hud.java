@@ -69,6 +69,9 @@ public class Hud {
         }
     }
 
+    public int getTimeCount() {
+        return worldTimer;
+    }
     public void addScore(int value) {
         score += value;
         scoreLabel.setText(String.format("%06d", score));

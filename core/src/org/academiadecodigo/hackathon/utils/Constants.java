@@ -22,9 +22,6 @@ public class Constants {
 
     public static final String LEVEL1_TMX = "level1.tmx";
 
-    public static final float PLAYER_X_SPEED = 2;
-
-
     public static final String PROJECTILE_RIGHT = "bullet_right.png";
     public static final String PROJECTILE_LEFT = "bullet_left.png";
 
@@ -34,4 +31,6 @@ public class Constants {
     public static final int HUMAN_SIZE = 16;
 
     public static final String PLAYER_REGION = "player";
+    public static final float PLAYER_X_SPEED = 2;
+    public static final float PLAYER_RUN_FORCE = 0.075f;
 }

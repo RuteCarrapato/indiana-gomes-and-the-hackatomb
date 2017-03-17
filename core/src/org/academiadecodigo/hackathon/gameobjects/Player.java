@@ -111,12 +111,12 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && b2dbody.getLinearVelocity().x <= Constants.PLAYER_X_SPEED) {
-            this.b2dbody.applyLinearImpulse(new Vector2(0.1f, 0), this.b2dbody.getWorldCenter(), true);
+            this.b2dbody.applyLinearImpulse(new Vector2(Constants.PLAYER_RUN_FORCE, 0), this.b2dbody.getWorldCenter(), true);
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && b2dbody.getLinearVelocity().x >= -Constants.PLAYER_X_SPEED) {
 
-            this.b2dbody.applyLinearImpulse(new Vector2(-0.1f, 0), this.b2dbody.getWorldCenter(), true);
+            this.b2dbody.applyLinearImpulse(new Vector2(-Constants.PLAYER_RUN_FORCE, 0), this.b2dbody.getWorldCenter(), true);
         }
 
 
@@ -237,6 +237,10 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
 
     public boolean isDead() {
         return playerIsDead;
+    }
+
+    public float getAnimTimer() {
+        return animTimer;
     }
 
     public void fire() {
