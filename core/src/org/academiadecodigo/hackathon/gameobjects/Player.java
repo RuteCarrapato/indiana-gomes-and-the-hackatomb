@@ -18,7 +18,7 @@ import org.academiadecodigo.hackathon.utils.Constants;
 /**
  * Created by codecadet on 16/03/17.
  */
-public class Player extends GameObject {
+public class Player extends GameObject implements com.badlogic.gdx.InputProcessor{
 
     public State currentState;
     public State previousState;
@@ -39,7 +39,6 @@ public class Player extends GameObject {
     private Array<Projectile> projectiles;
 
     private Sound sound;
-    public InputProcessor inputProcessor;
 
     public Player(PlayScreen screen) {
         super(screen);
@@ -76,8 +75,6 @@ public class Player extends GameObject {
         animLadder = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
 
-        this.inputProcessor = new InputProcessor(this);
-
         definePlayer();
 
         projectiles = new Array<Projectile>();
@@ -107,7 +104,7 @@ public class Player extends GameObject {
     int count = 0;
     public void handleInput(float dt) {
 
-        if(inputProcessor.keyUp(Input.Keys.ANY_KEY) && climbingLadder) {
+        if(keyUp(Input.Keys.ANY_KEY) && climbingLadder) {
             System.out.println("ANY KEY WAS UP!!!" + count++);
 //            this.b2dbody.setLinearVelocity(0, 0);
             this.currentState = State.LADDER_STOP;
@@ -195,6 +192,7 @@ public class Player extends GameObject {
         if ((b2dbody.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()) {
             region.flip(true, false);
             runningRight = false;
+
         } else if ((b2dbody.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
             region.flip(true, false);
             runningRight = true;
@@ -252,6 +250,59 @@ public class Player extends GameObject {
     public void setOnTheFloor(boolean onTheFloor) {
 
         this.onTheFloor = onTheFloor;
+    }
+
+
+    // INPUT PROCESSOR IMPLEMENTATION
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+
+        switch (keycode) {
+            case Input.Keys.UP:
+            case Input.Keys.DOWN:
+            case Input.Keys.RIGHT:
+            case Input.Keys.LEFT:
+            case Input.Keys.SPACE:
+            case Input.Keys.ANY_KEY:
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
     }
 
     public enum State {
