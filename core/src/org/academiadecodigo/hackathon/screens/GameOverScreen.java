@@ -2,8 +2,15 @@ package org.academiadecodigo.hackathon.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.utils.Constants;
 
@@ -12,16 +19,28 @@ import org.academiadecodigo.hackathon.utils.Constants;
  */
 public class GameOverScreen extends AbstractGameScreen {
 
-    final Indiana game;
-    OrthographicCamera camera;
+    private Viewport viewport;
+    private Stage stage;
+
+    private Indiana game;
+    private OrthographicCamera camera;
 
     public GameOverScreen(Indiana game) {
 
         this.game = game;
+        this.viewport = new FitViewport(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT, new OrthographicCamera());
+        this.stage = new Stage(viewport, game.batch);
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT);
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.RED);
 
+        Table table = new Table();
+        table.center();
+        table.setFillParent(true);
+
+        Label gameOverLabel = new Label("GAME OVER", font);
+        table.add(gameOverLabel).expandX();
+
+        stage.addActor(table);
     }
 
     @Override
@@ -35,20 +54,7 @@ public class GameOverScreen extends AbstractGameScreen {
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        camera.update();
-        game.batch.setProjectionMatrix(camera.combined);
-
-        game.batch.begin();
-
-        game.font.draw(game.batch, "És lo fin", 100, 150);
-        game.font.draw(game.batch, "Prima qualquer key para recomestart", 100, 100);
-
-        game.batch.end();
-
-        if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
-
-            game.setScreen(new MenuScreen(game));
-        }
+        stage.draw();
 
     }
 

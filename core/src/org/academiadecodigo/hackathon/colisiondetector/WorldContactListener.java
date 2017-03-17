@@ -2,6 +2,7 @@ package org.academiadecodigo.hackathon.colisiondetector;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
+import org.academiadecodigo.hackathon.gameobjects.Enemy;
 import org.academiadecodigo.hackathon.gameobjects.Ladder;
 import org.academiadecodigo.hackathon.gameobjects.Player;
 import org.academiadecodigo.hackathon.gameobjects.Projectile;
@@ -36,7 +37,7 @@ public class WorldContactListener implements ContactListener {
             player.hittingLadder();
         }
 
-        if (fixA.getUserData() == "enemy" || fixB.getUserData() == "enemy" && fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player) {
+        if (fixA.getUserData() instanceof Enemy || fixB.getUserData() instanceof Enemy && fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player) {
             Gdx.app.log("ENEMY", "collision");
 
             player.die();
@@ -63,6 +64,25 @@ public class WorldContactListener implements ContactListener {
             }
 
             projectile.setToDestroy();
+        }
+
+        if(fixA.getUserData() instanceof Projectile || fixB.getUserData() instanceof Projectile && fixA.getUserData() instanceof Enemy || fixB.getUserData() instanceof Enemy) {
+
+            Projectile projectile = null;
+            Enemy enemy = null;
+
+//            if(fixA.getUserData() instanceof Projectile) {
+//                projectile = (Projectile)(fixA.getUserData());
+//                enemy = (Enemy)(fixB.getUserData());
+//
+//            } else {
+//                projectile = (Projectile)(fixB.getUserData());
+//                enemy = (Enemy)(fixA.getUserData());
+//
+//            }
+
+//            projectile.setToDestroy();
+//            enemy.die();
         }
 
     }

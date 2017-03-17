@@ -1,4 +1,4 @@
-sprites.png
+player_movements.png
 size: 160, 16
 format: RGBA8888
 filter: Linear,Linear

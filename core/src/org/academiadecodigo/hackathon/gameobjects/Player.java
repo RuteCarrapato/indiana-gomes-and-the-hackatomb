@@ -36,7 +36,6 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
     public boolean runningRight;
     public boolean climbingLadder;
     public boolean playerIsDead;
-
     public boolean onTheFloor = true;
 
     private Array<Projectile> projectiles;
@@ -46,7 +45,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
     public Player(PlayScreen screen) {
         super(screen);
 
-        // Atlas Region in sprites.png and sprites.pack
+        // Atlas Region in player_movements.png and player_movements.pack
         this.atlasRegion = screen.getAtlas().findRegion(Constants.PLAYER_REGION);
         this.textureRegion = new TextureRegion(atlasRegion, 0, 0, Constants.HUMAN_SIZE, Constants.HUMAN_SIZE);
         setBounds(0, 0, Constants.HUMAN_SIZE / Constants.PPM, Constants.HUMAN_SIZE / Constants.PPM);

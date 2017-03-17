@@ -20,7 +20,6 @@ public class WorldCreator {
 
     public WorldCreator(PlayScreen screen) {
 
-        enemies = new Array<Enemy>();
         World world = screen.getWorld();
         TiledMap map = screen.getMap();
         //create body and fixture variables
@@ -30,9 +29,9 @@ public class WorldCreator {
         Body body;
 
         // create ground bodies/fixtures
-        for(MapObject object : map.getLayers().get(Constants.GROUND_INDEX).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get(Constants.GROUND_INDEX).getObjects().getByType(RectangleMapObject.class)) {
 
-            Rectangle rect = ((RectangleMapObject)object).getRectangle();
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
             bdef.position.set((rect.getX() + rect.getWidth() / 2) / Constants.PPM, (rect.getY() + rect.getHeight() / 2) / Constants.PPM);
@@ -45,15 +44,15 @@ public class WorldCreator {
         }
 
         // create treasure
-        for(MapObject object : map.getLayers().get(Constants.TREASURE_INDEX).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject)object).getRectangle();
+        for (MapObject object : map.getLayers().get(Constants.TREASURE_INDEX).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new Treasure(screen, rect);
         }
 
         // create ladder bodies/fixtures
-       for(MapObject object : map.getLayers().get(Constants.LADDER_INDEX).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get(Constants.LADDER_INDEX).getObjects().getByType(RectangleMapObject.class)) {
 
-           Rectangle rect = ((RectangleMapObject)object).getRectangle();
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             /*
 
@@ -68,25 +67,23 @@ public class WorldCreator {
 
            */
 
-           new Ladder(screen, rect);
+            new Ladder(screen, rect);
         }
 
         //create all enemies
-        for(MapObject object : map.getLayers().get(Constants.ENEMY_INDEX).getObjects().getByType(RectangleMapObject.class)){
+        enemies = new Array<Enemy>();
+        int count = 0;
+        for(MapObject object: map.getLayers().get(Constants.ENEMY_INDEX).getObjects().getByType(RectangleMapObject.class)) {
 
-            Rectangle rect = ((RectangleMapObject)object).getRectangle();
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            System.out.println("enemies created");
 
-//            enemies.add((new Enemy(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM)));
-
-            bdef.type = BodyDef.BodyType.DynamicBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Constants.PPM, (rect.getY() + rect.getHeight() / 2) / Constants.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef).setUserData("enemy");
+            enemies.add((new Enemy(screen, rect, count)));
+            count++;
         }
+
+
+
     }
 
     public Array<Enemy> getEnemies() {
