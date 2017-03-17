@@ -83,7 +83,7 @@ public class Player extends GameObject {
 
     public void update(float dt) {
 
-        setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y / 2);
+        setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y - getHeight() / 2);
     }
 
     public enum State {
