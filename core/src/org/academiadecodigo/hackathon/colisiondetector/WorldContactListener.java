@@ -3,8 +3,17 @@ package org.academiadecodigo.hackathon.colisiondetector;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import org.academiadecodigo.hackathon.gameobjects.Player;
+import org.academiadecodigo.hackathon.screens.PlayScreen;
 
 public class WorldContactListener implements ContactListener {
+
+    public World world;
+    public Player player;
+
+    public WorldContactListener(PlayScreen screen) {
+        this.world = screen.getWorld();
+        this.player = screen.getPlayer();
+    }
 
     @Override
     public void beginContact(Contact contact) {
@@ -13,12 +22,14 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
+
         System.out.println(fixA.getUserData());
         System.out.println(fixB.getUserData());
         Fixture player;
         Fixture object;
 
-        if (fixA.getUserData() == "ladder" || fixB.getUserData() == "ladder") {
+
+        if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() == "ladder" || fixB.getUserData() == "ladder") {
             Gdx.app.log("LADDER", "collision");
 
             if (fixA.getUserData() == "ladder") {
@@ -31,8 +42,7 @@ public class WorldContactListener implements ContactListener {
 
             if (object.getUserData() == "ladder" && player.getUserData() instanceof Player) {
                 if (player.getUserData() instanceof Player) {
-                    System.out.println("player climb");
-                    ((Player) player.getUserData()).climb();
+                    ((Player) player.getUserData()).hittingLadder();
                 }
             }
 
@@ -72,17 +82,19 @@ public class WorldContactListener implements ContactListener {
                 ((Player) player.getUserData()).setOnTheFloor(true);
             }
         }
+
     }
 
     @Override
     public void endContact(Contact contact) {
+
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
         Fixture player;
         Fixture object;
 
-        if (fixA.getUserData() == "ladder" || fixB.getUserData() == "ladder") {
-            System.out.println("oi");
+
+        if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() == "ladder" || fixB.getUserData() == "ladder") {
             Gdx.app.log("LADDER", "collision");
 
             if (fixA.getUserData() == "ladder") {
@@ -96,7 +108,7 @@ public class WorldContactListener implements ContactListener {
 
                 if (player.getUserData() instanceof Player) {
                     System.out.println("player climb");
-                    ((Player) player.getUserData()).resetGravity();
+                    ((Player) player.getUserData()).hittingLadder();
                 }
             }
         }
@@ -118,6 +130,7 @@ public class WorldContactListener implements ContactListener {
             if (object.getUserData() == "ground" && player.getUserData() instanceof Player) {
                 ((Player) player.getUserData()).setOnTheFloor(false);
             }
+
         }
 
     }

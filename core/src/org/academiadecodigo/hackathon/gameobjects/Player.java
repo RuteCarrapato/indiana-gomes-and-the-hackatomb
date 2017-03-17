@@ -64,7 +64,7 @@ public class Player extends GameObject {
         animRun = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
 
-        for (int i = 7; i < 9; i++) {
+        for (int i = 6; i < 8; i++) {
             frames.add(new TextureRegion(getTexture(), i * 16, 0, 16, 16));
         }
 
@@ -106,12 +106,14 @@ public class Player extends GameObject {
         }
 
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && onTheFloor) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && onTheFloor) {
             this.b2dbody.applyLinearImpulse(new Vector2(0, 2f), this.b2dbody.getWorldCenter(), true);
-            //TODO REFRESH JUMPS WHEN HIT THE GROUND
         }
 
-
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) && climbingLadder) {
+            System.out.println("GOING UP AND CLIMBING LADDER");
+           b2dbody.setLinearVelocity(0, 1);
+        }
     }
 
     public void update(float dt) {
@@ -124,6 +126,15 @@ public class Player extends GameObject {
             if (projectile.isDestroyed()) {
                 projectiles.removeValue(projectile, true);
             }
+        }
+    }
+
+    public void hittingLadder() {
+
+        if(climbingLadder) {
+            climbingLadder = false;
+        } else {
+            this.climbingLadder = true;
         }
     }
 
@@ -201,25 +212,7 @@ public class Player extends GameObject {
         LADDER
     }
 
-    public void climb() {
 
-        System.out.println("climb method");
-        System.out.println(b2dbody.getGravityScale());
-        b2dbody.setGravityScale(0);
-
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            System.out.println("climb up");
-            this.b2dbody.applyForceToCenter(0, 5, true);
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-
-            System.out.println("climb down");
-            this.b2dbody.applyLinearImpulse(new Vector2(0, -1f), this.b2dbody.getWorldCenter(), true);
-
-        }
-
-    }
 
     public void resetGravity() {
         b2dbody.setGravityScale(1);
