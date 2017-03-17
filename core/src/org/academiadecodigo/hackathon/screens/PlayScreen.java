@@ -142,9 +142,9 @@ public class PlayScreen extends AbstractGameScreen {
         game.batch.begin();
         player.draw(game.batch);
 
-        for (Enemy enemy : creator.getEnemies()) {
-            enemy.draw(game.batch);
-        }
+//        for (Enemy enemy : creator.getEnemies()) {
+//            enemy.draw(game.batch);
+//        }
 
         game.batch.end();
 
