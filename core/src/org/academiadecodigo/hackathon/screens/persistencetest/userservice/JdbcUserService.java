@@ -1,8 +1,11 @@
-package org.academiadecodigo.hackathon.screens.persistence;
+package org.academiadecodigo.hackathon.screens.persistencetest.userservice;
 
 /**
  * Created by codecadet on 17/03/17.
  */
+
+import org.academiadecodigo.hackathon.screens.persistencetest.connection.ConnectionManager;
+import org.academiadecodigo.hackathon.screens.persistencetest.UserModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

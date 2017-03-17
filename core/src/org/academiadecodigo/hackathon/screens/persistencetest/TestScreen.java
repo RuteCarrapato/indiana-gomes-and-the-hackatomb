@@ -1,4 +1,4 @@
-package org.academiadecodigo.hackathon.screens;
+package org.academiadecodigo.hackathon.screens.persistencetest;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -9,7 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import org.academiadecodigo.hackathon.Indiana;
-import org.academiadecodigo.hackathon.screens.persistence.JdbcUserService;
+import org.academiadecodigo.hackathon.screens.AbstractGameScreen;
+import org.academiadecodigo.hackathon.screens.persistencetest.userservice.JdbcUserService;
 
 /**
  * Created by codecadet on 17/03/17.

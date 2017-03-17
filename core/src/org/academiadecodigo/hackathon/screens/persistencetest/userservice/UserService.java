@@ -1,4 +1,6 @@
-package org.academiadecodigo.hackathon.screens.persistence;
+package org.academiadecodigo.hackathon.screens.persistencetest.userservice;
+
+import org.academiadecodigo.hackathon.screens.persistencetest.UserModel;
 
 /**
  * Created by codecadet on 17/03/17.

@@ -1,4 +1,4 @@
-package org.academiadecodigo.hackathon.screens.persistence;
+package org.academiadecodigo.hackathon.screens.persistencetest.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

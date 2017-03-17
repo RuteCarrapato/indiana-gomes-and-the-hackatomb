@@ -1,4 +1,4 @@
-package org.academiadecodigo.hackathon.screens.persistence;
+package org.academiadecodigo.hackathon.screens.persistencetest;
 
 /**
  * Created by codecadet on 17/03/17.
