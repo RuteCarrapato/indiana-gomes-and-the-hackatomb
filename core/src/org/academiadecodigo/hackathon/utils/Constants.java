@@ -38,4 +38,5 @@ public class Constants {
     public static final float PROJECTILE_HEIGHT = 16; // Pixels
     public static final float PROJECTILE_WIDTH = 16; // Pixels
     public static final float PROJECTILE_SPEED = 2;
+    public static final int ENEMY_POINTS = 100;
 }
