@@ -21,6 +21,7 @@ public class Player extends GameObject {
     public Animation animJump;
     public float animTimer;
     public boolean runningRight;
+    public boolean playerIsDead;
 
     public Player(PlayScreen screen) {
 
@@ -109,5 +110,32 @@ public class Player extends GameObject {
 
         }
 
+    }
+
+    public void die() {
+        if (!isDead()) {
+            //TODO: Boni: Implement sound effect of dead/game over
+            playerIsDead = true;
+        }
+    }
+
+    public boolean isDead() {
+        return playerIsDead;
+    }
+
+    public State getState() {
+        if (playerIsDead) {
+            return State.DEAD;
+        } else if((b2dbody.getLinearVelocity().y > 0 && currentState == State.JUMPING) || (b2dbody.getLinearVelocity().y < 0 && previousState == State.JUMPING))
+            return State.JUMPING;
+            //if negative in Y-Axis mario is falling
+        else if(b2dbody.getLinearVelocity().y < 0)
+            return State.FALLING;
+            //if mario is positive or negative in the X axis he is running
+        else if(b2dbody.getLinearVelocity().x != 0)
+            return State.RUNNING;
+            //if none of these return then he must be standing
+        else
+            return State.STANDING;
     }
 }
