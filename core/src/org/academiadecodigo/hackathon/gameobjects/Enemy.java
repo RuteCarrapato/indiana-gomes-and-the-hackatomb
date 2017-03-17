@@ -9,10 +9,16 @@ import org.academiadecodigo.hackathon.screens.PlayScreen;
  */
 public class Enemy extends GameObject {
 
+    public boolean died;
+
     public Enemy(PlayScreen screen, float x, float y) {
         super(screen, x, y);
         this.world = screen.getWorld();
         this.screen = screen;
 //        this.b2dbody = new Body();
+    }
+
+    public void die() {
+        died = true;
     }
 }
