@@ -12,9 +12,15 @@ import org.academiadecodigo.hackathon.utils.Constants;
 public class Enemy extends GameObject {
 
     public boolean died;
+    private float initialPosition;
+    private int index;
 
-    public Enemy(PlayScreen screen, Rectangle rectangle) {
+    private int counter = 0;
+    private int signal = 1;
+
+    public Enemy(PlayScreen screen, Rectangle rectangle, int index) {
         super(screen, rectangle.getX(), rectangle.getY());
+        this.index = index;
 
         this.world = screen.getWorld();
         this.screen = screen;
@@ -38,15 +44,20 @@ public class Enemy extends GameObject {
 
         b2dbody.createFixture(fdef).setUserData(this);
 
+        this.initialPosition = b2dbody.getPosition().x;
+
     }
 
     public void move() {
+        counter++;
 
-        if (this.b2dbody.getPosition().x == 0) {
-            this.b2dbody.applyLinearImpulse(new Vector2(0.3f, 0), this.b2dbody.getWorldCenter(), true);
-        } else if (this.b2dbody.getLinearVelocity().x >= 0.2f) {
-            System.out.println("entrou la dentro");
-            this.b2dbody.applyLinearImpulse(new Vector2(-0.4f, 0), this.b2dbody.getWorldCenter(), true);
+        if(counter % 60 == 0){
+            if(index > 6) {
+                this.b2dbody.applyForceToCenter(signal * 100f, 0, true);
+            } else {
+                this.b2dbody.applyForceToCenter(signal * 65f,0,true);
+            }
+            signal *= -1;
         }
     }
 

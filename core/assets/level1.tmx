@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="104">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="136">
  <tileset firstgid="1" name="sa_bg1" tilewidth="16" tileheight="16" tilecount="1" columns="1">
   <image source="sa_bg1.png" width="16" height="16"/>
  </tileset>
@@ -25,10 +25,10 @@
  </layer>
  <layer name="graphics" width="240" height="13">
   <data encoding="base64" compression="zlib">
-   eJztmdEKgzAMRd3U/f8nD8FBKL3mxqbtkHsgD5PFVMgxWt/LsrwVKSHEaJj+i/bs3Z7OyGNysz2Uv2IWPebHaH+jufJXPIUefRd14XVGlr87+M96hufvamIL1BZiNCP8RT4dWFci/pbnRP556/Pmr/wV/wwztxiQh2slkBOMvxs4Z8SfTH8/xJqF6AU7t1rcLrlyonShrMvMQw/G319dVM/eR+SvmAUz82rzLvJ+WOLl1OY2m4vqoecD7/0XXaf9LX/FLFr3n3v4eyf3OI6uI2NmI3/3i7pC9CbbX+ZbjM2xz8fMGhh/7+xBRepmfXcSopXWvmP6OhpsvfI4Ok/tfsG8+9qczcmTv2IGqO/Y3mb6usVhb//K7jNlryHzviNED2b3/JNCiNF8ARezBMY=
+   eJztme0KgzAMRdXq3v+Rh+CglF57Y9N0yD2QH9OlUcgxfmzLsmwKlxAiGqb/rD37tKc98phcbw/lr5jFiPkR7a81V/6KtzCi76wurFd4+XuA/6QrWv6mLHZDbSGiifAX+XSSu2Lxt1wT+dc6vtb8lb/in2HmFgPyMFUCOcH4u4M1Lf54+vshjlmIUbBzq8ftkjsnymvJashlYfz91Uf18uuI/BWzYGZebd5Zng9LWjm1uc3monro/qD1/IvOM/8tf8Uset8/j/D3Se65HZ2Hx8xG/h43dYUYjbe/zLeYPCe/L2eOgfH3yTsoS12v705C9NLbd0xfW4OtV25H69SuF8yzb56zN/Lkr5gB6ju2t5m+7nEY1Sv31/yNDiGimd3zbwohovkCMXsExw==
   </data>
  </layer>
- <objectgroup name="ground">
+ <objectgroup name="ground" visible="0">
   <object id="36" x="144" y="112" width="112" height="16"/>
   <object id="37" x="1264" y="96" width="32" height="16"/>
   <object id="45" x="1104" y="112" width="80" height="16"/>
@@ -83,21 +83,21 @@
  <objectgroup name="treasure" visible="0">
   <object id="48" x="1280" y="80" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="enemies" visible="0">
-  <object id="49" x="848" y="48" width="16" height="16"/>
-  <object id="50" x="960" y="160" width="16" height="16"/>
-  <object id="51" x="1104" y="160" width="16" height="16"/>
-  <object id="52" x="1168" y="160" width="16" height="16"/>
-  <object id="53" x="1280" y="128" width="16" height="16"/>
-  <object id="54" x="1120" y="96" width="16" height="16"/>
-  <object id="55" x="736" y="64" width="16" height="16"/>
-  <object id="56" x="768" y="176" width="16" height="16"/>
-  <object id="57" x="640" y="96" width="16" height="16"/>
-  <object id="58" x="640" y="176" width="16" height="16"/>
-  <object id="59" x="512" y="144" width="16" height="16"/>
-  <object id="60" x="400" y="64" width="16" height="16"/>
-  <object id="61" x="48" y="80" width="16" height="16"/>
-  <object id="62" x="160" y="96" width="16" height="16"/>
-  <object id="63" x="192" y="176" width="16" height="16"/>
+ <objectgroup name="enemies">
+  <object id="118" x="48" y="80" width="16" height="16"/>
+  <object id="120" x="608" y="96" width="16" height="16"/>
+  <object id="121" x="848" y="48" width="16" height="16"/>
+  <object id="122" x="736" y="64" width="16" height="16"/>
+  <object id="123" x="1120" y="96" width="16" height="16"/>
+  <object id="124" x="1280" y="128" width="16" height="16"/>
+  <object id="127" x="400" y="64" width="16" height="16"/>
+  <object id="128" x="160" y="96" width="16" height="16"/>
+  <object id="129" x="192" y="176" width="16" height="16"/>
+  <object id="130" x="512" y="144" width="16" height="16"/>
+  <object id="131" x="640" y="176" width="16" height="16"/>
+  <object id="132" x="768" y="176" width="16" height="16"/>
+  <object id="133" x="960" y="160" width="16" height="16"/>
+  <object id="134" x="1104" y="160" width="16" height="16"/>
+  <object id="135" x="1168" y="160" width="16" height="16"/>
  </objectgroup>
 </map>
