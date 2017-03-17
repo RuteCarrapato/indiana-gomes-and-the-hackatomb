@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
 
@@ -23,12 +24,14 @@ public class Player extends GameObject {
     public boolean runningRight;
     public boolean playerIsDead;
 
+    private Array<Projectile> projectiles;
+
     public Player(PlayScreen screen) {
 
         super(screen);
 
         // Atlas Region in sprites.png and sprites.pack
-        this.atlasRegion = screen.getAtlas().findRegion("player");
+        this.atlasRegion = screen.getAtlas().findRegion(Constants.PLAYER_REGION_STRING);
         this.textureRegion = new TextureRegion(atlasRegion, 0, 0, 16, 16);
         setBounds(0, 0, 16 / Constants.PPM, 16 / Constants.PPM);
         setRegion(textureRegion);
@@ -42,6 +45,8 @@ public class Player extends GameObject {
 
 
         definePlayer();
+
+        projectiles = new Array<Projectile>();
     }
 
     private void definePlayer() {
@@ -58,7 +63,7 @@ public class Player extends GameObject {
         shape.setRadius(6 / Constants.PPM);
 
         fdef.shape = shape;
-        b2dbody.createFixture(fdef).setUserData("player"); //TODO Change to constant
+        b2dbody.createFixture(fdef).setUserData(Constants.PLAYER_REGION_STRING);
     }
 
     public void handleInput(float dt) {
@@ -85,6 +90,13 @@ public class Player extends GameObject {
     public void update(float dt) {
 
         setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y - getHeight() / 2);
+
+        for (Projectile projectile : projectiles) {
+            projectile.update(dt);
+            if (projectile.isDestroyed()) {
+                projectiles.removeValue(projectile, true);
+            }
+        }
     }
 
     public enum State {
@@ -137,5 +149,9 @@ public class Player extends GameObject {
             //if none of these return then he must be standing
         else
             return State.STANDING;
+    }
+
+    public void fire(){
+        projectiles.add(new Projectile(screen, b2dbody.getPosition().x, b2dbody.getPosition().y, runningRight));
     }
 }

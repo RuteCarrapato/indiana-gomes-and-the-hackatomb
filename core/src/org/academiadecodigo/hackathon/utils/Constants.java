@@ -24,4 +24,6 @@ public class Constants {
     public static final String LADDER_SPRITE_NAME = "ladder";
 
     public static final float PLAYER_X_SPEED = 2;
+
+    public static final String PLAYER_REGION_STRING = "player";
 }
