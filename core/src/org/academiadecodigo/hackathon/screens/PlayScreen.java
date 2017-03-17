@@ -4,13 +4,13 @@ package org.academiadecodigo.hackathon.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academiadecodigo.hackathon.Indiana;
@@ -42,8 +42,6 @@ public class PlayScreen extends AbstractGameScreen {
     //Sprites
     private Player player;
 
-    private Texture texture;
-
     public PlayScreen(Indiana game) {
         this.game = game;
         atlas = new TextureAtlas("sprites.pack");
@@ -52,7 +50,7 @@ public class PlayScreen extends AbstractGameScreen {
         gamePort = new FitViewport(Constants.VIEW_WIDTH / Constants.PPM, Constants.VIEW_HEIGHT / Constants.PPM, gameCam);
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("level1.tmx");
+        map = mapLoader.load(Constants.LEVEL1_TMX);
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
 
         gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight()/ 2, 0);
@@ -77,13 +75,17 @@ public class PlayScreen extends AbstractGameScreen {
         player.update(dt);
 
         world.step(1/60f, 6, 2);
-        gameCam.position.x = player.b2dbody.getPosition().x;
+
+        if (player.currentState != Player.State.DEAD) {
+            gameCam.position.x = player.b2dbody.getPosition().x;
+        }
 
         //Update the gameCam
         gameCam.update();
 
         //renderer draws what the camera views
         renderer.setView(gameCam);
+
 
     }
 
@@ -101,12 +103,17 @@ public class PlayScreen extends AbstractGameScreen {
 
     @Override
     public void render(float delta) {
+        //separate our update logic from render
         update(delta);
 
+        //Clear the game screen with Black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        //render our game map
         renderer.render();
+
+        //renderer our Box2DDebugLines
         debugRenderer.render(world, gameCam.combined);
 
         world.setContactListener(new WorldContactListener());
@@ -115,9 +122,13 @@ public class PlayScreen extends AbstractGameScreen {
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        game.batch.end();
 
-//        game.batch.setProjectionMatrix(hud.stage.getCamera();
+
+//        for (Enemy enemy : creator.getEnemies())
+//            enemy.draw(game.batch);
+
+        game.batch.end();
+        
     }
 
     @Override
