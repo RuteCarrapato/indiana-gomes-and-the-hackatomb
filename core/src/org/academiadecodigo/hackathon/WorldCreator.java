@@ -40,7 +40,7 @@ public class WorldCreator {
 
             shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
             fdef.shape = shape;
-            body.createFixture(fdef);
+            body.createFixture(fdef).setUserData("ground");
         }
 
         // create treasure

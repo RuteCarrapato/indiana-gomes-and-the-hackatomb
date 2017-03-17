@@ -10,9 +10,11 @@ import org.academiadecodigo.hackathon.utils.Constants;
  * Created by codecadet on 16/03/17.
  */
 public class Enemy extends GameObject {
+    public boolean died;
 
     public Enemy(PlayScreen screen, Rectangle rectangle) {
         super(screen, rectangle.getX(), rectangle.getY());
+
         this.world = screen.getWorld();
         this.screen = screen;
         defineEnemy(rectangle);
@@ -47,5 +49,11 @@ public class Enemy extends GameObject {
             System.out.println("entrou la dentro");
             this.b2dbody.applyLinearImpulse(new Vector2(-0.4f, 0), this.b2dbody.getWorldCenter(), true);
         }
+    }
+
+
+    public void die() {
+        died = true;
+
     }
 }

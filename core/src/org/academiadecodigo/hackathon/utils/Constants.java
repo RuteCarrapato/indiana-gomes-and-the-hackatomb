@@ -21,10 +21,17 @@ public class Constants {
     public static final int ENEMY_INDEX = 5;
 
     public static final String LEVEL1_TMX = "level1.tmx";
-    public static final String LADDER_SPRITE_NAME = "ladder";
 
     public static final float PLAYER_X_SPEED = 2;
 
+
+    public static final String PROJECTILE_RIGHT = "bullet_right.png";
+    public static final String PROJECTILE_LEFT = "bullet_left.png";
+
+    public static final float PROJECTILE_HEIGHT = 16; // Pixels
+    public static final float PROJECTILE_WIDTH = 16; // Pixels
+
     public static final int HUMAN_SIZE = 16;
+
     public static final String PLAYER_REGION = "player";
 }
