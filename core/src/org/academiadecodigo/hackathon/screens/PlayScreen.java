@@ -10,7 +10,6 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -118,7 +117,6 @@ public class PlayScreen extends AbstractGameScreen {
         debugRenderer.render(world, gameCam.combined);
 
         world.setContactListener(new WorldContactListener());
-        EdgeShape body = new EdgeShape();
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();

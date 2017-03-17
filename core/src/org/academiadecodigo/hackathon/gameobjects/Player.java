@@ -57,7 +57,7 @@ public class Player extends GameObject {
         shape.setRadius(6 / Constants.PPM);
 
         fdef.shape = shape;
-        b2dbody.createFixture(fdef).setUserData("player"); //TODO Change to constant
+        b2dbody.createFixture(fdef).setUserData(this); //TODO Change to constant
     }
 
     public void handleInput(float dt) {
@@ -71,6 +71,8 @@ public class Player extends GameObject {
 
             this.b2dbody.applyLinearImpulse(new Vector2(-0.1f, 0), this.b2dbody.getWorldCenter(), true);
         }
+
+
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             this.b2dbody.applyLinearImpulse(new Vector2(0, 2f), this.b2dbody.getWorldCenter(), true);
@@ -95,19 +97,27 @@ public class Player extends GameObject {
         DEAD
     }
 
-    public void climbStairs() {
+    public void climb() {
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+        System.out.println("climb method");
+        System.out.println(b2dbody.getGravityScale());
+        b2dbody.setGravityScale(0);
 
-            this.b2dbody.applyLinearImpulse(new Vector2(0, 10.1f), this.b2dbody.getWorldCenter(), true);
-
+        if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            System.out.println("climb up");
+            this.b2dbody.applyForceToCenter(0, 5, true);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
 
-            this.b2dbody.applyLinearImpulse(new Vector2(0, 9.9f), this.b2dbody.getWorldCenter(), true);
+            System.out.println("climb down");
+            this.b2dbody.applyLinearImpulse(new Vector2(0, -1f), this.b2dbody.getWorldCenter(), true);
 
         }
 
+    }
+
+    public void resetGravity(){
+        b2dbody.setGravityScale(1);
     }
 }
