@@ -2,7 +2,6 @@ package org.academiadecodigo.hackathon;
 
 
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
@@ -10,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import org.academiadecodigo.hackathon.gameobjects.Enemy;
 import org.academiadecodigo.hackathon.gameobjects.Ladder;
+import org.academiadecodigo.hackathon.gameobjects.Treasure;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
 
@@ -42,6 +42,12 @@ public class WorldCreator {
             shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
             fdef.shape = shape;
             body.createFixture(fdef);
+        }
+
+        // create treasure
+        for(MapObject object : map.getLayers().get(Constants.TREASURE_INDEX).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject)object).getRectangle();
+            new Treasure(screen, rect);
         }
 
         // create ladder bodies/fixtures
