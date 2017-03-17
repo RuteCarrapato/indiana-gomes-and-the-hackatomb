@@ -17,7 +17,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.WorldCreator;
 import org.academiadecodigo.hackathon.colisiondetector.WorldContactListener;
+import org.academiadecodigo.hackathon.gameobjects.Enemy;
 import org.academiadecodigo.hackathon.gameobjects.Player;
+import org.academiadecodigo.hackathon.scenes.Hud;
 import org.academiadecodigo.hackathon.utils.Constants;
 
 public class PlayScreen extends AbstractGameScreen {
@@ -25,6 +27,7 @@ public class PlayScreen extends AbstractGameScreen {
     //Reference to our game, used to set Screens
     private Indiana game;
     private TextureAtlas atlas;
+    private Hud hud;
 
     //Basic PlayScreen variables
     private OrthographicCamera gameCam;
@@ -63,6 +66,8 @@ public class PlayScreen extends AbstractGameScreen {
         this.world = new World(new Vector2(0, Constants.GRAVITY), true);
         debugRenderer = new Box2DDebugRenderer();
 
+        hud = new Hud(game.batch);
+
         creator = new WorldCreator(this);
         player = new Player(this);
         music = Indiana.manager.get("audio/music/rick.mp3", Music.class);
@@ -79,6 +84,7 @@ public class PlayScreen extends AbstractGameScreen {
         handleInput(dt);
 
         player.update(dt);
+        hud.update(dt);
 
         world.step(1 / 60f, 6, 2);
 
@@ -129,11 +135,15 @@ public class PlayScreen extends AbstractGameScreen {
         game.batch.begin();
         player.draw(game.batch);
 
-
-//        for (Enemy enemy : creator.getEnemies())
-//            enemy.draw(game.batch);
+        for (Enemy enemy : creator.getEnemies()) {
+            enemy.draw(game.batch);
+        }
 
         game.batch.end();
+
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
+
 
     }
 
