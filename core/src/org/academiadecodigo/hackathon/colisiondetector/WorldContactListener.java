@@ -35,7 +35,7 @@ public class WorldContactListener implements ContactListener {
             player.die();
         }
 
-        if(fixA.getUserData() instanceof Enemy || fixB.getUserData() instanceof Player){
+        if (fixA.getUserData() instanceof Enemy || fixB.getUserData() instanceof Player) {
 
         }
 
@@ -44,7 +44,7 @@ public class WorldContactListener implements ContactListener {
             player.setOnTheFloor(true);
         }
 
-        if (((fixA.getUserData() instanceof Projectile) && (fixB.getUserData() == "ground")) ||  ((fixB.getUserData() instanceof Projectile) && (fixA.getUserData() == "ground"))) {
+        if (((fixA.getUserData() instanceof Projectile) && (fixB.getUserData() == "ground")) || ((fixB.getUserData() instanceof Projectile) && (fixA.getUserData() == "ground"))) {
 
             Projectile projectile;
 
@@ -64,12 +64,12 @@ public class WorldContactListener implements ContactListener {
             Enemy enemy = null;
 
             if (fixA.getUserData() instanceof Projectile) {
-                projectile = (Projectile)(fixA.getUserData());
-                enemy = (Enemy)(fixB.getUserData());
+                projectile = (Projectile) (fixA.getUserData());
+                enemy = (Enemy) (fixB.getUserData());
 
             } else {
-                projectile = (Projectile)(fixB.getUserData());
-                enemy = (Enemy)(fixA.getUserData());
+                projectile = (Projectile) (fixB.getUserData());
+                enemy = (Enemy) (fixA.getUserData());
             }
 
             projectile.setToDestroy();
@@ -78,7 +78,7 @@ public class WorldContactListener implements ContactListener {
         }
 
         // Collision Player with Treasure
-        if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Treasure || fixB.getUserData() instanceof Treasure) {
+        if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof Treasure) || (fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Treasure)) {
             player.win();
         }
 
@@ -92,18 +92,24 @@ public class WorldContactListener implements ContactListener {
         Fixture fixB = contact.getFixtureB();
 
 
-        if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
+        if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof Ladder) || (fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Ladder)) {
             Gdx.app.log("LADDER", "collision");
 
             player.hittingLadder();
         }
 
 
-        if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() == "ground" || fixB.getUserData() == "ground") {
+        if ((fixA.getUserData() instanceof Player && fixB.getUserData() == "ground") || (fixB.getUserData() instanceof Player && fixA.getUserData() == "ground")) {
 
             System.out.println("is not on floor");
 
             player.setOnTheFloor(false);
+        }
+
+        if((fixA.getUserData() instanceof Projectile && fixB.getUserData() instanceof Enemy) || (fixA.getUserData() instanceof Enemy && fixB.getUserData() instanceof Projectile)){
+            if(fixA.getUserData() instanceof Enemy){
+
+            }
         }
 
     }
