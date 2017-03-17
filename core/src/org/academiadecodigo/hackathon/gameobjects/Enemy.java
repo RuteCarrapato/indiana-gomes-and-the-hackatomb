@@ -3,7 +3,9 @@ package org.academiadecodigo.hackathon.gameobjects;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.utils.Array;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
@@ -12,6 +14,7 @@ import org.academiadecodigo.hackathon.utils.Constants;
  * Created by codecadet on 16/03/17.
  */
 public class Enemy extends GameObject {
+    public boolean died;
 
     public boolean enemyIsDead;
     public float initialPosition;
@@ -44,6 +47,7 @@ public class Enemy extends GameObject {
         setRegion(textureRegion);
 
         currentState = State.STANDING;
+        previousState = State.STANDING;
         animTimer = 0;
         runningRight = true;
 
@@ -68,6 +72,7 @@ public class Enemy extends GameObject {
         bdef.type = BodyDef.BodyType.DynamicBody;
         bdef.position.set((rect.getX() + rect.getWidth() / 2) / Constants.PPM, (rect.getY() + rect.getHeight() / 2) / Constants.PPM);
 
+
         b2dbody = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
@@ -77,8 +82,6 @@ public class Enemy extends GameObject {
         fdef.shape = shape;
         b2dbody.createFixture(fdef).setUserData(this);
 
-        this.initialPosition = b2dbody.getPosition().x;
-
     }
 
     public void move() {
@@ -87,6 +90,7 @@ public class Enemy extends GameObject {
         if(counter % 60 == 0){
             if(index > 6) {
                 this.b2dbody.applyForceToCenter(signal * 100f, 0, true);
+
             } else {
                 this.b2dbody.applyForceToCenter(signal * 65f,0,true);
             }

@@ -5,8 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -106,15 +104,11 @@ public class PlayScreen extends AbstractGameScreen {
             enemy.update(dt);
         }
 
-
     }
 
     private void handleInput(float dt) {
         // Player Movement
         player.handleInput(dt);
-
-
-
 
     }
 
@@ -150,9 +144,9 @@ public class PlayScreen extends AbstractGameScreen {
         game.batch.begin();
         player.draw(game.batch);
 
-//        for (Enemy enemy : creator.getEnemies()) {
-//            enemy.draw(game.batch);
-//        }
+        for (Enemy enemy : creator.getEnemies()) {
+            enemy.draw(game.batch);
+        }
 
         game.batch.end();
 
@@ -216,6 +210,10 @@ public class PlayScreen extends AbstractGameScreen {
 
     public Hud getHud() {
         return hud;
+    }
+
+    public Indiana getGame() {
+        return game;
     }
 }
 
