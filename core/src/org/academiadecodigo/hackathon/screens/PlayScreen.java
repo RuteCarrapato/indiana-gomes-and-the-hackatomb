@@ -64,7 +64,7 @@ public class PlayScreen extends AbstractGameScreen {
 
         // Creates the player TODO: MADE BY JOAQUIM CHECKA RUBEN
         this.world = new World(new Vector2(0, Constants.GRAVITY), true);
-        debugRenderer = new Box2DDebugRenderer();
+//        debugRenderer = new Box2DDebugRenderer();
 
         hud = new Hud(game.batch);
 
@@ -131,7 +131,7 @@ public class PlayScreen extends AbstractGameScreen {
         renderer.render();
 
         //renderer our Box2DDebugLines
-        debugRenderer.render(world, gameCam.combined);
+//        debugRenderer.render(world, gameCam.combined);
 
         world.setContactListener(new WorldContactListener(this));
 

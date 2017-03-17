@@ -24,11 +24,9 @@ public class GameOverScreen extends AbstractGameScreen {
     private Texture splashScreen;
 
     public GameOverScreen(Indiana game) {
-
         this.game = game;
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.CONFIG_WIDTH, Constants.CONFIG_HEIGHT);
-
     }
 
     @Override
@@ -52,7 +50,7 @@ public class GameOverScreen extends AbstractGameScreen {
 
         game.batch.end();
 
-        //Waiting for input for Enter
+        //Waiting for Input
         if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
             game.setScreen(new MenuScreen(game));
         }

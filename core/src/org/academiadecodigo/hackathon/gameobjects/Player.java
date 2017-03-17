@@ -21,22 +21,22 @@ import org.academiadecodigo.hackathon.utils.Constants;
 /**
  * Created by codecadet on 16/03/17.
  */
-public class Player extends GameObject implements com.badlogic.gdx.InputProcessor{
+public class Player extends GameObject implements com.badlogic.gdx.InputProcessor {
 
     public State currentState;
-    public State previousState;
+    private State previousState;
 
-    public Animation<TextureRegion> animRun;
-    public Animation<TextureRegion> animLadder;
-    public Animation animJump;
-    public TextureRegion animStand;
-    public TextureRegion animLadderStop;
+    private Animation<TextureRegion> animRun;
+    private Animation<TextureRegion> animLadder;
+    private Animation animJump;
+    private TextureRegion animStand;
+    private TextureRegion animLadderStop;
 
-    public float animTimer;
-    public boolean runningRight;
-    public boolean climbingLadder;
-    public boolean playerIsDead = false;
-    public boolean onTheFloor = true;
+    private float animTimer;
+    private boolean runningRight;
+    private boolean climbingLadder;
+    private boolean playerIsDead = false;
+    private boolean onTheFloor = true;
 
     private Array<Projectile> projectiles;
 
@@ -101,12 +101,14 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
 
     /**
      * Handles player input
+     *
      * @param dt
      */
     int count = 0;
+
     public void handleInput(float dt) {
 
-        if(keyUp(Input.Keys.ANY_KEY) && climbingLadder) {
+        if (keyUp(Input.Keys.ANY_KEY) && climbingLadder) {
             this.currentState = State.LADDER_STOP;
             this.b2dbody.getLinearVelocity().y = 0;
         }
@@ -125,12 +127,12 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
             this.b2dbody.applyLinearImpulse(new Vector2(0, 2f), this.b2dbody.getWorldCenter(), true);
         }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
             fire();
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP) && climbingLadder) {
-           this.b2dbody.setLinearVelocity(0, 1);
+            this.b2dbody.setLinearVelocity(0, 1);
         }
     }
 
@@ -150,14 +152,14 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
 
     public void hittingLadder() {
 
-        if(climbingLadder) {
+        if (climbingLadder) {
             this.climbingLadder = false;
         } else {
             this.climbingLadder = true;
         }
     }
 
-    public TextureRegion getFrame(float dt) {
+    private TextureRegion getFrame(float dt) {
 
         currentState = getState(dt);
 
@@ -205,7 +207,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
         return region;
     }
 
-    public State getState(float dt) {
+    private State getState(float dt) {
 
         if (climbingLadder) {
             return State.LADDER;
@@ -251,7 +253,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
         sound.play();
     }
 
-    public void draw(Batch batch){
+    public void draw(Batch batch) {
         super.draw(batch);
 
         for (Projectile projectile : projectiles) {
