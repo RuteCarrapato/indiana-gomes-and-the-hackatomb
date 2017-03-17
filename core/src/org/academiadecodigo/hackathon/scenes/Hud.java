@@ -25,11 +25,11 @@ public class Hud {
     private float timeCount;
     private Integer score;
 
-    Label countdownLabel;
-    Label scoreLabel;
-    Label timeLabel;
-    Label levelLabel;
-    Label playerLabel;
+    private Label countdownLabel;
+    private Label scoreLabel;
+    private Label timeLabel;
+    private Label levelLabel;
+    private Label playerLabel;
 
     public Hud(SpriteBatch sb) {
 
@@ -67,5 +67,10 @@ public class Hud {
             countdownLabel.setText(String.format("%03d", worldTimer));
             timeCount = 0;
         }
+    }
+
+    public void addScore(int value) {
+        score += value;
+        scoreLabel.setText(String.format("%06d", score));
     }
 }
