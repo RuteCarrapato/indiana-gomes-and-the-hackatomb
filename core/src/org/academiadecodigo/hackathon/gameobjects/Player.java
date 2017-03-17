@@ -2,14 +2,19 @@ package org.academiadecodigo.hackathon.gameobjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
+import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
+
+import static org.academiadecodigo.hackathon.Indiana.manager;
 
 /**
  * Created by codecadet on 16/03/17.
@@ -31,6 +36,8 @@ public class Player extends GameObject {
 
     private Array<Projectile> projectiles;
 
+    private Sound sound;
+
     public Player(PlayScreen screen) {
         super(screen);
 
@@ -51,14 +58,14 @@ public class Player extends GameObject {
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
-        for(int i = 1; i < 6; i++) {
-            frames.add(new TextureRegion(getTexture(), i * 16, 0 , 16, 16));
+        for (int i = 1; i < 6; i++) {
+            frames.add(new TextureRegion(getTexture(), i * 16, 0, 16, 16));
         }
 
         animRun = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
 
-        for(int i = 7; i < 9; i++) {
+        for (int i = 7; i < 9; i++) {
             frames.add(new TextureRegion(getTexture(), i * 16, 0, 16, 16));
         }
 
@@ -100,12 +107,10 @@ public class Player extends GameObject {
         }
 
 
-
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             this.b2dbody.applyLinearImpulse(new Vector2(0, 2f), this.b2dbody.getWorldCenter(), true);
             //TODO REFRESH JUMPS WHEN HIT THE GROUND
         }
-
 
 
     }
@@ -129,7 +134,7 @@ public class Player extends GameObject {
 
         TextureRegion region = null;
 
-        switch(currentState) {
+        switch (currentState) {
 
             case FALLING:
                 region = animStand;
@@ -153,12 +158,10 @@ public class Player extends GameObject {
                 region = animStand;
         }
 
-        if((b2dbody.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()){
+        if ((b2dbody.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()) {
             region.flip(true, false);
             runningRight = false;
-        }
-
-        else if((b2dbody.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()){
+        } else if ((b2dbody.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
             region.flip(true, false);
             runningRight = true;
         }
@@ -171,19 +174,19 @@ public class Player extends GameObject {
 
     public State getState(float dt) {
 
-        if(climbingLadder) {
+        if (climbingLadder) {
             return State.LADDER;
         }
 
-        if(b2dbody.getLinearVelocity().y > 0 || (b2dbody.getLinearVelocity().y < 0 && previousState == State.JUMPING && !climbingLadder)) {
+        if (b2dbody.getLinearVelocity().y > 0 || (b2dbody.getLinearVelocity().y < 0 && previousState == State.JUMPING && !climbingLadder)) {
             return State.JUMPING;
         }
 
-        if(b2dbody.getLinearVelocity().y < 0 && !climbingLadder) {
+        if (b2dbody.getLinearVelocity().y < 0 && !climbingLadder) {
             return State.FALLING;
         }
 
-        if(b2dbody.getLinearVelocity().x != 0) {
+        if (b2dbody.getLinearVelocity().x != 0) {
             return State.RUNNING;
         }
 
@@ -205,7 +208,7 @@ public class Player extends GameObject {
         System.out.println(b2dbody.getGravityScale());
         b2dbody.setGravityScale(0);
 
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             System.out.println("climb up");
             this.b2dbody.applyForceToCenter(0, 5, true);
         }
@@ -234,7 +237,11 @@ public class Player extends GameObject {
         return playerIsDead;
     }
 
-    public void fire(){
+    public void fire() {
         projectiles.add(new Projectile(screen, b2dbody.getPosition().x, b2dbody.getPosition().y, runningRight));
+
+        sound = Indiana.manager.get("audio/sounds/GUN.mp3", Sound.class);
+        sound.play();
     }
 }
+

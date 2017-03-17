@@ -24,6 +24,7 @@ public class Indiana extends Game {
 
 		manager = new com.badlogic.gdx.assets.AssetManager();
 		manager.load("audio/music/rick.mp3", Music.class);
+        manager.load("audio/sounds/GUN.mp3", Music.class);
 		manager.finishLoading();
 
 		setScreen(new MenuScreen(this));
