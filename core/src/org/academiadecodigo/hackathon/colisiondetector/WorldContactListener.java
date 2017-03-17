@@ -3,16 +3,20 @@ package org.academiadecodigo.hackathon.colisiondetector;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import org.academiadecodigo.hackathon.gameobjects.*;
+import org.academiadecodigo.hackathon.scenes.Hud;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
+import org.academiadecodigo.hackathon.utils.Constants;
 
 public class WorldContactListener implements ContactListener {
 
     public World world;
     public Player player;
+    private Hud hud;
 
     public WorldContactListener(PlayScreen screen) {
         this.world = screen.getWorld();
         this.player = screen.getPlayer();
+        this.hud = screen.getHud();
 
     }
 
@@ -73,7 +77,11 @@ public class WorldContactListener implements ContactListener {
             }
 
             projectile.setToDestroy();
+            if (!enemy.isDead()) {
+                hud.addScore(Constants.ENEMY_POINTS);
+            }
             enemy.setToDestroy();
+
 
         }
 
