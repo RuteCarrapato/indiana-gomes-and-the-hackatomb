@@ -53,9 +53,12 @@ public class Projectile extends GameObject {
     }
 
     public void update(float dt) {
+
         setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y - getHeight() / 2);
+
         if (setToDestroy && !destroyed) {
             world.destroyBody(b2dbody);
+            System.out.println("Projectile destroyed");
             destroyed = true;
         }
 
@@ -63,9 +66,6 @@ public class Projectile extends GameObject {
             b2dbody.setLinearVelocity(b2dbody.getLinearVelocity().x, 2f);
         }
 
-        if ((fireRight && b2dbody.getLinearVelocity().x < 0) || (!fireRight && b2dbody.getLinearVelocity().x > 0)) {
-            setToDestroy();
-        }
     }
 
     public void setToDestroy() {
