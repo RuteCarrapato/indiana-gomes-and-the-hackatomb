@@ -45,7 +45,7 @@ public class Projectile extends GameObject {
 
 
         b2dbody.createFixture(fdef).setUserData(this);
-        b2dbody.setLinearVelocity(new Vector2(fireRight ? 2 : -2, 0));
+        b2dbody.setLinearVelocity(new Vector2(fireRight ? Constants.PROJECTILE_SPEED : -Constants.PROJECTILE_SPEED, 0));
     }
 
     public void update(float dt) {

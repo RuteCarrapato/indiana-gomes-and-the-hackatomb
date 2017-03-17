@@ -12,7 +12,7 @@ public class Constants {
     public static final float PPM = 100;
 
     public static final int GRAVITY = -10;
-    public static final int PROJECTILE_SPEED = 0; //TODO: DEFINE SPEED
+    public static final float PROJECTILE_SPEED = 1;
 
 
     public static final int LADDER_INDEX = 3;
