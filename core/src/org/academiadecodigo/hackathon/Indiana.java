@@ -15,6 +15,7 @@ public class Indiana extends Game {
 	public static com.badlogic.gdx.assets.AssetManager manager;
 
 
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
