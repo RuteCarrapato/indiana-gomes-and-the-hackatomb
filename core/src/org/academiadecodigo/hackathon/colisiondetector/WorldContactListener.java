@@ -12,21 +12,29 @@ public class WorldContactListener implements ContactListener {
 
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
+
+        System.out.println(fixA.getUserData());
+        System.out.println(fixB.getUserData());
         Fixture player;
+        Fixture object;
 
         if (fixA.getUserData() == "ladder" || fixB.getUserData() == "ladder") {
             Gdx.app.log("LADDER", "collision");
 
             if (fixA.getUserData() == "ladder") {
                 player = fixB;
+                object = fixA;
             } else {
                 player = fixA;
+                object = fixB;
             }
 
+            if (object.getUserData() == "ladder" && player.getUserData() instanceof Player) {
                 if (player.getUserData() instanceof Player) {
                     System.out.println("player climb");
                     ((Player) player.getUserData()).climb();
                 }
+            }
 
 
         }
@@ -35,13 +43,35 @@ public class WorldContactListener implements ContactListener {
             Gdx.app.log("ENEMY", "collision");
             if (fixA.getUserData() == "player") {
                 player = fixA;
+                object = fixB;
             } else {
                 player = fixB;
+                object = fixA;
             }
 
-//            ((Player)player).die();
+            if (object.getUserData() == "enemy" && player.getUserData() instanceof Player) {
+                ((Player) player.getUserData()).die();
+            }
         }
 
+
+        if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player) {
+
+            if (fixA.getUserData() == "ground") {
+                System.out.println("is on floor");
+                player = fixB;
+                object = fixA;
+            } else {
+                player = fixA;
+                object = fixB;
+                System.out.println("is on floor");
+
+            }
+
+            if (object.getUserData() == "ground" && player.getUserData() instanceof Player) {
+                ((Player) player.getUserData()).setOnTheFloor(true);
+            }
+        }
     }
 
     @Override
@@ -49,6 +79,7 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
         Fixture player;
+        Fixture object;
 
         if (fixA.getUserData() == "ladder" || fixB.getUserData() == "ladder") {
             System.out.println("oi");
@@ -56,14 +87,39 @@ public class WorldContactListener implements ContactListener {
 
             if (fixA.getUserData() == "ladder") {
                 player = fixB;
+                object = fixA;
             } else {
                 player = fixA;
+                object = fixB;
             }
-            if (player.getUserData() instanceof Player) {
-                System.out.println("player climb");
-                ((Player) player.getUserData()).resetGravity();
+            if (object.getUserData() == "ladder" && player.getUserData() instanceof Player) {
+
+                if (player.getUserData() instanceof Player) {
+                    System.out.println("player climb");
+                    ((Player) player.getUserData()).resetGravity();
+                }
             }
         }
+
+
+        if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player) {
+
+            System.out.println("is not on floor");
+            if (fixA.getUserData() == "ground") {
+
+                player = fixB;
+                object = fixA;
+            } else {
+                player = fixA;
+                object = fixB;
+
+            }
+
+            if (object.getUserData() == "ground" && player.getUserData() instanceof Player) {
+                ((Player) player.getUserData()).setOnTheFloor(false);
+            }
+        }
+
     }
 
     @Override
