@@ -107,15 +107,11 @@ public class PlayScreen extends AbstractGameScreen {
 
         }
 
-
     }
 
     private void handleInput(float dt) {
         // Player Movement
         player.handleInput(dt);
-
-
-
 
     }
 

@@ -14,8 +14,8 @@ import org.academiadecodigo.hackathon.utils.Constants;
  */
 public class MenuScreen extends AbstractGameScreen {
 
-    final Indiana game;
-    OrthographicCamera camera;
+    private final Indiana game;
+    private OrthographicCamera camera;
     private Texture splashScreen;
 
     public MenuScreen(final Indiana game) {
@@ -23,10 +23,9 @@ public class MenuScreen extends AbstractGameScreen {
         this.game = game;
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT);
+        camera.setToOrtho(false, Constants.CONFIG_WIDTH, Constants.CONFIG_HEIGHT);
 
     }
-
 
     @Override
     public void show() {
@@ -45,12 +44,12 @@ public class MenuScreen extends AbstractGameScreen {
         game.batch.begin();
 
         splashScreen = new Texture("IndianaGomes.png");
-        game.batch.draw(splashScreen,0,0,Constants.VIEW_WIDTH,Constants.VIEW_HEIGHT);
+        game.batch.draw(splashScreen,0,0,Constants.CONFIG_WIDTH,Constants.CONFIG_HEIGHT);
 
         game.batch.end();
 
+        //Waiting for input of any key or touch
         if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
-
             game.setScreen(new PlayScreen(game));
         }
 
@@ -78,6 +77,7 @@ public class MenuScreen extends AbstractGameScreen {
 
     @Override
     public void dispose() {
-
+        game.dispose();
+        splashScreen.dispose();
     }
 }

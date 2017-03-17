@@ -18,6 +18,7 @@ import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.screens.GameOverScreen;
 import org.academiadecodigo.hackathon.screens.MenuScreen;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
+import org.academiadecodigo.hackathon.screens.WinScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
 
 /**
@@ -230,14 +231,15 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
 
     public void die() {
         if (!isDead()) {
-            System.out.println("MORRI");
+
             screen.getGame().setScreen(new GameOverScreen(screen.getGame()));
+
             //TODO: Boni: Implement sound effect of dead/game over
             playerIsDead = true;
         }
     }
 
-    public boolean isDead() {
+    private boolean isDead() {
         return playerIsDead;
     }
 
@@ -245,7 +247,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
         return animTimer;
     }
 
-    public void fire() {
+    private void fire() {
         projectiles.add(new Projectile(screen, b2dbody.getPosition().x, b2dbody.getPosition().y, runningRight));
 
         sound = Indiana.manager.get("audio/sounds/GUN.mp3", Sound.class);
@@ -267,7 +269,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
 
 
     public void win() {
-        screen.getGame().setScreen(new MenuScreen(screen.getGame()));
+        screen.getGame().setScreen(new WinScreen(screen.getGame()));
     }
 
 
