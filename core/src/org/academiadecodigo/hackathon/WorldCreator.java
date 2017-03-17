@@ -76,7 +76,16 @@ public class WorldCreator {
 
             Rectangle rect = ((RectangleMapObject)object).getRectangle();
 
-            enemies.add((new Enemy(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM)));
+//            enemies.add((new Enemy(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM)));
+
+            bdef.type = BodyDef.BodyType.DynamicBody;
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Constants.PPM, (rect.getY() + rect.getHeight() / 2) / Constants.PPM);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
+            fdef.shape = shape;
+            body.createFixture(fdef).setUserData("enemy");
         }
     }
 

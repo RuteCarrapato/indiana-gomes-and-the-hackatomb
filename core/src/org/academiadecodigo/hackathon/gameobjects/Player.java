@@ -58,7 +58,7 @@ public class Player extends GameObject {
         shape.setRadius(6 / Constants.PPM);
 
         fdef.shape = shape;
-        b2dbody.createFixture(fdef);
+        b2dbody.createFixture(fdef).setUserData("player"); //TODO Change to constant
     }
 
     public void handleInput(float dt) {
