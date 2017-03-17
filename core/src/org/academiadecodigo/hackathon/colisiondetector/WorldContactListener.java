@@ -51,7 +51,6 @@ public class WorldContactListener implements ContactListener {
         }
 
         if (((fixA.getUserData() instanceof Projectile) && (fixB.getUserData() instanceof Enemy)) || ((fixA.getUserData() instanceof Enemy) && (fixB.getUserData() instanceof Projectile))) {
-            System.out.println("projectile collides with ground");
             Projectile projectile = null;
             Enemy enemy = null;
 

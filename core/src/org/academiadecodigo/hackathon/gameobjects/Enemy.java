@@ -99,7 +99,6 @@ public class Enemy extends GameObject {
 
         if (setToDestroy && !enemyIsDead) {
             world.destroyBody(b2dbody);
-            System.out.println("Enemy destroyed");
             enemyIsDead = true;
         }
 
