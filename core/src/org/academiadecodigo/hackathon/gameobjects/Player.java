@@ -17,11 +17,10 @@ public class Player extends GameObject {
 
     public State currentState;
     public State previousState;
-    private Animation animRun;
-    private Animation animJump;
-    private float animTimer;
-    private boolean runningRight;
-    private int jumpCount = 1;
+    public Animation animRun;
+    public Animation animJump;
+    public float animTimer;
+    public boolean runningRight;
 
     public Player(PlayScreen screen) {
 
@@ -37,6 +36,10 @@ public class Player extends GameObject {
         currentState = State.STANDING;
         previousState = State.STANDING;
         animTimer = 0;
+        runningRight = true;
+
+
+
         definePlayer();
     }
 
@@ -80,7 +83,7 @@ public class Player extends GameObject {
 
     public void update(float dt) {
 
-        setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y / 2);
+        setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y - getHeight() / 2);
     }
 
     public enum State {

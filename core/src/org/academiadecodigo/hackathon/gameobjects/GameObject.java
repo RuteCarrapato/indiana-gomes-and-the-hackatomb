@@ -30,6 +30,7 @@ public class GameObject extends Sprite {
 
         this.screen = screen;
         world = screen.getWorld();
+        setPosition(x, y);
     }
 
     public void defineGameObj() {
