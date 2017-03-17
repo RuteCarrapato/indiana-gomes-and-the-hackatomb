@@ -5,6 +5,29 @@ sourceCompatibility = 1.6
 
 sourceSets.main.java.srcDirs = [ "src/" ]
 
+task connectDB{
+    description 'connect to database'
+
+
+    repositories {
+        mavenLocal()
+    }
+
+    configurations {
+        compile
+    }
+
+    dependencies {
+        compile com.oracle:ojdbc6:11.2.0.4.0'
+    }
+
+    doLast{
+
+        //java code for database connection
+
+    }
+
+}
 
 eclipse.project {
     name = appName + "-core"

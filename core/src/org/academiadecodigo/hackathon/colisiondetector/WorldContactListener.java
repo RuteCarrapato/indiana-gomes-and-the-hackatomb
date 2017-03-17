@@ -24,14 +24,10 @@ public class WorldContactListener implements ContactListener {
         Fixture fixB = contact.getFixtureB();
 
         if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
-            Gdx.app.log("LADDER", "collision");
-
             player.hittingLadder();
         }
 
         if (((fixA.getUserData() instanceof Enemy) && (fixB.getUserData() instanceof Player)) || ((fixA.getUserData() instanceof Player) && (fixB.getUserData() instanceof Enemy))) {
-            Gdx.app.log("ENEMY", "collision");
-
             player.die();
         }
 
@@ -56,7 +52,6 @@ public class WorldContactListener implements ContactListener {
             }
 
             projectile.setToDestroy();
-
         }
 
         if (((fixA.getUserData() instanceof Projectile) && (fixB.getUserData() instanceof Enemy)) || ((fixA.getUserData() instanceof Enemy) && (fixB.getUserData() instanceof Projectile))) {
@@ -74,14 +69,12 @@ public class WorldContactListener implements ContactListener {
 
             projectile.setToDestroy();
             enemy.setToDestroy();
-
         }
 
         // Collision Player with Treasure
         if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Treasure || fixB.getUserData() instanceof Treasure) {
             player.win();
         }
-
     }
 
 

@@ -5,16 +5,14 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import org.academiadecodigo.hackathon.managers.AssetManager;
 import org.academiadecodigo.hackathon.screens.MenuScreen;
-import org.academiadecodigo.hackathon.screens.PlayScreen;
+import org.academiadecodigo.hackathon.screens.TestScreen;
 
 public class Indiana extends Game {
 
     public SpriteBatch batch;
     public BitmapFont font;
     public static com.badlogic.gdx.assets.AssetManager manager;
-
 
     @Override
     public void create() {
