@@ -13,10 +13,10 @@ public class Ladder extends GameObject {
 
     public Ladder(PlayScreen screen, Rectangle rectangle) {
         super(screen);
-        defineladder(rectangle);
+        defineLadder(rectangle);
     }
 
-    public void defineladder(Rectangle rect) {
+    public void defineLadder(Rectangle rect) {
 
         BodyDef bdef = new BodyDef();
 

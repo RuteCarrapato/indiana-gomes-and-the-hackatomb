@@ -4,19 +4,19 @@ package org.academiadecodigo.hackathon.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.WorldCreator;
-import org.academiadecodigo.hackathon.gameobjects.Enemy;
 import org.academiadecodigo.hackathon.colisiondetector.WorldContactListener;
+import org.academiadecodigo.hackathon.gameobjects.items.Item;
 import org.academiadecodigo.hackathon.gameobjects.Player;
 import org.academiadecodigo.hackathon.utils.Constants;
 
@@ -43,7 +43,8 @@ public class PlayScreen extends AbstractGameScreen {
     //Sprites
     private Player player;
 
-    private Texture texture;
+    private Array<Item> items;
+
 
     public PlayScreen(Indiana game) {
         this.game = game;

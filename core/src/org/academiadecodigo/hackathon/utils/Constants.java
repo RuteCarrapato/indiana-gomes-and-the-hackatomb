@@ -21,4 +21,7 @@ public class Constants {
     public static final int ENEMY_INDEX = 5;
 
     public static final String LEVEL1_TMX = "level1.tmx";
+
+    public static final float ITEM_WIDTH = 8; //px
+    public static final float ITEM_HEIGHT = 8; //px
 }
