@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -51,7 +53,7 @@ public class PlayScreen extends AbstractGameScreen {
 
     public PlayScreen(Indiana game) {
         this.game = game;
-        atlas = new TextureAtlas("player_movements.pack");
+        atlas = new TextureAtlas("sprites.pack");
 
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(Constants.VIEW_WIDTH / Constants.PPM, Constants.VIEW_HEIGHT / Constants.PPM, gameCam);
@@ -140,6 +142,11 @@ public class PlayScreen extends AbstractGameScreen {
 
         world.setContactListener(new WorldContactListener(this));
 
+        /*
+        Texture texture = new Texture("bullet_left.png");
+        Sprite sprite = new Sprite(texture);
+        sprite.setBounds(0, 1, 0.32f, 0.32f);
+        */
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
         player.draw(game.batch);
@@ -153,7 +160,19 @@ public class PlayScreen extends AbstractGameScreen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
+        if(gameOver()) {
+            game.setScreen(new GameOverScreen(game));
+            dispose();
+        }
+    }
 
+    public boolean gameOver() {
+
+        if(player.currentState == Player.State.DEAD && player.getAnimTimer() > 3) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override

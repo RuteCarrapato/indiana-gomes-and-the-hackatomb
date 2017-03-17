@@ -22,6 +22,8 @@ public class GameOverScreen extends AbstractGameScreen {
     private Viewport viewport;
     private Stage stage;
 
+    private Input.TextInputListener textInputListener;
+
     private Indiana game;
     private OrthographicCamera camera;
 
@@ -91,5 +93,18 @@ public class GameOverScreen extends AbstractGameScreen {
     public void dispose() {
         stage.dispose();
 
+    }
+
+    public class InputListener implements Input.TextInputListener {
+
+        @Override
+        public void input(String text) {
+
+        }
+
+        @Override
+        public void canceled() {
+
+        }
     }
 }

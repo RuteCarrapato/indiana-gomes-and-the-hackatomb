@@ -3,7 +3,10 @@ package org.academiadecodigo.hackathon.gameobjects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import org.academiadecodigo.hackathon.gameobjects.InputProcessor;
@@ -106,19 +109,17 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
     public void handleInput(float dt) {
 
         if(keyUp(Input.Keys.ANY_KEY) && climbingLadder) {
-            System.out.println("ANY KEY WAS UP!!!" + count++);
-//            this.b2dbody.setLinearVelocity(0, 0);
             this.currentState = State.LADDER_STOP;
             this.b2dbody.getLinearVelocity().y = 0;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && b2dbody.getLinearVelocity().x <= Constants.PLAYER_X_SPEED) {
-            this.b2dbody.applyLinearImpulse(new Vector2(0.1f, 0), this.b2dbody.getWorldCenter(), true);
+            this.b2dbody.applyLinearImpulse(new Vector2(Constants.PLAYER_RUN_FORCE, 0), this.b2dbody.getWorldCenter(), true);
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && b2dbody.getLinearVelocity().x >= -Constants.PLAYER_X_SPEED) {
 
-            this.b2dbody.applyLinearImpulse(new Vector2(-0.1f, 0), this.b2dbody.getWorldCenter(), true);
+            this.b2dbody.applyLinearImpulse(new Vector2(-Constants.PLAYER_RUN_FORCE, 0), this.b2dbody.getWorldCenter(), true);
         }
 
 
@@ -143,6 +144,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
         for (Projectile projectile : projectiles) {
             projectile.update(dt);
             if (projectile.isDestroyed()) {
+                System.out.println();
                 projectiles.removeValue(projectile, true);
             }
         }
@@ -239,11 +241,23 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
         return playerIsDead;
     }
 
+    public float getAnimTimer() {
+        return animTimer;
+    }
+
     public void fire() {
         projectiles.add(new Projectile(screen, b2dbody.getPosition().x, b2dbody.getPosition().y, runningRight));
 
         sound = Indiana.manager.get("audio/sounds/GUN.mp3", Sound.class);
         sound.play();
+    }
+
+    public void draw(Batch batch){
+        super.draw(batch);
+
+        for (Projectile projectile : projectiles) {
+            projectile.draw(batch);
+        }
     }
 
     public void setOnTheFloor(boolean onTheFloor) {
