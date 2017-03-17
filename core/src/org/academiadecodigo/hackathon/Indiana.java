@@ -11,8 +11,6 @@ import org.academiadecodigo.hackathon.screens.MenuScreen;
 public class Indiana extends Game {
 
     public SpriteBatch batch;
-    public BitmapFont font;
-//    public static com.badlogic.gdx.assets.AssetManager manager;
     public static AssetManager manager;
 
     @Override

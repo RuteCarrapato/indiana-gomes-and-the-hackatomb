@@ -7,9 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.sun.xml.internal.bind.annotation.OverrideAnnotationOf;
 import org.academiadecodigo.hackathon.Indiana;
 import org.academiadecodigo.hackathon.screens.persistence.JdbcUserService;
 
@@ -19,7 +17,6 @@ import org.academiadecodigo.hackathon.screens.persistence.JdbcUserService;
 public class TestScreen extends AbstractGameScreen {
 
     private final Indiana game;
-    private boolean loggedIn;
     private JdbcUserService userService;
 
     private Skin skin;
@@ -59,8 +56,6 @@ public class TestScreen extends AbstractGameScreen {
         table.setFillParent(true);
         table.center();
 
-//        Label usernameLabel = new Label("Username:", skin);
-//        table.add(usernameLabel);
         textUsername = new TextField(text, skin);
         table.addActor(textUsername);
         textUsername.setText(text);
@@ -68,32 +63,25 @@ public class TestScreen extends AbstractGameScreen {
         textUsername.setPosition(250, 250);
 
         table.row();
-//        Label passwordLabel = new Label("Password:", skin);
-//        table.add(passwordLabel);
         textPassword = new TextField(text, skin);
         table.addActor(textPassword);
         textPassword.setText(text);
         textUsername.setSize(200, 60);
         textPassword.setPosition(250, 500);
 
-
         table.row();
         stage.addActor(table);
-
-
-        System.out.println(text);
-
-
     }
 
+    /**
+     *  TODO : Not yet implemented. By 10 minutes!
+     */
     private void onLogin() {
-        System.out.println("LOGGED IN!");
         userService.authenticate(textUsername.getText(), textPassword.getText());
     }
 
     @Override
     public void show() {
-
     }
 
     @Override
@@ -107,22 +95,18 @@ public class TestScreen extends AbstractGameScreen {
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override
