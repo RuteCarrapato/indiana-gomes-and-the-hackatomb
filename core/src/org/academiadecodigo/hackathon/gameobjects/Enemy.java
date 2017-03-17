@@ -28,6 +28,7 @@ public class Enemy extends GameObject {
 
     private int counter = 0;
     private int signal = 1;
+    private boolean setToDestroy;
 
     public Enemy(PlayScreen screen, Rectangle rectangle, int index) {
         super(screen, rectangle.getX(), rectangle.getY());
@@ -98,6 +99,13 @@ public class Enemy extends GameObject {
         setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y - getHeight() / 2);
         setRegion(getFrame(dt));
 
+        if (setToDestroy && !enemyIsDead) {
+            world.destroyBody(b2dbody);
+            System.out.println("Enemy destroyed");
+            enemyIsDead = true;
+        }
+
+
     }
 
     private TextureRegion getFrame(float dt) {
@@ -148,6 +156,14 @@ public class Enemy extends GameObject {
 
     public void die() {
         enemyIsDead = true;
+    }
+
+    public boolean isDead() {
+        return enemyIsDead;
+    }
+
+    public void setToDestroy() {
+        setToDestroy = true;
     }
 
     public enum State {

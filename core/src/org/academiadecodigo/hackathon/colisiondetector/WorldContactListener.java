@@ -27,8 +27,8 @@ public class WorldContactListener implements ContactListener {
         Fixture fixB = contact.getFixtureB();
 
 
-        System.out.println(fixA.getUserData());
-        System.out.println(fixB.getUserData());
+//        System.out.println(fixA.getUserData());
+//        System.out.println(fixB.getUserData());
 
 
         if (fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Ladder || fixB.getUserData() instanceof Ladder) {
@@ -49,21 +49,19 @@ public class WorldContactListener implements ContactListener {
             player.setOnTheFloor(true);
         }
 
-        if(fixA.getUserData() instanceof Projectile || fixB.getUserData() instanceof Projectile && fixA.getUserData() == "ground" || fixB.getUserData()== "ground") {
+        if (((fixA.getUserData() instanceof Projectile) && (fixB.getUserData() == "ground")) ||  ((fixB.getUserData() instanceof Projectile) && (fixA.getUserData() == "ground"))) {
 
-            Fixture projectileFixture;
-            Projectile projectile = null;
+            Projectile projectile;
 
-            if(fixA.getUserData() instanceof Projectile) {
-                projectileFixture = fixA;
-                projectile = (Projectile)projectileFixture.getUserData();
+            if (fixA.getUserData() instanceof Projectile) {
+                projectile = (Projectile) fixA.getUserData();
 
             } else {
-                projectileFixture = fixB;
-                projectile = (Projectile)projectileFixture.getUserData();
+                projectile = (Projectile) fixB.getUserData();
             }
 
             projectile.setToDestroy();
+
         }
 
         if (((fixA.getUserData() instanceof Projectile) && (fixB.getUserData() instanceof Enemy)) || ((fixA.getUserData() instanceof Enemy) && (fixB.getUserData() instanceof Projectile))) {
@@ -81,7 +79,8 @@ public class WorldContactListener implements ContactListener {
             }
 
             projectile.setToDestroy();
-            enemy.die();
+            enemy.setToDestroy();
+
         }
 
 

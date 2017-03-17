@@ -103,6 +103,7 @@ public class PlayScreen extends AbstractGameScreen {
         //Enemies movem
         for (Enemy enemy : creator.getEnemies()) {
             enemy.move();
+            enemy.update(dt);
         }
 
 
