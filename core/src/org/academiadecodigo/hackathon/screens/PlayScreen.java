@@ -117,7 +117,7 @@ public class PlayScreen extends AbstractGameScreen {
         //renderer our Box2DDebugLines
         debugRenderer.render(world, gameCam.combined);
 
-        world.setContactListener(new WorldContactListener());
+        world.setContactListener(new WorldContactListener(this));
         EdgeShape body = new EdgeShape();
 
         game.batch.setProjectionMatrix(gameCam.combined);
@@ -167,7 +167,12 @@ public class PlayScreen extends AbstractGameScreen {
     public TiledMap getMap() {
         return map;
     }
+
+    public Player getPlayer() {
+        return player;
+    }
 }
+
 
 
 

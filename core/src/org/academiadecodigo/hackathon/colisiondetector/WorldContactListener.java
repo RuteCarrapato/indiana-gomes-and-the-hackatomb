@@ -2,8 +2,18 @@ package org.academiadecodigo.hackathon.colisiondetector;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
+import org.academiadecodigo.hackathon.gameobjects.Player;
+import org.academiadecodigo.hackathon.screens.PlayScreen;
 
 public class WorldContactListener implements ContactListener {
+
+    public World world;
+    public Player player;
+
+    public WorldContactListener(PlayScreen screen) {
+        this.world = screen.getWorld();
+        this.player = screen.getPlayer();
+    }
 
     @Override
     public void beginContact(Contact contact) {
@@ -12,30 +22,12 @@ public class WorldContactListener implements ContactListener {
 
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
-        Fixture player;
 
-        if (fixA.getUserData() == "ladder" || fixB.getUserData() == "ladder") {
+        if (fixA.getUserData() == "player" || fixB.getUserData() == "player" && fixA.getUserData() == "ladder" || fixB.getUserData() == "ladder") {
             Gdx.app.log("LADDER", "collision");
 
-            if (fixA.getUserData() == "ladder") {
-                player = fixA;
-            } else {
-                player = fixB;
-            }
+            player.hittingLadder();
 
-//            player.climb();
-
-        }
-
-        if (fixA.getUserData() == "enemy" || fixB.getUserData() == "enemy") {
-            Gdx.app.log("ENEMY", "collision");
-            if (fixA.getUserData() == "player") {
-                player = fixA;
-            } else {
-                player = fixB;
-            }
-
-//            player.die();
         }
 
     }
@@ -43,6 +35,16 @@ public class WorldContactListener implements ContactListener {
     @Override
     public void endContact(Contact contact) {
         Gdx.app.log("End Contact", "");
+
+        Fixture fixA = contact.getFixtureA();
+        Fixture fixB = contact.getFixtureB();
+
+        if (fixA.getUserData() == "player" || fixB.getUserData() == "player" && fixA.getUserData() == "ladder" || fixB.getUserData() == "ladder") {
+            Gdx.app.log("LADDER", "collision");
+
+            player.hittingLadder();
+
+        }
     }
 
     @Override

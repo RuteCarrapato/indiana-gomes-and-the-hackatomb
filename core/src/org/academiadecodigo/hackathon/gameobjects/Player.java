@@ -84,7 +84,7 @@ public class Player extends GameObject {
         shape.setRadius(6 / Constants.PPM);
 
         fdef.shape = shape;
-        b2dbody.createFixture(fdef).setUserData(Constants.PLAYER_REGION_STRING);
+        b2dbody.createFixture(fdef).setUserData(Constants.PLAYER_REGION);
     }
 
     public void handleInput(float dt) {
@@ -99,12 +99,15 @@ public class Player extends GameObject {
             this.b2dbody.applyLinearImpulse(new Vector2(-0.1f, 0), this.b2dbody.getWorldCenter(), true);
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             this.b2dbody.applyLinearImpulse(new Vector2(0, 2f), this.b2dbody.getWorldCenter(), true);
             //TODO REFRESH JUMPS WHEN HIT THE GROUND
         }
 
-
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) && climbingLadder) {
+            System.out.println("GOING UP AND CLIMBING LADDER");
+           b2dbody.setLinearVelocity(0, 1);
+        }
 
     }
 
@@ -118,6 +121,15 @@ public class Player extends GameObject {
             if (projectile.isDestroyed()) {
                 projectiles.removeValue(projectile, true);
             }
+        }
+    }
+
+    public void hittingLadder() {
+
+        if(climbingLadder) {
+            climbingLadder = false;
+        } else {
+            this.climbingLadder = true;
         }
     }
 
@@ -195,22 +207,6 @@ public class Player extends GameObject {
         RUNNING,
         DEAD,
         LADDER
-    }
-
-    public void climbStairs() {
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-
-            this.b2dbody.applyLinearImpulse(new Vector2(0, 10.1f), this.b2dbody.getWorldCenter(), true);
-
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-
-            this.b2dbody.applyLinearImpulse(new Vector2(0, 9.9f), this.b2dbody.getWorldCenter(), true);
-
-        }
-
     }
 
     public void die() {
