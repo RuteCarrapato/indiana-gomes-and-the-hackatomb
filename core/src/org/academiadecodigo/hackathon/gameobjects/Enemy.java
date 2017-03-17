@@ -42,6 +42,7 @@ public class Enemy extends GameObject {
         setRegion(textureRegion);
 
         currentState = State.STANDING;
+        previousState = State.STANDING;
         animTimer = 0;
         runningRight = true;
 
@@ -108,10 +109,13 @@ public class Enemy extends GameObject {
         switch(currentState) {
 
             case RUNNING:
+                System.out.println("Enemy running");
                 region = animWalk.getKeyFrame(animTimer, true);
                 break;
             case STANDING:
+                System.out.println("Enemy standing");
                 region = stand;
+                break;
             default:
                 region = stand;
         }

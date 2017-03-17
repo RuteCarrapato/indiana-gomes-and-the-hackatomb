@@ -88,6 +88,7 @@ public class PlayScreen extends AbstractGameScreen {
         player.update(dt);
         hud.update(dt);
 
+
         world.step(1 / 60f, 6, 2);
 
         if (player.currentState != Player.State.DEAD) {
@@ -103,6 +104,7 @@ public class PlayScreen extends AbstractGameScreen {
         //Enemies movem
         for (Enemy enemy : creator.getEnemies()) {
             enemy.move();
+            enemy.update(dt);
         }
 
 
