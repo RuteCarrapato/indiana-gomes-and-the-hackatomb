@@ -12,7 +12,10 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.utils.Array;
 import org.academiadecodigo.hackathon.Indiana;
+import org.academiadecodigo.hackathon.screens.GameOverScreen;
+import org.academiadecodigo.hackathon.screens.MenuScreen;
 import org.academiadecodigo.hackathon.screens.PlayScreen;
+import org.academiadecodigo.hackathon.screens.WinScreen;
 import org.academiadecodigo.hackathon.utils.Constants;
 
 /**
@@ -32,7 +35,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
     public float animTimer;
     public boolean runningRight;
     public boolean climbingLadder;
-    public boolean playerIsDead;
+    public boolean playerIsDead = false;
     public boolean onTheFloor = true;
 
     private Array<Projectile> projectiles;
@@ -127,7 +130,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP) && climbingLadder) {
-           b2dbody.setLinearVelocity(0, 1);
+           this.b2dbody.setLinearVelocity(0, 1);
         }
     }
 
@@ -139,6 +142,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
         for (Projectile projectile : projectiles) {
             projectile.update(dt);
             if (projectile.isDestroyed()) {
+                System.out.println();
                 projectiles.removeValue(projectile, true);
             }
         }
@@ -147,7 +151,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
     public void hittingLadder() {
 
         if(climbingLadder) {
-            climbingLadder = false;
+            this.climbingLadder = false;
         } else {
             this.climbingLadder = true;
         }
@@ -224,12 +228,15 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
 
     public void die() {
         if (!isDead()) {
+
+            screen.getGame().setScreen(new GameOverScreen(screen.getGame()));
+
             //TODO: Boni: Implement sound effect of dead/game over
             playerIsDead = true;
         }
     }
 
-    public boolean isDead() {
+    private boolean isDead() {
         return playerIsDead;
     }
 
@@ -237,7 +244,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
         return animTimer;
     }
 
-    public void fire() {
+    private void fire() {
         projectiles.add(new Projectile(screen, b2dbody.getPosition().x, b2dbody.getPosition().y, runningRight));
 
         sound = Indiana.manager.get("audio/sounds/GUN.mp3", Sound.class);
@@ -247,20 +254,19 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
     public void draw(Batch batch){
         super.draw(batch);
 
-
-//        Texture texture = new Texture("bullet_left.png");
-//        Sprite sprite = new Sprite(texture);
-//        sprite.setBounds(0, 1, 0.32f, 0.32f);
         for (Projectile projectile : projectiles) {
-            System.out.println("im here");
             projectile.draw(batch);
-//            sprite.draw(batch);
         }
     }
 
     public void setOnTheFloor(boolean onTheFloor) {
 
         this.onTheFloor = onTheFloor;
+    }
+
+
+    public void win() {
+        screen.getGame().setScreen(new WinScreen(screen.getGame()));
     }
 
 
@@ -315,6 +321,7 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
     public boolean scrolled(int amount) {
         return false;
     }
+
 
     public enum State {
         FALLING,

@@ -70,7 +70,6 @@ public class PlayScreen extends AbstractGameScreen {
 
         creator = new WorldCreator(this);
         player = new Player(this);
-//        enemy = new Enemy(this, );
         music = Indiana.manager.get("audio/music/rick.mp3", Music.class);
         music.setLooping(true);
         music.play();
@@ -105,15 +104,11 @@ public class PlayScreen extends AbstractGameScreen {
             enemy.update(dt);
         }
 
-
     }
 
     private void handleInput(float dt) {
         // Player Movement
         player.handleInput(dt);
-
-
-
 
     }
 
@@ -215,6 +210,10 @@ public class PlayScreen extends AbstractGameScreen {
 
     public Hud getHud() {
         return hud;
+    }
+
+    public Indiana getGame() {
+        return game;
     }
 }
 

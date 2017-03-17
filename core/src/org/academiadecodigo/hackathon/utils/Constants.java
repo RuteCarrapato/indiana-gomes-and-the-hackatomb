@@ -4,6 +4,10 @@ public class Constants {
 
     // TODO: All the game sizes, numbers... etc
 
+    //CONFIG, DO NOT TOUCH OR ELSE I KILL YOU. Ruben
+    public static final int CONFIG_WIDTH = 1080;
+    public static final int CONFIG_HEIGHT = 608;
+
     /*
     Screen Size and Box2D Scale (Pixels Per Meter)
      */

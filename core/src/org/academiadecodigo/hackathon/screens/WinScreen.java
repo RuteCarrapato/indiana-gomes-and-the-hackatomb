@@ -13,17 +13,16 @@ import org.academiadecodigo.hackathon.utils.Constants;
  */
 public class WinScreen extends AbstractGameScreen {
 
-    final Indiana game;
-    OrthographicCamera camera;
+    private final Indiana game;
+    private OrthographicCamera camera;
     private Texture splashScreen;
 
-    public WinScreen(Indiana game, Texture splashScreen) {
+    public WinScreen(Indiana game) {
 
         this.game = game;
-        this.splashScreen = splashScreen;
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT);
+        camera.setToOrtho(false, Constants.CONFIG_WIDTH, Constants.CONFIG_HEIGHT);
 
     }
 
@@ -35,7 +34,7 @@ public class WinScreen extends AbstractGameScreen {
     @Override
     public void render(float delta) {
 
-        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         camera.update();
@@ -43,16 +42,13 @@ public class WinScreen extends AbstractGameScreen {
 
         game.batch.begin();
 
-        //splashScreen = new Texture(" RUBEN, FAZ AQUI UMA TEXTURA, BRO");
-        game.font.draw(game.batch, "You won!!! ", 100, 150);
-        game.font.draw(game.batch, "Press any key to play again!", 100, 100);
+        splashScreen = new Texture("WinScreen.png");
+        game.batch.draw(splashScreen,0,0,Constants.CONFIG_WIDTH,Constants.CONFIG_HEIGHT);
 
         game.batch.end();
 
-        if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
-
+        if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
             game.setScreen(new PlayScreen(game));
-
         }
     }
 
@@ -78,6 +74,7 @@ public class WinScreen extends AbstractGameScreen {
 
     @Override
     public void dispose() {
-
+        game.dispose();
+        splashScreen.dispose();
     }
 }

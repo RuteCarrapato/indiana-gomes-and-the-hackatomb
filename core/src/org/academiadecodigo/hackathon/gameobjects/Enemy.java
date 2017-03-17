@@ -14,9 +14,11 @@ import org.academiadecodigo.hackathon.utils.Constants;
  * Created by codecadet on 16/03/17.
  */
 public class Enemy extends GameObject {
-
     public boolean died;
+
+    public boolean enemyIsDead;
     public float initialPosition;
+
     private int index;
 
     private Animation<TextureRegion> animWalk;
@@ -79,21 +81,16 @@ public class Enemy extends GameObject {
         fdef.shape = shape;
         b2dbody.createFixture(fdef).setUserData(this);
 
-        this.initialPosition = b2dbody.getPosition().x;
-
     }
 
     public void move() {
         counter++;
-        System.out.println("move");
 
         if(counter % 60 == 0){
             if(index > 6) {
-                System.out.println("index >6");
                 this.b2dbody.applyForceToCenter(signal * 100f, 0, true);
 
             } else {
-                System.out.println("index <6");
                 this.b2dbody.applyForceToCenter(signal * 65f,0,true);
             }
             signal *= -1;
@@ -141,7 +138,7 @@ public class Enemy extends GameObject {
 
     private State getState(float dt) {
 
-        if(died) {
+        if(enemyIsDead) {
             return State.DEAD;
         }
 
@@ -154,8 +151,7 @@ public class Enemy extends GameObject {
 
 
     public void die() {
-        died = true;
-
+        enemyIsDead = true;
     }
 
     public enum State {

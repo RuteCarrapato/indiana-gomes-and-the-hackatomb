@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -18,31 +19,16 @@ import org.academiadecodigo.hackathon.utils.Constants;
  * Created by codecadet on 16/03/17.
  */
 public class GameOverScreen extends AbstractGameScreen {
-
-    private Viewport viewport;
-    private Stage stage;
-
-    private Input.TextInputListener textInputListener;
-
     private Indiana game;
     private OrthographicCamera camera;
+    private Texture splashScreen;
 
     public GameOverScreen(Indiana game) {
 
         this.game = game;
-        this.viewport = new FitViewport(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT, new OrthographicCamera());
-        this.stage = new Stage(viewport, game.batch);
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, Constants.CONFIG_WIDTH, Constants.CONFIG_HEIGHT);
 
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.RED);
-
-        Table table = new Table();
-        table.center();
-        table.setFillParent(true);
-
-        Label gameOverLabel = new Label("GAME OVER", font);
-        table.add(gameOverLabel).expandX();
-
-        stage.addActor(table);
     }
 
     @Override
@@ -53,10 +39,23 @@ public class GameOverScreen extends AbstractGameScreen {
     @Override
     public void render(float delta) {
 
-        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        stage.draw();
+        camera.update();
+        game.batch.setProjectionMatrix(camera.combined);
+
+        game.batch.begin();
+
+        splashScreen = new Texture("GameOver.png");
+        game.batch.draw(splashScreen,0,0,Constants.CONFIG_WIDTH,Constants.CONFIG_HEIGHT);
+
+        game.batch.end();
+
+        //Waiting for input for Enter
+        if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+            game.setScreen(new MenuScreen(game));
+        }
 
     }
 
@@ -82,19 +81,9 @@ public class GameOverScreen extends AbstractGameScreen {
 
     @Override
     public void dispose() {
-
+        game.dispose();
+        splashScreen.dispose();
     }
 
-    public class InputListener implements Input.TextInputListener {
 
-        @Override
-        public void input(String text) {
-
-        }
-
-        @Override
-        public void canceled() {
-
-        }
-    }
 }
