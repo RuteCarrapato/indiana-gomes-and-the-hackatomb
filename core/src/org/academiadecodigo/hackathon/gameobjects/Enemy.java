@@ -12,7 +12,7 @@ import org.academiadecodigo.hackathon.utils.Constants;
 
 public class Enemy extends GameObject {
 
-    public boolean enemyIsDead;
+    private boolean enemyIsDead;
     private int index;
 
     private Animation<TextureRegion> animWalk;
@@ -59,7 +59,7 @@ public class Enemy extends GameObject {
         defineEnemy(rectangle);
     }
 
-    public void defineEnemy(Rectangle rect) {
+    private void defineEnemy(Rectangle rect) {
 
         BodyDef bdef = new BodyDef();
 
@@ -101,7 +101,6 @@ public class Enemy extends GameObject {
             world.destroyBody(b2dbody);
             enemyIsDead = true;
         }
-
 
     }
 
@@ -151,7 +150,6 @@ public class Enemy extends GameObject {
         return State.STANDING;
     }
 
-
     public void die() {
         enemyIsDead = true;
     }
@@ -164,7 +162,7 @@ public class Enemy extends GameObject {
         setToDestroy = true;
     }
 
-    public enum State {
+    private enum State {
         RUNNING,
         FALLING,
         STANDING,
