@@ -137,13 +137,12 @@ public class Player extends GameObject implements com.badlogic.gdx.InputProcesso
 
     public void update(float dt) {
 
-        setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y - getHeight() / 2);
+        setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y - (getHeight() / 2) + Constants.SPRITE_POSITION_FIX);
         setRegion(getFrame(dt));
 
         for (Projectile projectile : projectiles) {
             projectile.update(dt);
             if (projectile.isDestroyed()) {
-                System.out.println();
                 projectiles.removeValue(projectile, true);
             }
         }

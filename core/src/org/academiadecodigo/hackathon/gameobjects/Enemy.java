@@ -94,7 +94,7 @@ public class Enemy extends GameObject {
 
     public void update(float dt) {
 
-        setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y - getHeight() / 2);
+        setPosition(b2dbody.getPosition().x - getWidth() / 2, b2dbody.getPosition().y - (getHeight() / 2) + Constants.SPRITE_POSITION_FIX);
         setRegion(getFrame(dt));
 
         if (setToDestroy && !enemyIsDead) {
