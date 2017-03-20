@@ -11,7 +11,7 @@ public class Constants {
     public static final int VIEW_HEIGHT = 208;
     public static final float PPM = 100;
 
-    // World varaibles
+    // World variables
     public static final int GRAVITY = -10;
 
     public static final int LADDER_INDEX = 3;
@@ -24,8 +24,6 @@ public class Constants {
 
     public static final int ENEMY_INDEX = 5;
     public static final String ENEMY_REGION = "zenemy";
-    public static final int ENEMY_POINTS = 100;
-
 
     public static final String PLAYER_REGION = "player";
     public static final float PLAYER_X_SPEED = 2;
