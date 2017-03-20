@@ -5,6 +5,26 @@ sourceCompatibility = 1.6
 
 sourceSets.main.java.srcDirs = [ "src/" ]
 
+task connectDB{
+    description 'connect to database'
+
+
+    repositories {
+        mavenLocal()
+    }
+
+    configurations {
+        compile
+    }
+
+
+    doLast{
+
+        //java code for database connection
+
+    }
+
+}
 
 eclipse.project {
     name = appName + "-core"

@@ -1,6 +1,5 @@
 package org.academiadecodigo.hackathon.colisiondetector;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import org.academiadecodigo.hackathon.gameobjects.*;
 import org.academiadecodigo.hackathon.scenes.Hud;
@@ -47,10 +46,10 @@ public class WorldContactListener implements ContactListener {
             }
 
             projectile.setToDestroy();
-
         }
 
         if (((fixA.getUserData() instanceof Projectile) && (fixB.getUserData() instanceof Enemy)) || ((fixA.getUserData() instanceof Enemy) && (fixB.getUserData() instanceof Projectile))) {
+
             Projectile projectile = null;
             Enemy enemy = null;
 
@@ -68,7 +67,6 @@ public class WorldContactListener implements ContactListener {
                 hud.addScore(Constants.ENEMY_POINTS);
             }
             enemy.setToDestroy();
-
         }
 
         // Collision Player with Treasure

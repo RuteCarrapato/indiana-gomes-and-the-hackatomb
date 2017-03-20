@@ -118,6 +118,7 @@ public class Enemy extends GameObject {
                 break;
             case STANDING:
                 region = stand;
+                break;
             default:
                 region = stand;
         }
