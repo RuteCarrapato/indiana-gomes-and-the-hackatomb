@@ -43,10 +43,7 @@ public class PlayScreen extends AbstractGameScreen {
     private Box2DDebugRenderer debugRenderer;
     private WorldCreator creator;
 
-    //Sprites
     private Player player;
-
-    //Music
     private Music music;
 
     public PlayScreen(Indiana game) {
@@ -62,9 +59,7 @@ public class PlayScreen extends AbstractGameScreen {
 
         gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
-        // Creates the player TODO: MADE BY JOAQUIM CHECKA RUBEN
         this.world = new World(new Vector2(0, Constants.GRAVITY), true);
-//        debugRenderer = new Box2DDebugRenderer();
 
         hud = new Hud(game.batch);
 
@@ -73,7 +68,6 @@ public class PlayScreen extends AbstractGameScreen {
         music = Indiana.manager.get("audio/music/rick.mp3", Music.class);
         music.setLooping(true);
         music.play();
-
     }
 
     public TextureAtlas getAtlas() {
@@ -92,10 +86,8 @@ public class PlayScreen extends AbstractGameScreen {
             gameCam.position.x = player.b2dbody.getPosition().x;
         }
 
-        //Update the gameCam
+        //Update the gameCam and set the view to the gamecam
         gameCam.update();
-
-        //renderer draws what the camera views
         renderer.setView(gameCam);
 
         //Enemies movem
@@ -110,12 +102,10 @@ public class PlayScreen extends AbstractGameScreen {
     private void handleInput(float dt) {
         // Player Movement
         player.handleInput(dt);
-
     }
 
     @Override
     public void show() {
-
     }
 
 
@@ -130,9 +120,6 @@ public class PlayScreen extends AbstractGameScreen {
 
         //render our game map
         renderer.render();
-
-        //renderer our Box2DDebugLines
-//        debugRenderer.render(world, gameCam.combined);
 
         world.setContactListener(new WorldContactListener(this));
 
@@ -162,7 +149,6 @@ public class PlayScreen extends AbstractGameScreen {
         if(player.currentState == Player.State.DEAD && player.getAnimTimer() > 3) {
             return true;
         }
-
         return false;
     }
 
@@ -173,17 +159,14 @@ public class PlayScreen extends AbstractGameScreen {
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override

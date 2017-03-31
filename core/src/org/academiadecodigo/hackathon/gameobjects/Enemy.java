@@ -99,7 +99,6 @@ public class Enemy extends GameObject {
 
         if (setToDestroy && !enemyIsDead) {
             world.destroyBody(b2dbody);
-            System.out.println("Enemy destroyed");
             enemyIsDead = true;
         }
 
@@ -119,6 +118,7 @@ public class Enemy extends GameObject {
                 break;
             case STANDING:
                 region = stand;
+                break;
             default:
                 region = stand;
         }
