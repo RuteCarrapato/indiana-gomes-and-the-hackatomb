@@ -4,7 +4,8 @@ Made by Veronica Corrales,
 Rute Carrapato,
 Joaquim :D,
 Ruben Mateus,
-João Bonifácio.
+João Bonifácio 
+using LibGDX.
 
 Hope you can have fun like we did in that crazy night, with alot of pizzas and no sleep.
 
